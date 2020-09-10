@@ -14,5 +14,6 @@ Team Members:
 * Trenton Plager
 * Jason Kulp
 * John Vance
+* Nick Engell
   
 Link to Documentation: https://docs.google.com/document/d/1vRYMQuU-ygcSrXvbKn6na4ehjqg5dI6SvgTrgyeUew4/edit?usp=sharing
