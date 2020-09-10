@@ -2,7 +2,7 @@
 
 This repository serves as central code and data storage for Team Rice Ball for their IGM 601 project, Post Apocalyptic Healthy Eating (PAHE). 
 
-## Info
+## Team Info
 
 Team Name: Team Rice Ball
 
@@ -19,3 +19,7 @@ Team Members:
 * Ben Stern
   
 Link to Documentation: https://docs.google.com/document/d/1vRYMQuU-ygcSrXvbKn6na4ehjqg5dI6SvgTrgyeUew4/edit?usp=sharing
+
+## Project Info 
+
+Game Engine: Unity Version 2020.1.5f1
