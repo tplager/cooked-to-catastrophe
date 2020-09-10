@@ -15,5 +15,6 @@ Team Members:
 * Jason Kulp
 * John Vance
 * Nick Engell
+* Kyle Weekley (Liaison)
   
 Link to Documentation: https://docs.google.com/document/d/1vRYMQuU-ygcSrXvbKn6na4ehjqg5dI6SvgTrgyeUew4/edit?usp=sharing
