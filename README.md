@@ -16,5 +16,6 @@ Team Members:
 * John Vance
 * Nick Engell
 * Kyle Weekley (Liaison)
+* Ben Stern
   
 Link to Documentation: https://docs.google.com/document/d/1vRYMQuU-ygcSrXvbKn6na4ehjqg5dI6SvgTrgyeUew4/edit?usp=sharing
