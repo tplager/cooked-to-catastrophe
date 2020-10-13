@@ -1,4 +1,4 @@
-# pahe-repo
+# cooked-to-catastrophe
 
 This repository serves as central code and data storage for Team Rice Ball for their IGM 601 project, Post Apocalyptic Healthy Eating (PAHE). 
 
@@ -6,7 +6,7 @@ This repository serves as central code and data storage for Team Rice Ball for t
 
 Team Name: Team Rice Ball
 
-Working Game Title: Post Apocalyptic Healthy Eating
+Game Title: Cooked to Catastrophe
 
 Weekly Meeting Time: Fridays 6:00pm - 8:00pm
 
