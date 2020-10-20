@@ -23,3 +23,13 @@ Link to Documentation: https://docs.google.com/document/d/1vRYMQuU-ygcSrXvbKn6na
 ## Project Info 
 
 Game Engine: Unity Version 2020.1.5f1
+
+## Layout Fix
+
+If when opening the Unity editor you get the error "Failed to load window layout" do the following 
+Go to 
+```
+C:\Users\(YOURUSER)\AppData\Roaming\Unity\Editor-5.x\Preferences\Layouts\default
+```
+open the Default.wlt file with notepad or notepad++ and copy the contents.
+then in the project go to library and open CurrentLayout-default.dwlt with notepad or notepad++ and paste in the contents from the Default.wlt
