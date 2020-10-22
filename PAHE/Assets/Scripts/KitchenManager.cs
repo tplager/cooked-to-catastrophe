@@ -5,27 +5,32 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Author: Kyle Weekley
-/// Manages information related to the kitchen scene
+/// Purpose: Manages information related to the kitchen scene
+/// Restrictions: None
 /// </summary>
 public class KitchenManager : MonoBehaviour
 {
     public GameObject currentSelection;
     private Image selectionIcon;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Author: Kyle Weekley
+    /// Purpose: Set references to necessary objects
+    /// </summary>
     void Start()
     {
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
     /// <summary>
-    /// Clears the currently selected object
+    /// Author: Kyle Weekley
+    /// Purpose: Clears the currently selected object
+    /// Restrictions: None
     /// </summary>
     public void ClearSelection()
     {

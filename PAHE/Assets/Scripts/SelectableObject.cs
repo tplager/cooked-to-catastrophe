@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Author: Kyle Weekley
-/// Allows an object to be selected and appropriately updates the current selection UI
+/// Purpose: Allows an object to be selected and appropriately updates the current selection UI
+/// Restrictions: None
 /// </summary>
 public class SelectableObject : MonoBehaviour, IPointerDownHandler
 {
@@ -14,7 +15,10 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
     private KitchenManager kitchenManager;
     private Image selectionIcon;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Author: Kyle Weekley
+    /// Purpose: Sets references to objects necessary for item seleciton
+    /// </summary>
     void Start()
     {
         selected = false;
@@ -22,21 +26,17 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
-        // Highlight object if selected
-        if (selected == true)
-        {
-            //TODO: Highlight object edges
-        }
     }
 
     /// <summary>
-    /// Object is selected when clicked
+    /// Author: Kyle Weekley
+    /// Purpose: Object is selected when clicked
+    /// Restrictions: None
     /// </summary>
-    /// <param name="eventData"></param>
+    /// <param name="eventData">Used for recognizing clicks on 2D objects</param>
     public void OnPointerDown(PointerEventData eventData)
     {
         // Only select this object if another object is not already selected
