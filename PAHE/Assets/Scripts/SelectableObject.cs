@@ -15,6 +15,7 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
     private KitchenManager kitchenManager;
     private Image selectionIcon;
 
+
     /// <summary>
     /// Author: Kyle Weekley
     /// Purpose: Sets references to objects necessary for item seleciton
@@ -24,6 +25,7 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
         selected = false;
         kitchenManager = GameObject.Find("Main Camera").GetComponent<KitchenManager>();
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
+
     }
 
     void Update()
@@ -52,4 +54,6 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
             selectionIcon.color = this.GetComponent<Image>().color;
         }
     }
+
+    
 }
