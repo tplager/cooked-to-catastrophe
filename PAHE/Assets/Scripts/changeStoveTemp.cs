@@ -7,12 +7,12 @@ using UnityEngine;
 /// Purpose: Allows for each stove burner to be set independently.
 /// Restrictions: Won't fully work until the Kitchen Object Interactions section is finished.
 /// </summary>
-public class changeStoveTemp : MonoBehaviour
+public class ChangeStoveTemp : MonoBehaviour
 {
-    public int burnerTR = 0;
-    private int burnerBR = 0;
-    private int burnerBL = 0;
-    private int burnerTL = 0;
+    public int burnerTR;        // Top Right Burner temp
+    private int burnerBR;       // Bottom Right Burner temp
+    private int burnerBL;       // Bottom Left Burner temp
+    private int burnerTL;       // Top Left Burner temp
 
     #region Getters
     /// <summary>
@@ -58,9 +58,11 @@ public class changeStoveTemp : MonoBehaviour
 
     #region Setters
     /// <summary>
-    /// Setter for Top Right burner
+    /// Author: John Vance.
+    /// Purpose: Setter for Top Right Burner.
+    /// Restrictions: None.
     /// </summary>
-    /// <param name="x"></param>
+    /// <param name="x">New Top Right Burner temperature</param>
     public void setTR(int x)
     {
         burnerTR = x;
@@ -68,9 +70,11 @@ public class changeStoveTemp : MonoBehaviour
     }
 
     /// <summary>
-    /// Setter for Bottom Right burner
+    /// Author: John Vance.
+    /// Purpose: Setter for Bottom Right Burner.
+    /// Restrictions: None.
     /// </summary>
-    /// <param name="x"></param>
+    /// <param name="x">New Bottom Right Burner temperature</param>
     public void setBR(int x)
     {
         burnerBR = x;
@@ -78,9 +82,11 @@ public class changeStoveTemp : MonoBehaviour
     }
 
     /// <summary>
-    /// Setter for Bottom Left burner
+    /// Author: John Vance.
+    /// Purpose: Setter for Bottom Left Burner.
+    /// Restrictions: None.
     /// </summary>
-    /// <param name="x"></param>
+    /// <param name="x">New Bottom Left Burner temperature</param>
     public void setBL(int x)
     {
         burnerBL = x;
@@ -88,9 +94,11 @@ public class changeStoveTemp : MonoBehaviour
     }
 
     /// <summary>
-    /// Setter for Top Left burner
+    /// Author: John Vance.
+    /// Purpose: Setter for Top Left Burner.
+    /// Restrictions: None.
     /// </summary>
-    /// <param name="x"></param>
+    /// <param name="x">New Top Left Burner temperature</param>
     public void setTL(int x)
     {
         burnerTL = x;
@@ -99,16 +107,19 @@ public class changeStoveTemp : MonoBehaviour
     #endregion
 
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        burnerTR = 0;
+        burnerBR = 0;
+        burnerBL = 0;
+        burnerTL = 0;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         //If player touches stove dial
+        
             // then UI window pops up
 
         //Get input values from player
