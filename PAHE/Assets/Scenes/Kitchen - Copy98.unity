@@ -287,7 +287,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -498,7 +498,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -709,7 +709,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1235,7 +1235,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1955,7 +1955,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2477,7 +2477,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2685,7 +2685,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3445,7 +3445,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3743,7 +3743,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4348,7 +4348,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6050,7 +6050,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6257,7 +6257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6389,7 +6389,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6521,7 +6521,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7116,7 +7116,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerTR
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7739,7 +7739,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1834353888}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
-        m_MethodName: setTR
+        m_MethodName: set_BurnerBL
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
