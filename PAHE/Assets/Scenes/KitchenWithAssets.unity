@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 139974008}
   - component: {fileID: 139974007}
   m_Layer: 5
-  m_Name: Counter (2)
+  m_Name: SharedCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 922841908}
   - component: {fileID: 922841907}
   m_Layer: 5
-  m_Name: Counter
+  m_Name: CounterRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 1326545313}
   - component: {fileID: 1326545312}
   m_Layer: 5
-  m_Name: Counter (1)
+  m_Name: CounterLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 1834353887}
   - component: {fileID: 1834353886}
   m_Layer: 5
-  m_Name: Oven/Stove
+  m_Name: Stove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
