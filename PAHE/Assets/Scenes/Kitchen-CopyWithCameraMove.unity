@@ -2340,7 +2340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftCameraPosition: {x: 317, y: 179, z: -10}
   rightCameraPosition: {x: 811, y: 179, z: -10}
-  lerpQuickener: 2.5
+  lerpQuickener: 3.5
 --- !u!1 &1564048911
 GameObject:
   m_ObjectHideFlags: 0
