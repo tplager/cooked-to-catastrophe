@@ -56,6 +56,25 @@ public class KitchenManager : MonoBehaviour
 
     }
 
+	/// Author: Ben Stern
+	/// <summary>
+	/// Attempt to select an object or interact with it in some way
+	/// </summary>
+	/// <param name="selectedObject">The is attempting to be selected</param>
+	public void ObjectSelected(SelectableObject selectedObject)
+	{
+		if(currentSelection == null)
+		{
+			selectedObject.selected = true;
+			currentSelection = selectedObject.gameObject;
+			selectionIcon.color = selectedObject.GetComponent<Image>().color;
+		}
+		else
+		{
+			//TODO: call interactable object methods
+		}
+	}
+
     /// <summary>
     /// Author: Kyle Weekley
     /// Purpose: Clears the currently selected object
