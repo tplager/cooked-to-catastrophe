@@ -64,9 +64,6 @@ public class KitchenManager : MonoBehaviour
     public void ClearSelection()
     {
         currentSelection = null;
-
-        //Reset selection sprite
-        //selectionIcon.sprite = null;
         
         // Clears the Stove UI when the Clear Selection button is pressed
         foreach (GameObject element in stoveDialArray)
@@ -75,8 +72,11 @@ public class KitchenManager : MonoBehaviour
 
         }
 
+        //Reset selection sprite
+        selectionIcon.sprite = null;
+
         //Currently using sprite color for testing
-        selectionIcon.color = Color.white;
+        //selectionIcon.color = Color.white;
     }
 
     /// <summary>

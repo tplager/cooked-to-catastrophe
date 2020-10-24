@@ -7,7 +7,7 @@ using UnityEngine;
 /// Purpose: Allows for each stove burner to be set independently.
 /// Restrictions: Won't fully work until the Kitchen Object Interactions section is finished.
 /// </summary>
-public class changeStoveTemp : MonoBehaviour
+public class ChangeStoveTemp : MonoBehaviour
 
 {
     [SerializeField]

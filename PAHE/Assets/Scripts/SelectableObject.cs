@@ -48,10 +48,10 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
             kitchenManager.currentSelection = this.gameObject;
 
             //Set current selection sprite in UI to this object's sprite
-            //selectionIcon.sprite = this.GetComponent<Image>().sprite;
+            selectionIcon.sprite = this.GetComponent<Image>().sprite;
 
             //Currently using sprite color for testing
-            selectionIcon.color = this.GetComponent<Image>().color;
+            //selectionIcon.color = this.GetComponent<Image>().color;
         }
     }
 
