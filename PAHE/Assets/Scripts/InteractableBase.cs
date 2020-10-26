@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Author: Ben Stern
+/// <summary>
+/// A component that handles interactions between objects
+/// </summary>
 public class InteractableBase : MonoBehaviour
 {
 	/// <summary>
@@ -53,19 +57,27 @@ public class InteractableBase : MonoBehaviour
 	/// <param name="interactResponse">The DelegateResponse this action will Have</param>
 	public void AddInteractionToList(string actionName, InteractDelegate interactResponse)
 	{
-		actionResponses.Add(actionName, interactResponse);
-		interactionsDirty = true;
+		if (!actionResponses.ContainsKey(actionName))
+		{
+			actionResponses.Add(actionName, interactResponse);
+			interactionsDirty = true;
+		}
 	}
 
 	public void RemoveInteractionFromList(string actionName)
 	{
-		actionResponses.Remove(actionName);
-		interactionsDirty = true;
+		if (actionResponses.Remove(actionName))
+		{
+			interactionsDirty = true;
+		}
 	}
 
 	public void AddInteractionTrigger(string triggerName)
 	{
-		interactionsTrigers.Add(triggerName);
+		if (!interactionsTrigers.Contains(triggerName))
+		{
+			interactionsTrigers.Add(triggerName);
+		}
 	}
 
 	public void RemoveInteractionTrigger(string triggerName)

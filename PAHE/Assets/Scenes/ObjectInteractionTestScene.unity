@@ -1084,6 +1084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0926f8c1329a9458a9937403f7f5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlacePositionRelative: {x: 0, y: -30, z: 0}
 --- !u!114 &163428531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3581,6 +3582,8 @@ GameObject:
   - component: {fileID: 1089639477}
   - component: {fileID: 1089639476}
   - component: {fileID: 1089639475}
+  - component: {fileID: 1089639479}
+  - component: {fileID: 1089639478}
   m_Layer: 5
   m_Name: Plate
   m_TagString: Untagged
@@ -3658,6 +3661,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089639473}
   m_CullTransparentMesh: 0
+--- !u!114 &1089639478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089639473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0926f8c1329a9458a9937403f7f5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlacePositionRelative: {x: 0, y: 0, z: 0}
+--- !u!114 &1089639479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089639473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac28e660a49d8d4586402e5b36adb3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionsTrigers: []
 --- !u!1 &1100631612
 GameObject:
   m_ObjectHideFlags: 0
@@ -4618,6 +4647,7 @@ GameObject:
   - component: {fileID: 1297413377}
   - component: {fileID: 1297413379}
   - component: {fileID: 1297413380}
+  - component: {fileID: 1297413381}
   m_Layer: 5
   m_Name: Egg
   m_TagString: Untagged
@@ -4657,7 +4687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9575472, b: 0.9575472, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4709,6 +4739,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionsTrigers:
   - Place Item
+--- !u!114 &1297413381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297413375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b804114a9579eb6479256fc9b0244fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shelledImage: {fileID: 21300000, guid: 550e804a9a236494b8270c18f2d0ef9a, type: 3}
+  rawImage: {fileID: 21300000, guid: 50decd1f25d7d4b40824a5810e6a3a8b, type: 3}
+  Fried: {fileID: 21300000, guid: 3f1ff23a9040f9b46b4a4320fb46b030, type: 3}
 --- !u!1 &1311727185
 GameObject:
   m_ObjectHideFlags: 0
