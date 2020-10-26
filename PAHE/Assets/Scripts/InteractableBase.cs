@@ -27,6 +27,7 @@ public class InteractableBase : MonoBehaviour
 			{
 				interactions.Clear();
 				interactions.AddRange(actionResponses.Keys);
+				Debug.Log(interactions);
 			}
 			return interactions;
 		}
@@ -37,15 +38,39 @@ public class InteractableBase : MonoBehaviour
 	/// </summary>
 	[SerializeField]protected List<string> interactionsTrigers;
 
+	private void Awake()
+	{
+		interactions = new List<string>();
+		interactionsDirty = false;
+		actionResponses = new Dictionary<string, InteractDelegate>();
+		//interactionsTrigers = new List<string>();
+	}
+
 	/// <summary>
 	/// Add an interaction to this objects list of interactions and responses
 	/// </summary>
 	/// <param name="action">The action type that is being added to this list</param>
 	/// <param name="interactResponse">The DelegateResponse this action will Have</param>
-	protected void AddInteractionToList(string actionName, InteractDelegate interactResponse)
+	public void AddInteractionToList(string actionName, InteractDelegate interactResponse)
 	{
 		actionResponses.Add(actionName, interactResponse);
 		interactionsDirty = true;
+	}
+
+	public void RemoveInteractionFromList(string actionName)
+	{
+		actionResponses.Remove(actionName);
+		interactionsDirty = true;
+	}
+
+	public void AddInteractionTrigger(string triggerName)
+	{
+		interactionsTrigers.Add(triggerName);
+	}
+
+	public void RemoveInteractionTrigger(string triggerName)
+	{
+		interactionsTrigers.Remove(triggerName);
 	}
 
 	/// <summary>
@@ -58,7 +83,7 @@ public class InteractableBase : MonoBehaviour
 		List<string> possibleInteractions = new List<string>();
 		foreach(string actionName in interactionsTrigers)
 		{
-			if (obj.interactions.Contains(actionName))
+			if (obj.Interactions.Contains(actionName))
 			{
 				possibleInteractions.Add(actionName);
 			}
@@ -70,20 +95,24 @@ public class InteractableBase : MonoBehaviour
 	/// Attempt to trigger interactions on another object 
 	/// </summary>
 	/// <param name="obj">the object whose interactions we are triggering</param>
-	public void AttemptInteraction(InteractableBase obj)
+	public bool AttemptInteraction(InteractableBase obj)
 	{
 		List<string> possibleInteractions = GetPossibleInteractions(obj);
+		possibleInteractions.AddRange(obj.GetPossibleInteractions(this));
 		if(possibleInteractions.Count == 0)
 		{
 			Debug.Log("NO Interactions, send message to UI");
 		}else if(possibleInteractions.Count == 1)
 		{
 			obj.Interact(possibleInteractions[0], this);
+			Debug.Log(possibleInteractions[0]);
+			return true;
 		}
 		else
 		{
 			Debug.Log("Interaction list, Send Message to UI");
 		}
+		return false;
 	}
 
 	/// <summary>
@@ -97,6 +126,9 @@ public class InteractableBase : MonoBehaviour
 		if (actionResponses.TryGetValue(action, out response))
 		{
 			response(obj);
+		}else if(obj.actionResponses.TryGetValue(action, out response))
+		{
+			response(this);
 		}
 	}
 
