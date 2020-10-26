@@ -37,6 +37,7 @@ public class InteractableBase : MonoBehaviour
 		}
 	}
 
+	//Author: Ben Stern
 	/// <summary>
 	/// List interactions that this object can trigger but cannot handle response to
 	/// </summary>
@@ -50,20 +51,27 @@ public class InteractableBase : MonoBehaviour
 		//interactionsTrigers = new List<string>();
 	}
 
+	//Author: Ben Stern
 	/// <summary>
-	/// Add an interaction to this objects list of interactions and responses
+	/// Add an interaction to this objects list of interactions and responses 
 	/// </summary>
 	/// <param name="action">The action type that is being added to this list</param>
 	/// <param name="interactResponse">The DelegateResponse this action will Have</param>
 	public void AddInteractionToList(string actionName, InteractDelegate interactResponse)
 	{
-		if (!actionResponses.ContainsKey(actionName))
+		if (actionResponses.ContainsKey(actionName))
 		{
-			actionResponses.Add(actionName, interactResponse);
-			interactionsDirty = true;
+			Debug.Log("an action of the same name already exists in the list");
 		}
+		actionResponses.Add(actionName, interactResponse);
+		interactionsDirty = true;
 	}
 
+	//Author: Ben Stern
+	/// <summary>
+	/// Remove an interaction from the list of interactions
+	/// </summary>
+	/// <param name="actionName">The action type you want to remove from the list</param>
 	public void RemoveInteractionFromList(string actionName)
 	{
 		if (actionResponses.Remove(actionName))
@@ -72,6 +80,11 @@ public class InteractableBase : MonoBehaviour
 		}
 	}
 
+	//Author: Ben Stern
+	/// <summary>
+	/// add a trigger to this object
+	/// </summary>
+	/// <param name="triggerName">the trigger to add</param>
 	public void AddInteractionTrigger(string triggerName)
 	{
 		if (!interactionsTrigers.Contains(triggerName))
@@ -80,11 +93,17 @@ public class InteractableBase : MonoBehaviour
 		}
 	}
 
+	//Author: Ben Stern
+	/// <summary>
+	/// Remove a trigger from this object
+	/// </summary>
+	/// <param name="triggerName">the trigger to remove</param>
 	public void RemoveInteractionTrigger(string triggerName)
 	{
 		interactionsTrigers.Remove(triggerName);
 	}
 
+	//Author: Ben Stern
 	/// <summary>
 	/// Get the list of possible actions this object can trigger
 	/// </summary>
@@ -103,6 +122,7 @@ public class InteractableBase : MonoBehaviour
 		return possibleInteractions;
 	}
 
+	//Author: Ben Stern
 	/// <summary>
 	/// Attempt to trigger interactions on another object 
 	/// </summary>
@@ -127,6 +147,7 @@ public class InteractableBase : MonoBehaviour
 		return false;
 	}
 
+	//Author: Ben Stern
 	/// <summary>
 	/// trigger an interaction on this object
 	/// </summary>

@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//Author: Ben Stern
 
+/// <summary>
+/// a component allowing an object to be a container
+/// </summary>
 [RequireComponent(typeof(InteractableBase))]
 public class ContainerComponent : MonoBehaviour
 {
-
+	/// <summary>
+	/// A vector representing where to place object put in this container relative to its position
+	/// </summary>
 	public Vector3 PlacePositionRelative;
 
 	/// <summary>
@@ -36,11 +42,14 @@ public class ContainerComponent : MonoBehaviour
 	public void HoldItem(InteractableBase ItemToHold)
 	{
 		itemHolding = ItemToHold;
+		//move the item into the container
 		itemHolding.transform.position = transform.position + PlacePositionRelative;
 		itemHolding.transform.SetParent(transform);
+		//call any interaction that happen when this item is placed in a container
 		itemHolding.Interact("On Place In Container", interactableComponent);
+		//objects in containers should not be selectable until taken out of the container
 		itemHolding.GetComponent<SelectableObject>().enabled = false;
-		//add the empty interactions to the list
+		//add the empty into to interaction to the list
 		interactableComponent.AddInteractionToList("Empty into", EmptyInto);
 	}
 
@@ -56,6 +65,7 @@ public class ContainerComponent : MonoBehaviour
 		if (itemHolding.transform.parent != transform)
 		{
 			itemHolding = null;
+			//remove the empty into interaction from the list
 			interactableComponent.RemoveInteractionFromList("Empty into");
 		}
 	}
