@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// </summary>
 public class KitchenManager : MonoBehaviour
 {
-    public GameObject currentSelection;
+    public SelectableObject currentSelection;
     private Image selectionIcon;
     private GameObject stoveTopRightUI;
     private GameObject stoveTopLeftUI;
@@ -56,6 +56,35 @@ public class KitchenManager : MonoBehaviour
 
     }
 
+	/// Author: Ben Stern
+	/// <summary>
+	/// Attempt to select an object or interact with it in some way
+	/// </summary>
+	/// <param name="selectedObject">The is attempting to be selected</param>
+	public void ObjectSelected(SelectableObject selectedObject)
+	{
+		if(currentSelection == null)
+		{
+			selectedObject.selected = true;
+			currentSelection = selectedObject;
+			selectionIcon.color = selectedObject.GetComponent<Image>().color;
+			selectionIcon.sprite = selectedObject.GetComponent<Image>().sprite;
+		}
+		else
+		{
+			//TODO: call interactable object methods
+			InteractableBase currentInteractable = currentSelection.GetComponent<InteractableBase>();
+			InteractableBase selectedInteractable = selectedObject.GetComponent<InteractableBase>();
+			if(currentInteractable != null && selectedInteractable != null)
+			{
+				if (selectedInteractable.AttemptInteraction(currentInteractable))
+				{
+					ClearSelection();
+				}
+			}
+		}
+	}
+
     /// <summary>
     /// Author: Kyle Weekley
     /// Purpose: Clears the currently selected object
@@ -63,7 +92,12 @@ public class KitchenManager : MonoBehaviour
     /// </summary>
     public void ClearSelection()
     {
-        currentSelection = null;
+
+		if (currentSelection != null)
+		{
+			currentSelection.selected = false;
+		}
+		currentSelection = null;
         
         // Clears the Stove UI when the Clear Selection button is pressed
         foreach (GameObject element in stoveDialArray)
@@ -74,6 +108,7 @@ public class KitchenManager : MonoBehaviour
 
         //Reset selection sprite
         selectionIcon.sprite = null;
+		selectionIcon.color = Color.white;
 
         //Currently using sprite color for testing
         //selectionIcon.color = Color.white;

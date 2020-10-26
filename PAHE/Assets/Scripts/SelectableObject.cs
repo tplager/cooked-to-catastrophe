@@ -15,7 +15,6 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
     private KitchenManager kitchenManager;
     private Image selectionIcon;
 
-
     /// <summary>
     /// Author: Kyle Weekley
     /// Purpose: Sets references to objects necessary for item seleciton
@@ -25,7 +24,6 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
         selected = false;
         kitchenManager = GameObject.Find("Main Camera").GetComponent<KitchenManager>();
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
-
     }
 
     void Update()
@@ -41,19 +39,18 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
     /// <param name="eventData">Used for recognizing clicks on 2D objects</param>
     public void OnPointerDown(PointerEventData eventData)
     {
-        // Only select this object if another object is not already selected
-        if (kitchenManager.currentSelection == null)
+		// Only select this object if another object is not already selected
+		/*if (kitchenManager.currentSelection == null)
         {
             selected = true;
             kitchenManager.currentSelection = this.gameObject;
 
             //Set current selection sprite in UI to this object's sprite
-            selectionIcon.sprite = this.GetComponent<Image>().sprite;
+            //selectionIcon.sprite = this.GetComponent<Image>().sprite;
 
             //Currently using sprite color for testing
-            //selectionIcon.color = this.GetComponent<Image>().color;
-        }
+            selectionIcon.color = this.GetComponent<Image>().color;
+        }*/
+		kitchenManager.ObjectSelected(this);
     }
-
-    
 }
