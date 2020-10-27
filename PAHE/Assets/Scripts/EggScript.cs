@@ -7,9 +7,10 @@ using UnityEngine.UI;
 
 public enum EggStates
 {
-	shelled,
-	raw,
+	Shelled,
+	Raw,
 	Fried,
+	Burnt
 }
 
 /// <summary>
@@ -17,6 +18,7 @@ public enum EggStates
 /// </summary>
 [RequireComponent(typeof(InteractableBase))]
 [RequireComponent(typeof(Image))]
+[RequireComponent(typeof(CookableObject))]
 public class EggScript : MonoBehaviour
 {
 	
@@ -43,29 +45,55 @@ public class EggScript : MonoBehaviour
 	/// <summary>
 	/// the image representing the egg when it is fried
 	/// </summary>
-	public Sprite Fried;
+	public Sprite fried;
 
-    void Start()
+	// Image representing the egg when it's burnt
+	public Sprite burnt;
+
+	void Start()
     {
 		//get the interactable component and add interactions to it
 		interactableComponent = GetComponent<InteractableBase>();
 		interactableComponent.AddInteractionToList("On Place In Container", OnPlaceInContainer);
+
 		//get the image component and set the sprite
 		imageComponent = GetComponent<Image>();
 		imageComponent.sprite = shelledImage;
     }
 
-	//takes an interactable base so it can be a delegate
+	// Author: Nick Engell
 	/// <summary>
-	/// A function to call when the egg is placed in to a container
+	/// Updates the egg state and image based on the food cook state
 	/// </summary>
-	/// <param name="container">the container the egg is being placed in</param>
-	public void OnPlaceInContainer(InteractableBase container)
+    private void Update()
+    {
+		// If the egg is fully cooked
+        if(GetComponent<CookableObject>().IsCooked)
+        {
+			// Update it's state and image
+			eggState = EggStates.Fried;
+			imageComponent.sprite = fried;
+        }
+		// If the egg is burnt
+		if(GetComponent<CookableObject>().IsBurnt)
+        {
+			// Update it's state and image
+			eggState = EggStates.Burnt;
+			imageComponent.sprite = burnt;
+        }
+    }
+
+    //takes an interactable base so it can be a delegate
+    /// <summary>
+    /// A function to call when the egg is placed in to a container
+    /// </summary>
+    /// <param name="container">the container the egg is being placed in</param>
+    public void OnPlaceInContainer(InteractableBase container)
 	{
 		//if the egg is currently shelled, unshell it
-		if(eggState == EggStates.shelled)
+		if(eggState == EggStates.Shelled)
 		{
-			eggState = EggStates.raw;
+			eggState = EggStates.Raw;
 			imageComponent.sprite = rawImage;
 		}
 	}
