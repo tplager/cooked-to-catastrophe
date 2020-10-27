@@ -22,7 +22,7 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
     void Start()
     {
         selected = false;
-        kitchenManager = GameObject.Find("Main Camera").GetComponent<KitchenManager>();
+        kitchenManager = GameObject.Find("Game Manager").GetComponent<KitchenManager>();
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
     }
 

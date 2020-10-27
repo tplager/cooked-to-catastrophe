@@ -520,7 +520,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBR
         m_Mode: 3
@@ -1031,8 +1031,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -630, y: -32}
-  m_SizeDelta: {x: 512, y: 512}
+  m_AnchoredPosition: {x: -681, y: -119}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &163428528
 MonoBehaviour:
@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0926f8c1329a9458a9937403f7f5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlacePositionRelative: {x: 0, y: -30, z: 0}
+  PlacePositionRelative: {x: 0, y: -20, z: 0}
 --- !u!114 &163428531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBL
         m_Mode: 3
@@ -1650,7 +1650,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBL
         m_Mode: 3
@@ -1857,7 +1857,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTL
         m_Mode: 3
@@ -2235,7 +2235,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBR
         m_Mode: 3
@@ -2692,7 +2692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTR
         m_Mode: 3
@@ -3148,7 +3148,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBR
         m_Mode: 3
@@ -3520,7 +3520,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTR
         m_Mode: 3
@@ -4095,7 +4095,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTR
         m_Mode: 3
@@ -4227,7 +4227,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTL
         m_Mode: 3
@@ -4359,7 +4359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTL
         m_Mode: 3
@@ -4464,6 +4464,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8376f1d6d6ee1a440ab4f4bab212a315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  burnerTR: 0
+  burnerBR: 0
+  burnerBL: 0
+  burnerTL: 0
 --- !u!114 &1282634017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4492,7 +4496,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1282634018
 CanvasRenderer:
@@ -4584,7 +4588,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTR
         m_Mode: 3
@@ -4752,8 +4756,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shelledImage: {fileID: 21300000, guid: 550e804a9a236494b8270c18f2d0ef9a, type: 3}
-  rawImage: {fileID: 21300000, guid: 50decd1f25d7d4b40824a5810e6a3a8b, type: 3}
-  Fried: {fileID: 21300000, guid: 3f1ff23a9040f9b46b4a4320fb46b030, type: 3}
+  rawImage: {fileID: 21300000, guid: 85f89446ed14ad34d88647f9cc69585e, type: 3}
+  Fried: {fileID: 21300000, guid: 50decd1f25d7d4b40824a5810e6a3a8b, type: 3}
 --- !u!1 &1311727185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4836,7 +4840,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBR
         m_Mode: 3
@@ -5689,7 +5693,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBL
         m_Mode: 3
@@ -6537,7 +6541,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerBL
         m_Mode: 3
@@ -6894,7 +6898,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1282634016}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: changeStoveTemp, Assembly-CSharp
         m_MethodName: set_BurnerTL
         m_Mode: 3

@@ -19,6 +19,17 @@ public class KitchenManager : MonoBehaviour
 
     private GameObject[] stoveDialArray;
 
+    private GameObject stove;
+
+    // Author: Nick Engell
+    /// <summary>
+    /// Get access to the stove
+    /// </summary>
+    public GameObject Stove
+    {
+        get { return stove; }
+    }
+
     /// <summary>
     /// Author: Kyle Weekley
     /// Purpose: Set references to necessary objects
@@ -31,6 +42,9 @@ public class KitchenManager : MonoBehaviour
         stoveTopLeftUI = GameObject.Find("TopLeftBurnerUI").gameObject;             // Gets the reference to the Top Left Burner
         stoveBottomRightUI = GameObject.Find("BottomRightBurnerUI").gameObject;     // Gets the reference to the Bottom Right Burner
         stoveBottomLeftUI = GameObject.Find("BottomLeftBurnerUI").gameObject;       // Gets the reference to the Bottom Left Burner
+
+        // Find and store a reference to the stove object
+        stove = GameObject.Find("Stove");
 
         // Puts the UI elements into the array
         stoveDialArray = new GameObject[] { stoveTopRightUI, stoveTopLeftUI, stoveBottomRightUI, stoveBottomLeftUI };
