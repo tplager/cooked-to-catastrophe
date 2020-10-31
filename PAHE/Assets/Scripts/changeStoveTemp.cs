@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 /// <summary>
 /// Author: John Vance
 /// Purpose: Allows for each stove burner to be set independently.
 /// Restrictions: Won't fully work until the Kitchen Object Interactions section is finished.
 /// </summary>
 public class ChangeStoveTemp : MonoBehaviour
-
 {
     [SerializeField]
     private int burnerTR;       // Top Right Burner temp
@@ -81,7 +82,8 @@ public class ChangeStoveTemp : MonoBehaviour
 
     void Update()
     {
-   
-        
+
+
     }
 }
+
