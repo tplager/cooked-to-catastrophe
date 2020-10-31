@@ -18,6 +18,18 @@ public class CookableObject : MonoBehaviour
     [SerializeField] private float mediumHeatMultiplier;
     [SerializeField] private float highHeatMultiplier;
 
+    // How much space the object will take up in the cart
+    [SerializeField] private float size;
+
+    // Author: Nick Engell
+    /// <summary>
+    /// Property for how much space the object will take up in the cart
+    /// </summary>
+    public float Size
+    {
+        get { return size; }
+    }
+
     // Author: Nick Engell
     /// <summary>
     /// Status of whether the food is cooked or not
