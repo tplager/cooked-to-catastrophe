@@ -22,13 +22,25 @@ public class Room : MonoBehaviour
     // that can be taken from the room
     [SerializeField]
     private List<string> subTypes = new List<string>();
+
+    // A prefab that represents 1 row in the submenu canvas
+    // Each row represents 1 ingredient in the room
+    [SerializeField]
+    private GameObject ingredientListItem;
+
+    // The parent object of all of the rooms in the main Overview canvas in the pantry
+    private GameObject roomsContainer; 
     #endregion
 
     #region Properties
     /// <summary>
     /// Returns whether the room is locked or not
     /// </summary>
-    public bool Locked { get; set; }
+    public bool Locked 
+    { 
+        get { return locked; } 
+        set { locked = value; } 
+    }
     #endregion
 
     #region Methods
@@ -43,6 +55,48 @@ public class Room : MonoBehaviour
         {
             GetComponent<Button>().interactable = true;
             transform.Find("LockPanel").gameObject.SetActive(false);
+        }
+
+        roomsContainer = GameObject.Find("/OverviewCanvas/Rooms");
+    }
+
+    /// Author: Trenton Plager
+    /// <summary>
+    /// Opens the submenu canvas, closes the containing object holding all the rooms in the overview canvas,
+    /// and populates each of the rows in the canvas with the appropriate children and text
+    /// </summary>
+    public void OpenRoom()
+    {
+        roomsContainer.SetActive(false);
+        GameObject subMenuCanvas = GameObject.Find("SubMenuCanvas");
+
+        subMenuCanvas.GetComponent<Canvas>().enabled = true;
+        subMenuCanvas.transform.Find("Title Panel/Text").GetComponent<Text>().text = gameObject.GetComponentInChildren<Text>().text; 
+        Transform roomContentTransform = subMenuCanvas.transform.Find("Scroll View/Viewport/Content");
+
+        for (int i = 0; i < subTypes.Count; i++)
+        {
+            try
+            {
+                GameObject roomIngredient = roomContentTransform.GetChild(i).gameObject;
+                roomIngredient.SetActive(true); 
+                roomIngredient.name = subTypes[i];
+                roomIngredient.GetComponentInChildren<Text>().text = subTypes[i];
+            }
+            catch
+            {
+                GameObject roomIngredient = Instantiate(ingredientListItem, roomContentTransform);
+                roomIngredient.name = subTypes[i];
+                roomIngredient.GetComponentInChildren<Text>().text = subTypes[i];
+            }
+        }
+
+        if (roomContentTransform.childCount > subTypes.Count)
+        {
+            for (int i = roomContentTransform.childCount - subTypes.Count; i < roomContentTransform.childCount; i++)
+            {
+                roomContentTransform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
     #endregion
