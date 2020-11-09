@@ -9,11 +9,11 @@ using UnityEngine;
 public class CartManager : MonoBehaviour
 {
 
-	//was orignally a dictionary of cartitems to ints, had to change it while fixing a bug, may change it back
 	/// <summary>
-	/// A dictionary of items in the cart, uses the items name as the key and holds a game object and int tuple as a value
+	/// A dictionary of items in the cart, uses a cart object as a key and an int as a value
 	/// </summary>
-	private Dictionary<string,(GameObject, int)> itemsInCart;
+	private Dictionary<CartItem, int> itemsInCart;
+	//private Dictionary<string,(GameObject, int)> itemsInCart;
 	/// <summary>
 	/// a representation of the maximum space in the cart
 	/// </summary>
@@ -54,7 +54,8 @@ public class CartManager : MonoBehaviour
 		}
 		_instance = this;
 		DontDestroyOnLoad(gameObject);
-		itemsInCart = new Dictionary<string, (GameObject, int)>();
+		//itemsInCart = new Dictionary<string, (GameObject, int)>();
+		itemsInCart = new Dictionary<CartItem, int>();
 	}
 
 	//Author: Ben Stern
@@ -65,22 +66,41 @@ public class CartManager : MonoBehaviour
 	/// <returns>True if the item was added to the cart, false other wise</returns>
 	public bool AddItemToCart(CartItem item)
 	{
-		if(usedCartSpace + item.Size > MaxCartSpace)
+		if (usedCartSpace + item.Size > MaxCartSpace)
 		{
 			Debug.Log("Not Enough Space");
 			return false;
 		}
 
-		if (!itemsInCart.ContainsKey(item.name))
+		if (!itemsInCart.ContainsKey(item))
 		{
-			itemsInCart[item.name] = (item.gameObject,0);
+			itemsInCart[item] = 0;
 		}
 
-		itemsInCart[item.name] = (itemsInCart[item.name].Item1, itemsInCart[item.name].Item2 + 1);
+		itemsInCart[item] += 1;
 		usedCartSpace += item.Size;
-		Debug.Log(item.name + ": " + itemsInCart[item.name]);
+		Debug.Log(item.name + ": " + itemsInCart[item]);
 		return true;
 	}
+	//public bool AddItemToCart(CartItem item)
+	//{
+	//	if(usedCartSpace + item.Size > MaxCartSpace)
+	//	{
+	//		Debug.Log("Not Enough Space");
+	//		return false;
+	//	}
+
+	//	if (!itemsInCart.ContainsKey(item.name))
+	//	{
+	//		itemsInCart[item.name] = (item.gameObject,0);
+	//	}
+
+	//	itemsInCart[item.name] = (itemsInCart[item.name].Item1, itemsInCart[item.name].Item2 + 1);
+	//	usedCartSpace += item.Size;
+	//	Debug.Log(item.name + ": " + itemsInCart[item.name]);
+	//	return true;
+	//}
+
 
 	//Author: Ben Stern
 	/// <summary>
@@ -90,16 +110,30 @@ public class CartManager : MonoBehaviour
 	/// <returns>true if the item was removed from the cart, false other wise</returns>
 	public bool RemoveItemFromCart(CartItem item)
 	{
-		if(!itemsInCart.ContainsKey(item.name) || itemsInCart[item.name].Item2 <= 0)
+		if (!itemsInCart.ContainsKey(item) || itemsInCart[item] <= 0)
 		{
 			Debug.Log("Item Not in Cart");
 			return false;
 		}
 
-		itemsInCart[item.name] = (itemsInCart[item.name].Item1, itemsInCart[item.name].Item2 - 1);
+		itemsInCart[item] -= 1;
 		usedCartSpace -= item.Size;
-		Debug.Log(item.name + ": " + itemsInCart[item.name]);
+		Debug.Log(item.name + ": " + itemsInCart[item]);
 		return true;
 	}
+	//public bool RemoveItemFromCart(CartItem item)
+	//{
+	//	if (!itemsInCart.ContainsKey(item.name) || itemsInCart[item.name].Item2 <= 0)
+	//	{
+	//		Debug.Log("Item Not in Cart");
+	//		return false;
+	//	}
+
+	//	itemsInCart[item.name] = (itemsInCart[item.name].Item1, itemsInCart[item.name].Item2 - 1);
+	//	usedCartSpace -= item.Size;
+	//	Debug.Log(item.name + ": " + itemsInCart[item.name]);
+	//	return true;
+	//}
+
 
 }
