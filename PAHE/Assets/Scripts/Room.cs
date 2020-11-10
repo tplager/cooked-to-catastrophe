@@ -60,7 +60,7 @@ public class Room : MonoBehaviour
 		roomsContainer = GameObject.Find("/OverviewCanvas/Rooms");
 	}
 
-	/// Author: Trenton Plager
+	/// Author: Trenton Plager, Ben Stern
 	/// <summary>
 	/// Opens the submenu canvas, closes the containing object holding all the rooms in the overview canvas,
 	/// and populates each of the rows in the canvas with the appropriate children and text
