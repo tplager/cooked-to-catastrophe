@@ -80,18 +80,12 @@ public class Room : MonoBehaviour
 			CartItem cartItem = subTypes[i];
 			try
 			{
-				//GameObject roomIngredient = roomContentTransform.GetChild(i).gameObject;
 				roomIngredient = roomContentTransform.GetChild(i).gameObject;
 				roomIngredient.SetActive(true);
-				//roomIngredient.name = subTypes[i];
-				//roomIngredient.GetComponentInChildren<Text>().text = subTypes[i];
 			}
 			catch
 			{
-				//GameObject roomIngredient = Instantiate(ingredientListItem, roomContentTransform);
 				roomIngredient = Instantiate(ingredientListItem, roomContentTransform);
-				//roomIngredient.name = subTypes[i];
-				//roomIngredient.GetComponentInChildren<Text>().text = subTypes[i];
 			}
 			roomIngredient.name = cartItem.ItemName;
 			roomIngredient.GetComponentInChildren<Text>().text = cartItem.ItemName;
