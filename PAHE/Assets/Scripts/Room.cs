@@ -21,7 +21,7 @@ public class Room : MonoBehaviour
 	// This list will be used to populate the different ingredients
 	// that can be taken from the room
 	[SerializeField]
-	private List<GameObject> subTypes = new List<GameObject>();
+	private List<CartItem> subTypes = new List<CartItem>();
 
 	// A prefab that represents 1 row in the submenu canvas
 	// Each row represents 1 ingredient in the room
@@ -77,7 +77,7 @@ public class Room : MonoBehaviour
 		for (int i = 0; i < subTypes.Count; i++)
 		{
 			GameObject roomIngredient;
-			CartItem cartItem = subTypes[i].GetComponent<CartItem>();
+			CartItem cartItem = subTypes[i];
 			try
 			{
 				//GameObject roomIngredient = roomContentTransform.GetChild(i).gameObject;
@@ -101,7 +101,7 @@ public class Room : MonoBehaviour
 				string text = buttons[j].GetComponentInChildren<Text>().text;
 				//we set a fresh q and bcartinstance because delegates act weird - Ben Stern
 				int q = i;
-				CartItem bCartItem = subTypes[q].GetComponent<CartItem>();
+				CartItem bCartItem = subTypes[q];
 				if (text == "-")
 				{
 					buttons[j].GetComponent<Button>().onClick.AddListener(() => CartManager.Instance.RemoveItemFromCart(bCartItem));

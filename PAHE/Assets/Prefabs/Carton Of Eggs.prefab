@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 843659211984098846}
   - component: {fileID: 136456046975046097}
   - component: {fileID: 2219905485959162150}
-  - component: {fileID: 3173933999971177211}
   m_Layer: 5
   m_Name: Carton Of Eggs
   m_TagString: Untagged
@@ -76,18 +75,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3173933999971177211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3174632898146246471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f8c3cd0ae681a47a90a7ad4671cd88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Size: 10
-  CartImage: {fileID: 21300000, guid: 11e5f98b55e5c144d94021aa8e4bd4b0, type: 3}
-  ItemName: Carton Of Eggs

@@ -82,24 +82,6 @@ public class CartManager : MonoBehaviour
 		Debug.Log(item.name + ": " + itemsInCart[item]);
 		return true;
 	}
-	//public bool AddItemToCart(CartItem item)
-	//{
-	//	if(usedCartSpace + item.Size > MaxCartSpace)
-	//	{
-	//		Debug.Log("Not Enough Space");
-	//		return false;
-	//	}
-
-	//	if (!itemsInCart.ContainsKey(item.name))
-	//	{
-	//		itemsInCart[item.name] = (item.gameObject,0);
-	//	}
-
-	//	itemsInCart[item.name] = (itemsInCart[item.name].Item1, itemsInCart[item.name].Item2 + 1);
-	//	usedCartSpace += item.Size;
-	//	Debug.Log(item.name + ": " + itemsInCart[item.name]);
-	//	return true;
-	//}
 
 
 	//Author: Ben Stern
@@ -121,19 +103,6 @@ public class CartManager : MonoBehaviour
 		Debug.Log(item.name + ": " + itemsInCart[item]);
 		return true;
 	}
-	//public bool RemoveItemFromCart(CartItem item)
-	//{
-	//	if (!itemsInCart.ContainsKey(item.name) || itemsInCart[item.name].Item2 <= 0)
-	//	{
-	//		Debug.Log("Item Not in Cart");
-	//		return false;
-	//	}
-
-	//	itemsInCart[item.name] = (itemsInCart[item.name].Item1, itemsInCart[item.name].Item2 - 1);
-	//	usedCartSpace -= item.Size;
-	//	Debug.Log(item.name + ": " + itemsInCart[item.name]);
-	//	return true;
-	//}
 
 
 }

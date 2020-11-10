@@ -6,9 +6,11 @@ using UnityEngine;
 /// <summary>
 /// A representation of any item that can be held in a cart
 /// </summary>
-public class CartItem : MonoBehaviour
+[CreateAssetMenu(fileName = "CartItem", menuName = "ScriptableObjects/CartItem", order = 1)]
+public class CartItem : ScriptableObject
 {
 	public int Size;
 	public Sprite CartImage;
 	public string ItemName;
+	public GameObject prefab;
 }
