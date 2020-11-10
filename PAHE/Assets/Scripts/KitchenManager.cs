@@ -19,6 +19,9 @@ public class KitchenManager : MonoBehaviour
 
     private GameObject[] stoveDialArray;
 
+    [SerializeField]
+    private GameObject utensilCup;              // Variable for the Utensil Cup
+
     private GameObject stove;
 
     // Author: Nick Engell
