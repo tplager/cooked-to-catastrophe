@@ -1103,8 +1103,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1015345276}
   m_HandleRect: {fileID: 1015345275}
   m_Direction: 2
-  m_Value: 1.0000001
-  m_Size: 0.58392256
+  m_Value: 1
+  m_Size: 0.48090562
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1165,8 +1165,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: subTypes.Array.data[0]
-      value: Carton of Eggs
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: 554b7615dfcc28645b91cdf99e738ddb, type: 2}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: locked
       value: 0
@@ -1496,11 +1496,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: subTypes.Array.data[0]
-      value: Spaghetti Noodles
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2972168161164982913, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: m_Name
@@ -1614,11 +1614,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: subTypes.Array.data[0]
-      value: Marinara Sauce
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2972168161164982913, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: m_Name
@@ -2620,7 +2620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: subTypes.Array.data[0]
-      value: White Rice
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: subTypes.Array.data[1]
@@ -2628,7 +2628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2972168161164982913, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: m_Name
@@ -3737,8 +3737,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2103367171}
   m_HandleRect: {fileID: 2103367170}
   m_Direction: 0
-  m_Value: -0.0000037304524
-  m_Size: 0.98784465
+  m_Value: 0.0000074608492
+  m_Size: 0.9878446
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3873,11 +3873,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: subTypes.Array.data[0]
-      value: Frozen Meatballs
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1092300355665654920, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: locked
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2972168161164982913, guid: 235828cf66f277d499aa3a5961810e08, type: 3}
       propertyPath: m_Name
