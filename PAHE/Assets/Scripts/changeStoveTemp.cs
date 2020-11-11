@@ -23,6 +23,8 @@ public class ChangeStoveTemp : MonoBehaviour
     [SerializeField]
     private int burnerTL;       // Top Left Burner temp
 
+
+
     #region Getters/Setters
     /// <summary>
     /// Getter/Setter for Top Right burner
@@ -78,12 +80,15 @@ public class ChangeStoveTemp : MonoBehaviour
         burnerBL = 0;
         burnerTL = 0;
 
+       
+
     }
 
     void Update()
     {
 
-
     }
+
+   
 }
 

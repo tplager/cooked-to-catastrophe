@@ -12,9 +12,14 @@ public class KitchenManager : MonoBehaviour
 {
     public SelectableObject currentSelection;
     private Image selectionIcon;
+
+    [SerializeField]
     private GameObject stoveTopRightUI;
+    [SerializeField]
     private GameObject stoveTopLeftUI;
+    [SerializeField]
     private GameObject stoveBottomRightUI;
+    [SerializeField]
     private GameObject stoveBottomLeftUI;
 
     private GameObject[] stoveDialArray;
@@ -38,10 +43,10 @@ public class KitchenManager : MonoBehaviour
     {
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
 
-        stoveTopRightUI = GameObject.Find("TopRightBurnerUI").gameObject;           // Gets the reference to the Top Right Burner
-        stoveTopLeftUI = GameObject.Find("TopLeftBurnerUI").gameObject;             // Gets the reference to the Top Left Burner
-        stoveBottomRightUI = GameObject.Find("BottomRightBurnerUI").gameObject;     // Gets the reference to the Bottom Right Burner
-        stoveBottomLeftUI = GameObject.Find("BottomLeftBurnerUI").gameObject;       // Gets the reference to the Bottom Left Burner
+        //stoveTopRightUI = GameObject.Find("TopRightBurnerUI").gameObject;           // Gets the reference to the Top Right Burner
+        //stoveTopLeftUI = GameObject.Find("TopLeftBurnerUI").gameObject;             // Gets the reference to the Top Left Burner
+        //stoveBottomRightUI = GameObject.Find("BottomRightBurnerUI").gameObject;     // Gets the reference to the Bottom Right Burner
+        //stoveBottomLeftUI = GameObject.Find("BottomLeftBurnerUI").gameObject;       // Gets the reference to the Bottom Left Burner
 
         // Find and store a reference to the stove object
         stove = GameObject.Find("Stove");
@@ -151,6 +156,14 @@ public class KitchenManager : MonoBehaviour
             }
         }
         
+
+    }
+
+
+    public void Leave(GameObject burner)
+    {
+        burner.SetActive(false);
+        ClearSelection();
 
     }
 }
