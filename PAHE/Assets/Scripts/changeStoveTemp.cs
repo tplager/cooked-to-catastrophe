@@ -4,17 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public enum StoveTemps
-{
-    High,
-    Medium,
-    Low,
-    Off
-
-}
-
-
-
 /// <summary>
 /// Author: John Vance
 /// Purpose: Allows for each stove burner to be set independently.
