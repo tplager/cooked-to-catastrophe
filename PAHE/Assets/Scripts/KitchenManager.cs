@@ -159,7 +159,11 @@ public class KitchenManager : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Author: John Vance
+    /// Purpose: Allows for the player to leave a Burner Menu
+    /// </summary>
+    /// <param name="burner">The Burner the player is affecting</param>
     public void Leave(GameObject burner)
     {
         burner.SetActive(false);
