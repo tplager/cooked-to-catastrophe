@@ -13,6 +13,10 @@ public class Guest : MonoBehaviour
 
     private List<string> dialogueLines;
 
+    [SerializeField] private Sprite neturalFace;
+    [SerializeField] private Sprite happyFace;
+    [SerializeField] private Sprite sadFace;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,5 +52,20 @@ public class Guest : MonoBehaviour
     public void CompareDishAndOrder()// Insert order enum here
     {
         // Check to see if the recieved dish is the same as the foodOrder, if so display happy, else sad
+
+        // Change the guest info headshot to happy or sad
+    }
+
+    // Called when the guest is clicked on
+    public void UpdateGuestInfo()
+    {
+        // Get the text fields in the info panel
+        // Update the greeting text with a random dialogue line with a "- " at the beginning
+        // Update the meal text with the dish name
+        // Update the dish icon with the correct dish
+
+        // The dishes in the cafeteria manager might be a dictionary / list of vectors. Something that can hold the dish name and the dish icon.
+
+        // Update the guest photo to be the happy face for 1 second then go to neutral
     }
 }
