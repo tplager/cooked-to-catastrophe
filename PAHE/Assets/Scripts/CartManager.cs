@@ -30,7 +30,7 @@ public class CartManager : MonoBehaviour
 	/// <summary>
 	/// The shoping cart list in the scene
 	/// </summary>
-	private Text ShopingCartList;
+	private Text shoppingCartList;
 
 	/// <summary>
 	/// the singleton instance
@@ -71,7 +71,7 @@ public class CartManager : MonoBehaviour
 		GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
 		if (obj != null)
 		{
-			ShopingCartList = obj.GetComponent<Text>();
+			shoppingCartList = obj.GetComponent<Text>();
 		}
 	}
 
@@ -123,12 +123,13 @@ public class CartManager : MonoBehaviour
 		return true;
 	}
 
+	// Author: Ben Stern
 	/// <summary>
 	/// Update the cart list when done
 	/// </summary>
 	public void UpdateCartList()
 	{
-		if(ShopingCartList != null)
+		if(shoppingCartList != null)
 		{
 			string s = "";
 			foreach(KeyValuePair<CartItem, int> item in itemsInCart)
@@ -141,7 +142,7 @@ public class CartManager : MonoBehaviour
 					s += '\n';
 				}
 			}
-			ShopingCartList.text = s;
+			shoppingCartList.text = s;
 		}
 	}
 
@@ -153,14 +154,14 @@ public class CartManager : MonoBehaviour
 	/// <param name="mode">the way the scene is being loaded</param>
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		ShopingCartList = null;
+		shoppingCartList = null;
 		if(scene.name == "Pantry")
 		{
 			//I dont like doing this, but I want to get this done quickly so im doing it like this
 			GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
 			if (obj != null)
 			{
-				ShopingCartList = obj.GetComponent<Text>();
+				shoppingCartList = obj.GetComponent<Text>();
 			}
 		}
 	}
