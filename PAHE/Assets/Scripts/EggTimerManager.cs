@@ -21,7 +21,7 @@ public class EggTimerManager : MonoBehaviour
     private float timeElapsed;
     private float timeToSkip;
 
-    private ChangeStoveTemp stoveTemps;
+    private StoveTemp stoveTemps;
 
     // Author: Nick Engell
     /// <summary>
@@ -34,7 +34,7 @@ public class EggTimerManager : MonoBehaviour
         timeToSkip = 0;
 
         // Gets a reference to the stove
-        stoveTemps = GetComponent<KitchenManager>().Stove.GetComponent<ChangeStoveTemp>();
+        stoveTemps = GetComponent<KitchenManager>().Stove.GetComponent<StoveTemp>();
     }
 
     // Author: Nick Engell

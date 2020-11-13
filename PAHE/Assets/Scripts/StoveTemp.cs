@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// Purpose: Allows for each stove burner to be set independently.
 /// Restrictions: Won't fully work until the Kitchen Object Interactions section is finished.
 /// </summary>
-public class ChangeStoveTemp : MonoBehaviour
+public class StoveTemp : MonoBehaviour
 {
     [SerializeField]
     private int burnerTR;       // Top Right Burner temp
@@ -24,30 +24,22 @@ public class ChangeStoveTemp : MonoBehaviour
     private int burnerTL;       // Top Left Burner temp
 
 
-    [SerializeField]
-    private GameObject statusGameObjectBR;  // The status' GameObject to get the text
+    public GameObject statusGameObjectBR;  // The status' GameObject to get the text
     private Text statusTextBR;  // The burner's status
 
-    [SerializeField]
-    private GameObject statusGameObjectBL;  // The status' GameObject to get the text
+    
+    public GameObject statusGameObjectBL;  // The status' GameObject to get the text
     private Text statusTextBL;  // The burner's status
 
-    [SerializeField]
-    private GameObject statusGameObjectTR;  // The status' GameObject to get the text
+    
+    public GameObject statusGameObjectTR;  // The status' GameObject to get the text
     private Text statusTextTR;  // The burner's status
 
-    [SerializeField]
-    private GameObject statusGameObjectTL;  // The status' GameObject to get the text
+    
+    public GameObject statusGameObjectTL;  // The status' GameObject to get the text
     private Text statusTextTL;  // The burner's status
 
-    private int test;
-
-    public int Test
-    {
-        get { return test; }
-        set { test = value; }
-    }
-
+    
 
     #region Getters/Setters
     /// <summary>
