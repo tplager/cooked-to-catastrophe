@@ -96,6 +96,7 @@ public class Room : MonoBehaviour
 				//we set a fresh q and bcartinstance because delegates act weird - Ben Stern
 				int q = i;
 				CartItem bCartItem = subTypes[q];
+				buttons[j].GetComponent<Button>().onClick.RemoveAllListeners();
 				if (text == "-")
 				{
 					buttons[j].GetComponent<Button>().onClick.AddListener(() => CartManager.Instance.RemoveItemFromCart(bCartItem));
