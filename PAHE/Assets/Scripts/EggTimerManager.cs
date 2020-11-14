@@ -21,7 +21,7 @@ public class EggTimerManager : MonoBehaviour
     private float timeElapsed;
     private float timeToSkip;
 
-    private ChangeStoveTemp stoveTemps;
+    private StoveTemp stoveTemps;
 
     // Author: Nick Engell
     /// <summary>
@@ -34,7 +34,7 @@ public class EggTimerManager : MonoBehaviour
         timeToSkip = 0;
 
         // Gets a reference to the stove
-        stoveTemps = GetComponent<KitchenManager>().Stove.GetComponent<ChangeStoveTemp>();
+        stoveTemps = GetComponent<KitchenManager>().Stove.GetComponent<StoveTemp>();
     }
 
     // Author: Nick Engell
@@ -292,15 +292,15 @@ public class EggTimerManager : MonoBehaviour
                         // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
                         switch(stoveTemps.BurnerTL)
                         {
-                            case 20:
+                            case 1:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
                                 break;
-                            case 60:
+                            case 2:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 break;
-                            case 100:
+                            case 3:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
                                 break;
@@ -311,15 +311,15 @@ public class EggTimerManager : MonoBehaviour
                         // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
                         switch (stoveTemps.BurnerTR)
                         {
-                            case 20:
+                            case 1:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
                                 break;
-                            case 60:
+                            case 2:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 break;
-                            case 100:
+                            case 3:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
                                 break;
@@ -329,15 +329,15 @@ public class EggTimerManager : MonoBehaviour
                         // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
                         switch (stoveTemps.BurnerBL)
                         {
-                            case 20:
+                            case 1:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
                                 break;
-                            case 60:
+                            case 2:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 break;
-                            case 100:
+                            case 3:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
                                 break;
@@ -347,15 +347,15 @@ public class EggTimerManager : MonoBehaviour
                         // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
                         switch (stoveTemps.BurnerBR)
                         {
-                            case 20:
+                            case 1:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
                                 break;
-                            case 60:
+                            case 2:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
                                 break;
-                            case 100:
+                            case 3:
                                 currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
                                 currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
                                 break;
