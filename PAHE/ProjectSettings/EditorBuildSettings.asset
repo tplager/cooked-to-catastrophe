@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Cafeteria-GuestTest.unity
+    guid: ba43f2096be0a614cb3381840345815e
   m_configObjects: {}

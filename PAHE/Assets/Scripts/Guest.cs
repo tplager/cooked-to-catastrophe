@@ -1,21 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Guest : MonoBehaviour
 {
-
+    // Author: Nick Engell
+    // Whether or not the guest has a key for the player
     private bool hasKey;
-
-    // Variable that holds the order the customer wants
-    // Fill in later when the cafeteria manager has an enum for it
-    // private BLANK foodOrder
-
+    // A list of possible dialogue lines
     private List<string> dialogueLines;
-
+    // Sprite for guest's neutral face
     [SerializeField] private Sprite neturalFace;
+    // Sprite for guest's happy face
     [SerializeField] private Sprite happyFace;
+    // Sprite for guest's sad face
     [SerializeField] private Sprite sadFace;
+    // Reference to the gameManager of the scene
+    [SerializeField] private GameObject gameManager;
+    // Quick reference to the cafeteria manager
+    private CafeteriaManager cafeteriaManager;
+    // The key of what order the guest wants from the specials list
+    private string orderKeyRequested;
+    // The unique greeting line for this specific guest
+    private string uniqueGreetingLine;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +35,14 @@ public class Guest : MonoBehaviour
         dialogueLines.Add("Man, it smells so good in here compared to outside.");
         dialogueLines.Add("Oooo, this is gonna be good!");
         dialogueLines.Add("Can't really find much good food out there.");
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Quick reference to the cafeteria manager script
+        cafeteriaManager = gameManager.GetComponent<CafeteriaManager>();
 
+        // Pick a random order from the available specials when they are initally created
+        PickOrder();
+        // Give the guest a unique dialogue line when they are initally created
+        uniqueGreetingLine = GetRandomDialogueLine();
     }
 
     // Author: Nick Engell
@@ -44,28 +55,66 @@ public class Guest : MonoBehaviour
         return dialogueLines[Random.Range(0, dialogueLines.Count)];
     }
 
+    // Author: Nick Engell
+    /// <summary>
+    /// Gets a random order from the available specials
+    /// </summary>
     public void PickOrder()
     {
-        // Get a random? order from the cafeteria manager and set the foodOrder to it
+        // Pick a random order from the dictionary of specials
+        orderKeyRequested = cafeteriaManager.Specials.Keys.ToArray()[(int)Random.Range(0, cafeteriaManager.Specials.Keys.Count)];
     }
 
-    public void CompareDishAndOrder()// Insert order enum here
+    // Author: Nick Engell
+    /// <summary>
+    /// Checks to see if the dish passed in is the one the guest ordered
+    /// </summary>
+    /// <param name="orderToCompare"></param>
+    public void CompareDishAndOrder(string orderToCompare)
     {
-        // Check to see if the recieved dish is the same as the foodOrder, if so display happy, else sad
-
-        // Change the guest info headshot to happy or sad
+        // If the incoming order is what the guest initally ordered
+        if(orderToCompare == orderKeyRequested)
+        {
+            cafeteriaManager.GuestInfo.SetActive(true);
+            // Not entirely sure how inefficient this is. I could find it by manually getting the indexes but it'd be messy to read
+            // Sets the guest picture in the info screen to happy
+            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = happyFace;
+        }
+        else
+        {
+            cafeteriaManager.GuestInfo.SetActive(true);
+            // Not entirely sure how inefficient this is. I could find it by manually getting the indexes but it'd be messy to read
+            // Sets the guest picture in the info screen to sad
+            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = sadFace;
+        }
     }
 
-    // Called when the guest is clicked on
+    // Author: Nick Engell
+    /// <summary>
+    /// Updates the guest info based on the current guest clicked on
+    /// </summary>
     public void UpdateGuestInfo()
     {
-        // Get the text fields in the info panel
-        // Update the greeting text with a random dialogue line with a "- " at the beginning
-        // Update the meal text with the dish name
-        // Update the dish icon with the correct dish
+        // I used transform.Find() here and i'm not entirely sure how inefficient it is. I could find it by manually getting the indexes but it'd be messy to read
 
-        // The dishes in the cafeteria manager might be a dictionary / list of vectors. Something that can hold the dish name and the dish icon.
+        // If the guest info screen isn't already open
+        if(cafeteriaManager.GuestInfo.activeSelf == false)
+        {
+            // Open it
+            cafeteriaManager.GuestInfo.SetActive(true);
 
-        // Update the guest photo to be the happy face for 1 second then go to neutral
+            // Update the greeting text with their unique dialogue line with a "- " at the beginning
+            cafeteriaManager.GuestInfo.transform.Find("Greeting Background/Greeting Text").gameObject.GetComponent<Text>().text = "- " + uniqueGreetingLine;
+
+            // Update the meal text with the dish name
+            cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("It'd be awesome if I could get some {0}.", orderKeyRequested);
+            // Update the dish icon with the correct dish
+            cafeteriaManager.GuestInfo.transform.Find("Meal Background/Plate Background/Dish Requested").gameObject.GetComponent<Image>().sprite = cafeteriaManager.Specials[orderKeyRequested];
+
+            // Update the guest face with their netural face
+            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = neturalFace;
+        }
+
+
     }
 }
