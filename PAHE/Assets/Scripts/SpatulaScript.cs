@@ -17,7 +17,7 @@ public class SpatulaScript : MonoBehaviour
         interactableBase = GetComponent<InteractableBase>();
         // Adds the interaction
         interactableBase.AddInteractionToList("Put Back Spatula", SpatulaToCup);
-        interactableBase.AddInteractionToList("Take Egg", SpatulaGrab);
+        interactableBase.AddInteractionToList("Take Egg", SpatulaSet);
 
     }
 
@@ -44,9 +44,15 @@ public class SpatulaScript : MonoBehaviour
     /// Restrictions: None
     /// </summary>
     /// <param name="container">The container that the Spatula is acting on</param>
-    public void SpatulaGrab(InteractableBase container)
+    public void SpatulaSet(InteractableBase container)
     {
+        // Moves the Spatula slightly lower
         transform.position = container.transform.position - new Vector3(0.0f, 20.0f, 0.0f);// + PlacePositionRelative;
+        InteractableBase child = transform.GetChild(0).gameObject.GetComponent<InteractableBase>();
+
+        // Sets the Egg to be a child of the Plate
+        child.transform.position = container.transform.position;
+        child.transform.SetParent(container.transform);
 
     }
 
