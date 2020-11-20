@@ -6,23 +6,23 @@ using UnityEngine.UI;
 
 public class Guest : MonoBehaviour
 {
-    // Author: Nick Engell
+    // Author: Nick Engell, Kyle Weekley
     // Whether or not the guest has a key for the player
     private bool hasKey;
     // A list of possible dialogue lines
     private List<string> dialogueLines;
     // Sprite for guest's neutral face
-    [SerializeField] private Sprite neturalFace;
+    [SerializeField] private Sprite neutralFace;
     // Sprite for guest's happy face
     [SerializeField] private Sprite happyFace;
     // Sprite for guest's sad face
     [SerializeField] private Sprite sadFace;
     // Reference to the gameManager of the scene
-    [SerializeField] private GameObject gameManager;
+    private GameObject gameManager;
     // Quick reference to the cafeteria manager
     private CafeteriaManager cafeteriaManager;
     // The key of what order the guest wants from the specials list
-    private string orderKeyRequested;
+    public string orderKeyRequested;
     // The unique greeting line for this specific guest
     private string uniqueGreetingLine;
 
@@ -36,11 +36,18 @@ public class Guest : MonoBehaviour
         dialogueLines.Add("Oooo, this is gonna be good!");
         dialogueLines.Add("Can't really find much good food out there.");
 
+        // Get reference to GameManager (Kyle: Added single .find here since guests are now being instantiated at runtime)
+        gameManager = GameObject.Find("GameManager");
+
         // Quick reference to the cafeteria manager script
         cafeteriaManager = gameManager.GetComponent<CafeteriaManager>();
 
-        // Pick a random order from the available specials when they are initally created
-        PickOrder();
+        // If an order hasn't already been specified, pick a random order from the available specials when they are initally created
+        if (orderKeyRequested == null)
+        {
+            PickOrder();
+        }
+
         // Give the guest a unique dialogue line when they are initally created
         uniqueGreetingLine = GetRandomDialogueLine();
     }
@@ -111,8 +118,8 @@ public class Guest : MonoBehaviour
             // Update the dish icon with the correct dish
             cafeteriaManager.GuestInfo.transform.Find("Meal Background/Plate Background/Dish Requested").gameObject.GetComponent<Image>().sprite = cafeteriaManager.Specials[orderKeyRequested];
 
-            // Update the guest face with their netural face
-            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = neturalFace;
+            // Update the guest face with their neutral face
+            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = neutralFace;
         }
 
 
