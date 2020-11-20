@@ -32,6 +32,11 @@ public class CartManager : MonoBehaviour
 	/// </summary>
 	private Text shoppingCartList;
 
+    /// <summary>
+    /// The section for displaying the weight in the cart
+    /// </summary>
+    private Text weightDisplayed;
+
 	/// <summary>
 	/// the singleton instance
 	/// </summary>
@@ -73,7 +78,16 @@ public class CartManager : MonoBehaviour
 		{
 			shoppingCartList = obj.GetComponent<Text>();
 		}
-	}
+
+        // Gets the Weight Display Text component
+        GameObject weight = GameObject.Find("/OverviewCanvas/Weight Display/Text");
+        if (weight != null)
+        {
+            weightDisplayed = weight.GetComponent<Text>();
+        }
+
+
+    }
 
 	//Author: Ben Stern
 	/// <summary>
@@ -123,30 +137,41 @@ public class CartManager : MonoBehaviour
 		return true;
 	}
 
-	// Author: Ben Stern
+	// Author: Ben Stern, John Vance
 	/// <summary>
 	/// Update the cart list when done
 	/// </summary>
 	public void UpdateCartList()
 	{
-		if(shoppingCartList != null)
+		if(shoppingCartList != null && weightDisplayed != null)
 		{
 			string s = "";
-			foreach(KeyValuePair<CartItem, int> item in itemsInCart)
+            int n = 0;
+            string str = "";
+            foreach (KeyValuePair<CartItem, int> item in itemsInCart)
 			{
 				if(item.Value > 0)
 				{
 					s += item.Key.ItemName;
 					s += "  X";
 					s += item.Value;
+                    s += "  ";
+                    s += item.Key.Size * item.Value;
 					s += '\n';
-				}
+
+                    n += item.Key.Size * item.Value;
+
+                }
 			}
-			shoppingCartList.text = s;
+            str += "Space Used: " + n + "/" + MaxCartSpace;
+            weightDisplayed.text = str;
+
+
+            shoppingCartList.text = s;
 		}
 	}
 
-	// Author: Ben Stern
+	// Author: Ben Stern, John Vance
 	/// <summary>
 	/// Is  called when a new scene is loaded
 	/// </summary>
@@ -155,7 +180,7 @@ public class CartManager : MonoBehaviour
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 		shoppingCartList = null;
-		if(scene.name == "Pantry")
+        if (scene.name == "Pantry")
 		{
 			//I dont like doing this, but I want to get this done quickly so im doing it like this
 			GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
@@ -163,7 +188,13 @@ public class CartManager : MonoBehaviour
 			{
 				shoppingCartList = obj.GetComponent<Text>();
 			}
-		}
+
+            GameObject weight = GameObject.Find("/OverviewCanvas/Weight Display/Text");
+            if (weight != null)
+            {
+                weightDisplayed = weight.GetComponent<Text>();
+            }
+        }
 	}
 
 	private void OnDisable()
