@@ -14,15 +14,18 @@ public class KitchenManager : MonoBehaviour
     private Image selectionIcon;
 
     [SerializeField]
-    private GameObject stoveTopRightUI;
+    private GameObject stoveTopRightUI;     // Gets the reference to the Top Right Burner
     [SerializeField]
-    private GameObject stoveTopLeftUI;
+    private GameObject stoveTopLeftUI;      // Gets the reference to the Top Left Burner
     [SerializeField]
-    private GameObject stoveBottomRightUI;
+    private GameObject stoveBottomRightUI;  // Gets the reference to the Bottom Right Burner
     [SerializeField]
-    private GameObject stoveBottomLeftUI;
+    private GameObject stoveBottomLeftUI;   // Gets the reference to the Bottom Left Burner
 
     private GameObject[] stoveDialArray;
+
+    [SerializeField]
+    private GameObject utensilCup;              // Variable for the Utensil Cup
 
     private GameObject stove;
 
@@ -43,11 +46,7 @@ public class KitchenManager : MonoBehaviour
     {
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
 
-        //stoveTopRightUI = GameObject.Find("TopRightBurnerUI").gameObject;           // Gets the reference to the Top Right Burner
-        //stoveTopLeftUI = GameObject.Find("TopLeftBurnerUI").gameObject;             // Gets the reference to the Top Left Burner
-        //stoveBottomRightUI = GameObject.Find("BottomRightBurnerUI").gameObject;     // Gets the reference to the Bottom Right Burner
-        //stoveBottomLeftUI = GameObject.Find("BottomLeftBurnerUI").gameObject;       // Gets the reference to the Bottom Left Burner
-
+        
         // Find and store a reference to the stove object
         stove = GameObject.Find("Stove");
 
@@ -96,7 +95,14 @@ public class KitchenManager : MonoBehaviour
 			InteractableBase selectedInteractable = selectedObject.GetComponent<InteractableBase>();
 			if(currentInteractable != null && selectedInteractable != null)
 			{
-				if (selectedInteractable.AttemptInteraction(currentInteractable))
+                if((currentSelection.name == "Spatula" && selectedObject.name == "Frying Pan") || 
+                    (currentSelection.name == "Spatula" && selectedObject.name == "Plate"))
+                {
+                    selectedInteractable.AttemptInteraction(currentInteractable);
+
+                }
+
+				else if (selectedInteractable.AttemptInteraction(currentInteractable))
 				{
 					ClearSelection();
 				}

@@ -142,8 +142,13 @@ public class InteractableBase : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Interaction list, Send Message to UI");
-		}
+            for (int i = 0; i < possibleInteractions.Count; i++)
+            {
+                Debug.Log("Interaction list, Send Message to UI \nInteraction " + i + ": " + possibleInteractions[i]);
+                //Debug.Log(possibleInteractions[i]);
+
+            }
+        }
 		return false;
 	}
 
