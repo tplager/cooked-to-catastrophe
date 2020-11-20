@@ -2024,7 +2024,6 @@ MonoBehaviour:
   instructionsPanel: {fileID: 535765151}
   ingredientsPrefab: {fileID: 6288875219275515513, guid: 16700b43bd0e32a4293d6a0460c4925a, type: 3}
   instructionsPrefab: {fileID: 7221300458880960147, guid: a066770419fbef34c8fa06cf51cb53e1, type: 3}
-  content: {fileID: 960462195}
   isSpecialIndicator: {fileID: 2115533998}
   specials: []
   orderQuantity: {fileID: 1747180062}
@@ -2604,7 +2603,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ba418b395b999db45a8773745e355d71, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
