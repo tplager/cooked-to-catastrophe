@@ -180,7 +180,7 @@ public class CartManager : MonoBehaviour
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 		shoppingCartList = null;
-        if (scene.name == "Pantry")
+        if (scene.name == "Pantry" || scene.name == "133-Pantry")
 		{
 			//I dont like doing this, but I want to get this done quickly so im doing it like this
 			GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
@@ -195,11 +195,32 @@ public class CartManager : MonoBehaviour
                 weightDisplayed = weight.GetComponent<Text>();
             }
         }
+		if(scene.name == "Kitchen" || scene.name == "133-KitchenScene")
+		{
+			GameObject inventory = GameObject.Find("Cart Inventory");
+			if(inventory != null)
+			{
+				KitchenCartAccesor kca = inventory.GetComponent<KitchenCartAccesor>();
+				if (kca != null)
+				{
+					foreach (KeyValuePair<CartItem, int> item in itemsInCart)
+					{
+						kca.AddInventoryItemToScene(item.Key, item.Value);
+					}
+					inventory.transform.parent.gameObject.SetActive(false);
+				}
+			}
+		}
 	}
 
 	private void OnDisable()
 	{
 		//remove from scene manager when the program is closed
 		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	public int GetNumberInShopingCart(CartItem item)
+	{
+		return itemsInCart[item];
 	}
 }

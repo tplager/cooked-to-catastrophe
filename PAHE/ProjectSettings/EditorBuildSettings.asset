@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/FeatureBranchScenes/133-KitchenScene.unity
+    guid: 5acb9b6993c7caa42a479bd74733e615
+  - enabled: 1
+    path: Assets/Scenes/FeatureBranchScenes/133-Pantry.unity
+    guid: 5b6d87b26d31ae14f836696d825f6309
   m_configObjects: {}
