@@ -219,8 +219,18 @@ public class CartManager : MonoBehaviour
 		SceneManager.sceneLoaded -= OnSceneLoaded;
 	}
 
+	//Author: Ben Stern
+	/// <summary>
+	/// A simple getter to the number of an item in a cart
+	/// </summary>
+	/// <param name="item">the item we are getting</param>
+	/// <returns>the number of the item in a cart</returns>
 	public int GetNumberInShopingCart(CartItem item)
 	{
+		if (!itemsInCart.ContainsKey(item))
+		{
+			return 0;
+		}
 		return itemsInCart[item];
 	}
 }

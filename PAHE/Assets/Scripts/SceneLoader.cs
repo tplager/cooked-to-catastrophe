@@ -11,11 +11,20 @@ using UnityEngine.SceneManagement;
 // Since you cant call static methods in the inspector this object cant be a singleton
 public class SceneLoader : MonoBehaviour
 {
+
+	/// <summary>
+	/// A simple function to load a scene
+	/// </summary>
+	/// <param name="s">the name of the scene</param>
 	public void LoadScene(string s)
 	{
 		SceneManager.LoadScene(s);
 	}
 
+	/// <summary>
+	/// A simple function to load a scene
+	/// </summary>
+	/// <param name="i">The index of the scene</param>
 	public void LoadScene(int i)
 	{
 		SceneManager.LoadScene(i);
