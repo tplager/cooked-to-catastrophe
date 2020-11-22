@@ -33,7 +33,7 @@ public class Guest : MonoBehaviour
         dialogueLines = new List<string>();
         // Populated the list with some possible lines
         dialogueLines.Add("Man, it smells so good in here compared to outside.");
-        dialogueLines.Add("Oooo, this is gonna be good!");
+        dialogueLines.Add("Ooh, this is gonna be good!");
         dialogueLines.Add("Can't really find much good food out there.");
 
         // Get reference to GameManager (Kyle: Added single .find here since guests are now being instantiated at runtime)
@@ -114,12 +114,14 @@ public class Guest : MonoBehaviour
             cafeteriaManager.GuestInfo.transform.Find("Greeting Background/Greeting Text").gameObject.GetComponent<Text>().text = "- " + uniqueGreetingLine;
 
             // Update the meal text with the dish name
-            cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("It'd be awesome if I could get some {0}.", orderKeyRequested);
+            cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("{0}, please!", orderKeyRequested);
             // Update the dish icon with the correct dish
             cafeteriaManager.GuestInfo.transform.Find("Meal Background/Plate Background/Dish Requested").gameObject.GetComponent<Image>().sprite = cafeteriaManager.Specials[orderKeyRequested];
 
             // Update the guest face with their neutral face
             cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = neutralFace;
+
+            cafeteriaManager.RemoveGuestFromList(this.gameObject);
         }
 
 

@@ -84,30 +84,9 @@ public class CafeteriaManager : MonoBehaviour
         guests = new List<GameObject>();
 
         //Create three guests, each ordering one of our MVP specials
-        SetupGuest(guests, guestPositionLeft, specials.Keys.ToArray()[0]);
-        SetupGuest(guests, guestPositionCenter, specials.Keys.ToArray()[1]);
-        SetupGuest(guests, guestPositionRight, specials.Keys.ToArray()[2]);
-
-        //// Initialize guests for day 1
-        //GameObject guestLeft = Instantiate(guest, guestPositionLeft, Quaternion.identity);
-        //GameObject guestCenter = Instantiate(guest, guestPositionCenter, Quaternion.identity);
-        //GameObject guestRight = Instantiate(guest, guestPositionRight, Quaternion.identity);
-
-        ////Set guests as children of canvas
-        //guestLeft.transform.SetParent(canvas.transform, false);
-        //guestCenter.transform.SetParent(canvas.transform, false);
-        //guestRight.transform.SetParent(canvas.transform, false);
-
-        //// Set each guest's order
-        //// For the MVP demo, we want each guest to order one of our three available recipes
-        //guestLeft.GetComponent<Guest>().orderKeyRequested = specials.Keys.ToArray()[0];
-        //guestCenter.GetComponent<Guest>().orderKeyRequested = specials.Keys.ToArray()[1];
-        //guestRight.GetComponent<Guest>().orderKeyRequested = specials.Keys.ToArray()[2];
-
-        //// Add each guest to the guest list
-        //guests.Add(guestLeft);
-        //guests.Add(guestCenter);
-        //guests.Add(guestRight);
+        SetupGuest(guestPositionLeft, specials.Keys.ToArray()[0]);
+        SetupGuest(guestPositionCenter, specials.Keys.ToArray()[1]);
+        SetupGuest(guestPositionRight, specials.Keys.ToArray()[2]);
     }
 
     // Author: Nick Engell
@@ -142,9 +121,8 @@ public class CafeteriaManager : MonoBehaviour
     /// <summary>
     /// Creates a guest with or without specified order
     /// </summary>
-    /// <param name="currentGuests">List of instantiated guests</param>
     /// <param name="order">Optionally specified order the guest will ask for</param>
-    public void SetupGuest(List<GameObject> currentGuests, Vector3 position, string order = null)
+    public void SetupGuest(Vector3 position, string order = null)
     {
         //Instantiate guest at the proper position
         GameObject newGuest = Instantiate(guest, position, Quaternion.identity);
@@ -161,5 +139,16 @@ public class CafeteriaManager : MonoBehaviour
 
         //Add guest to guest list
         guests.Add(newGuest);
+    }
+
+    // Author: Kyle Weekley
+    /// <summary>
+    /// Removes a guest from the guest list
+    /// To be called when a guest has received their order and leaves the restaurant
+    /// </summary>
+    /// <param name="removedGuest">Guest object to be removed from list</param>
+    public void RemoveGuestFromList(GameObject removedGuest)
+    {
+        guests.Remove(removedGuest);
     }
 }
