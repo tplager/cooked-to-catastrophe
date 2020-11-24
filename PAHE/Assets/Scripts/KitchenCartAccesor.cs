@@ -13,7 +13,7 @@ public class KitchenCartAccesor : MonoBehaviour
 	/// <summary>
 	/// The prefab for the cart item in the menu
 	/// </summary>
-	public GameObject CartMenueItem;
+	public GameObject CartMenuItem;
 
 	/// <summary>
 	/// The canvas where ingredients are spawned
@@ -36,7 +36,7 @@ public class KitchenCartAccesor : MonoBehaviour
 		//check to see if the number of the item is not zero
 		if (number > 0)
 		{
-			GameObject obj = Instantiate(CartMenueItem, transform);
+			GameObject obj = Instantiate(CartMenuItem, transform);
 			obj.GetComponentsInChildren<Image>()[1].sprite = item.CartImage;
 			obj.GetComponentInChildren<Text>().text = number.ToString();
 			//set the on click button
@@ -53,7 +53,7 @@ public class KitchenCartAccesor : MonoBehaviour
 	public void CreateInventoryItem(CartItem item, GameObject obj)
 	{
 		//get the number of items in the menu
-		int numInCart = CartManager.Instance.GetNumberInShopingCart(item);
+		int numInCart = CartManager.Instance.GetNumberInShoppingCart(item);
 		//if there are zero or less of this item in the cart destroy the menu object
 		if (numInCart <= 0)
 		{

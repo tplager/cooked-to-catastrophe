@@ -225,7 +225,7 @@ public class CartManager : MonoBehaviour
 	/// </summary>
 	/// <param name="item">the item we are getting</param>
 	/// <returns>the number of the item in a cart</returns>
-	public int GetNumberInShopingCart(CartItem item)
+	public int GetNumberInShoppingCart(CartItem item)
 	{
 		if (!itemsInCart.ContainsKey(item))
 		{
