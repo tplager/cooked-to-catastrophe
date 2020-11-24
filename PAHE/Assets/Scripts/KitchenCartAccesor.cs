@@ -25,13 +25,20 @@ public class KitchenCartAccesor : MonoBehaviour
 	/// </summary>
 	public Vector3 defaultPosition;
 
+
+	//this is onl here to make sure that the cart manager is initialized when someone enters the scene
+	public void Awake()
+	{
+		bool test = CartManager.Instance != null;
+	}
+
 	//Author: Ben Stern
 	/// <summary>
 	/// Adds an inventory item to the menue
 	/// </summary>
 	/// <param name="item">the inventory item that is being added to the menu</param>
 	/// <param name="number">the number of said item being added to the menu</param>
-    public void AddInventoryItemToScene(CartItem item, int number)
+	public void AddInventoryItemToScene(CartItem item, int number)
 	{
 		//check to see if the number of the item is not zero
 		if (number > 0)

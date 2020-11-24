@@ -72,8 +72,10 @@ public class CartManager : MonoBehaviour
 		itemsInCart = new Dictionary<CartItem, int>();
 		//because cart manager is not destroyed when new scenes are loaded we need to reget certain elements when entering a new scene
 		SceneManager.sceneLoaded += OnSceneLoaded;
+
+		OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 		//I dont like doing this, but I want to get this done quickly so im doing it like this
-		GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
+		/*GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
 		if (obj != null)
 		{
 			shoppingCartList = obj.GetComponent<Text>();
@@ -84,7 +86,7 @@ public class CartManager : MonoBehaviour
         if (weight != null)
         {
             weightDisplayed = weight.GetComponent<Text>();
-        }
+        }*/
 
 
     }
