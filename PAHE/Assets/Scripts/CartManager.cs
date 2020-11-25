@@ -72,8 +72,10 @@ public class CartManager : MonoBehaviour
 		itemsInCart = new Dictionary<CartItem, int>();
 		//because cart manager is not destroyed when new scenes are loaded we need to reget certain elements when entering a new scene
 		SceneManager.sceneLoaded += OnSceneLoaded;
+
+		OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 		//I dont like doing this, but I want to get this done quickly so im doing it like this
-		GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
+		/*GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
 		if (obj != null)
 		{
 			shoppingCartList = obj.GetComponent<Text>();
@@ -84,7 +86,7 @@ public class CartManager : MonoBehaviour
         if (weight != null)
         {
             weightDisplayed = weight.GetComponent<Text>();
-        }
+        }*/
 
 
     }
@@ -180,7 +182,7 @@ public class CartManager : MonoBehaviour
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
 		shoppingCartList = null;
-        if (scene.name == "Pantry")
+        if (scene.name == "Pantry" || scene.name == "133-Pantry")
 		{
 			//I dont like doing this, but I want to get this done quickly so im doing it like this
 			GameObject obj = GameObject.Find("/OverviewCanvas/Grocery List/Text");
@@ -195,11 +197,42 @@ public class CartManager : MonoBehaviour
                 weightDisplayed = weight.GetComponent<Text>();
             }
         }
+		if(scene.name == "Kitchen" || scene.name == "133-KitchenScene")
+		{
+			GameObject inventory = GameObject.Find("Cart Inventory");
+			if(inventory != null)
+			{
+				KitchenCartAccesor kca = inventory.GetComponent<KitchenCartAccesor>();
+				if (kca != null)
+				{
+					foreach (KeyValuePair<CartItem, int> item in itemsInCart)
+					{
+						kca.AddInventoryItemToScene(item.Key, item.Value);
+					}
+					inventory.transform.parent.gameObject.SetActive(false);
+				}
+			}
+		}
 	}
 
 	private void OnDisable()
 	{
 		//remove from scene manager when the program is closed
 		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	//Author: Ben Stern
+	/// <summary>
+	/// A simple getter to the number of an item in a cart
+	/// </summary>
+	/// <param name="item">the item we are getting</param>
+	/// <returns>the number of the item in a cart</returns>
+	public int GetNumberInShoppingCart(CartItem item)
+	{
+		if (!itemsInCart.ContainsKey(item))
+		{
+			return 0;
+		}
+		return itemsInCart[item];
 	}
 }
