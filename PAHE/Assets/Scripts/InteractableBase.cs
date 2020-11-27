@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Author: Ben Stern
 /// <summary>
@@ -43,13 +44,31 @@ public class InteractableBase : MonoBehaviour
 	/// </summary>
 	[SerializeField]protected List<string> interactionsTrigers;
 
-	private void Awake()
+    // Author: John Vance
+    /// <summary>
+    /// Gets the dropdown menu for multiple interactions
+    /// </summary>
+    [SerializeField]
+    private GameObject interactionDropdown;
+
+    // Author: John Vance
+    /// <summary>
+    /// Gets the Dropdown component of the dropdown menu
+    /// </summary>
+    private Dropdown drop;
+
+    private InteractableBase interacting;
+
+    private void Awake()
 	{
 		interactions = new List<string>();
 		interactionsDirty = false;
 		actionResponses = new Dictionary<string, InteractDelegate>();
-		//interactionsTrigers = new List<string>();
-	}
+
+        interactionDropdown = GameObject.Find("InteractionsDropdown");
+        //interactionDropdown.SetActive(false); 
+        //interactionsTrigers = new List<string>();
+    }
 
 	//Author: Ben Stern
 	/// <summary>
@@ -129,25 +148,48 @@ public class InteractableBase : MonoBehaviour
 	/// <param name="obj">the object whose interactions we are triggering</param>
 	public bool AttemptInteraction(InteractableBase obj)
 	{
-		List<string> possibleInteractions = GetPossibleInteractions(obj);
+        interacting = obj;
+
+        List<string> possibleInteractions = GetPossibleInteractions(obj);
 		possibleInteractions.AddRange(obj.GetPossibleInteractions(this));
 		if(possibleInteractions.Count == 0)
 		{
 			Debug.Log("NO Interactions, send message to UI");
 		}else if(possibleInteractions.Count == 1)
 		{
-			obj.Interact(possibleInteractions[0], this);
-			Debug.Log(possibleInteractions[0]);
-			return true;
+            interactionDropdown.transform.position = this.transform.position + new Vector3(0.0f, 50.0f, 0.0f);
+            interactionDropdown.SetActive(true);
+
+            drop = interactionDropdown.GetComponent<Dropdown>();
+            drop.ClearOptions();
+            possibleInteractions.Insert(0, "None");
+            drop.AddOptions(possibleInteractions);
+
+            //obj.Interact(possibleInteractions[0], this);
+            //Debug.Log(possibleInteractions[0]);
+            return true;
 		}
+
+        // Author: John Vance
 		else
 		{
-            for (int i = 0; i < possibleInteractions.Count; i++)
-            {
-                Debug.Log("Interaction list, Send Message to UI \nInteraction " + i + ": " + possibleInteractions[i]);
-                //Debug.Log(possibleInteractions[i]);
+            // Display dropdown menu and sets it to the second selected object's position
+            interactionDropdown.transform.position = this.transform.position + new Vector3(0.0f, 50.0f, 0.0f);
+            interactionDropdown.SetActive(true);
 
-            }
+            drop = interactionDropdown.GetComponent<Dropdown>();
+            drop.ClearOptions();
+            possibleInteractions.Insert(0, "None");
+            drop.AddOptions(possibleInteractions);
+
+            return true;
+
+            //for (int i = 0; i < possibleInteractions.Count; i++)
+            //{
+            //    Debug.Log("Interaction list, Send Message to UI \nInteraction " + i + ": " + possibleInteractions[i]);
+            //    //Debug.Log(possibleInteractions[i]);
+
+            //}
         }
 		return false;
 	}
@@ -169,5 +211,19 @@ public class InteractableBase : MonoBehaviour
 			response(this);
 		}
 	}
+
+    // Author: John Vance
+    /// <summary>
+    /// Allows for the dropdown menu to run interactions
+    /// </summary>
+    /// <param name="value"></param>
+    public void MultipleInteractions(int value)
+    {
+        if (interacting != null)
+        {
+            interacting.Interact(drop.options[value].text, this);
+        }
+
+    }
 
 }

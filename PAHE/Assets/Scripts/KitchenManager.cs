@@ -29,6 +29,8 @@ public class KitchenManager : MonoBehaviour
 
     private GameObject stove;
 
+    private GameObject interactionsDropdown;
+
     // Author: Nick Engell
     /// <summary>
     /// Get access to the stove
@@ -45,8 +47,8 @@ public class KitchenManager : MonoBehaviour
     void Start()
     {
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
+        interactionsDropdown = GameObject.Find("InteractionsDropdown");
 
-        
         // Find and store a reference to the stove object
         stove = GameObject.Find("Stove");
 
@@ -93,6 +95,7 @@ public class KitchenManager : MonoBehaviour
 			//TODO: call interactable object methods
 			InteractableBase currentInteractable = currentSelection.GetComponent<InteractableBase>();
 			InteractableBase selectedInteractable = selectedObject.GetComponent<InteractableBase>();
+
 			if(currentInteractable != null && selectedInteractable != null)
 			{
                 if((currentSelection.name == "Spatula" && selectedObject.name == "Frying Pan") || 
