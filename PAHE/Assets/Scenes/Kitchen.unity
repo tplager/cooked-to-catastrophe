@@ -6530,6 +6530,7 @@ MonoBehaviour:
   lowHeatMultiplier: 0.5
   mediumHeatMultiplier: 1
   highHeatMultiplier: 1.5
+  size: 0
 --- !u!1 &1311727185
 GameObject:
   m_ObjectHideFlags: 0
