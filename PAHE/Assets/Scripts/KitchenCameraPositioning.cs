@@ -12,19 +12,26 @@ using UnityEngine;
 public class KitchenCameraPositioning : MonoBehaviour
 {
     #region Fields
+    // The desired poistion of the camera on the left side of the kitchen
     [SerializeField]
-    private Vector3 leftCameraPosition;             // The desired poistion of the camera on the left side of the kitchen
-    [SerializeField]
-    private Vector3 rightCameraPosition;            // The desired position of the camera on the right side of the kitchen
+    private Vector3 leftCameraPosition;
 
-    private Vector3 targetPosition;                 // The current target position of the camera. It should be either left or right camera position
+    // The desired position of the camera on the right side of the kitchen
     [SerializeField]
-    private float lerpQuickener;                    // A float value to make the camera lerp faster
+    private Vector3 rightCameraPosition;
+
+    // The current target position of the camera
+    // It should be either left or right camera position
+    private Vector3 targetPosition;
+
+    // A float value to make the camera lerp faster
+    [SerializeField]
+    private float lerpQuickener;
     #endregion
 
     #region Methods
-    /// <summary>
     /// Author: Trenton Plager
+    /// <summary>
     /// Purpose: Sets the default position of the camera to the left side of the kitchen
     /// Restrictions: None
     /// </summary>
@@ -33,8 +40,8 @@ public class KitchenCameraPositioning : MonoBehaviour
         targetPosition = leftCameraPosition;
     }
 
-    /// <summary>
     /// Author: Trenton Plager
+    /// <summary>
     /// Purpose: Lerps the camera's position from its current position to the target position
     /// According to delta time and modified by the quickening factor field
     /// Restrictions: None
@@ -44,8 +51,8 @@ public class KitchenCameraPositioning : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, lerpQuickener * Time.deltaTime);
     }
 
-    /// <summary>
     /// Author: Trenton Plager
+    /// <summary>
     /// Purpose: Switches the target position of the camera to the opposite target position
     /// Restrictions: None
     /// </summary>

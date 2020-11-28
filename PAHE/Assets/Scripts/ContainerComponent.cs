@@ -30,7 +30,8 @@ public class ContainerComponent : MonoBehaviour
 		//initialize all of the interactions and triggers
 		interactableComponent = GetComponent<InteractableBase>();
 		interactableComponent.AddInteractionToList("Place Item", HoldItem);
-		interactableComponent.AddInteractionTrigger("Empty into");
+        //interactableComponent.AddInteractionToList("Take Egg", SpatulaGrab);
+        interactableComponent.AddInteractionTrigger("Empty into");
 	}
 
 
@@ -47,8 +48,8 @@ public class ContainerComponent : MonoBehaviour
 		itemHolding.transform.SetParent(transform);
 		//call any interaction that happen when this item is placed in a container
 		itemHolding.Interact("On Place In Container", interactableComponent);
-		//objects in containers should not be selectable until taken out of the container
-		itemHolding.GetComponent<SelectableObject>().enabled = false;
+        //objects in containers should not be selectable until taken out of the container
+        itemHolding.GetComponent<SelectableObject>().enabled = false;
 		//add the empty into to interaction to the list
 		interactableComponent.AddInteractionToList("Empty into", EmptyInto);
 	}
@@ -61,12 +62,18 @@ public class ContainerComponent : MonoBehaviour
 	public void EmptyInto(InteractableBase itemToEmptyInto)
 	{
 		itemToEmptyInto.Interact("Place Item", itemHolding);
-		//double check that the item is no longer in this container befor editing properties.
-		if (itemHolding.transform.parent != transform)
+        
+        // Allows for the spatula to move onto the frying pan and plate
+        itemToEmptyInto.Interact("Take Egg", interactableComponent);
+
+        //double check that the item is no longer in this container befor editing properties.
+        if (itemHolding.transform.parent != transform)
 		{
 			itemHolding = null;
 			//remove the empty into interaction from the list
 			interactableComponent.RemoveInteractionFromList("Empty into");
 		}
 	}
+
+    
 }
