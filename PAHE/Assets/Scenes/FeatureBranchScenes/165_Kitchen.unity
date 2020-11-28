@@ -7599,6 +7599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionsTrigers:
   - Place Item
+  - Test
   interactionDropdown: {fileID: 1911193073}
 --- !u!114 &1297413381
 MonoBehaviour:
