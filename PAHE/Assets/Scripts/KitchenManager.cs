@@ -30,6 +30,7 @@ public class KitchenManager : MonoBehaviour
     private GameObject stove;
 
     private GameObject interactionsDropdown;
+    private Dropdown drop;
 
     // Author: Nick Engell
     /// <summary>
@@ -48,6 +49,8 @@ public class KitchenManager : MonoBehaviour
     {
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
         interactionsDropdown = GameObject.Find("InteractionsDropdown");
+        drop = interactionsDropdown.GetComponent<Dropdown>();
+        interactionsDropdown.SetActive(false);
 
         // Find and store a reference to the stove object
         stove = GameObject.Find("Stove");
@@ -108,8 +111,9 @@ public class KitchenManager : MonoBehaviour
 				else if (selectedInteractable.AttemptInteraction(currentInteractable))
 				{
 					ClearSelection();
-				}
-			}
+                    
+                }
+            }
 		}
 	}
 
@@ -127,12 +131,7 @@ public class KitchenManager : MonoBehaviour
 		}
 		currentSelection = null;
         
-        // Clears the Stove UI when the Clear Selection button is pressed
-        foreach (GameObject element in stoveDialArray)
-        {
-            element.SetActive(false);
-
-        }
+        
 
         //Reset selection sprite
         selectionIcon.sprite = null;

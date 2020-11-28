@@ -57,7 +57,7 @@ public class InteractableBase : MonoBehaviour
     /// </summary>
     private Dropdown drop;
 
-    private InteractableBase interacting;
+    private string title;
 
     private void Awake()
 	{
@@ -66,17 +66,19 @@ public class InteractableBase : MonoBehaviour
 		actionResponses = new Dictionary<string, InteractDelegate>();
 
         interactionDropdown = GameObject.Find("InteractionsDropdown");
-        //interactionDropdown.SetActive(false); 
+        drop = interactionDropdown.GetComponent<Dropdown>();
+
+        title = "\"Select One\"";
         //interactionsTrigers = new List<string>();
     }
 
-	//Author: Ben Stern
-	/// <summary>
-	/// Add an interaction to this objects list of interactions and responses 
-	/// </summary>
-	/// <param name="action">The action type that is being added to this list</param>
-	/// <param name="interactResponse">The DelegateResponse this action will Have</param>
-	public void AddInteractionToList(string actionName, InteractDelegate interactResponse)
+    //Author: Ben Stern
+    /// <summary>
+    /// Add an interaction to this objects list of interactions and responses 
+    /// </summary>
+    /// <param name="action">The action type that is being added to this list</param>
+    /// <param name="interactResponse">The DelegateResponse this action will Have</param>
+    public void AddInteractionToList(string actionName, InteractDelegate interactResponse)
 	{
 		if (actionResponses.ContainsKey(actionName))
 		{
@@ -148,48 +150,59 @@ public class InteractableBase : MonoBehaviour
 	/// <param name="obj">the object whose interactions we are triggering</param>
 	public bool AttemptInteraction(InteractableBase obj)
 	{
-        interacting = obj;
-
         List<string> possibleInteractions = GetPossibleInteractions(obj);
 		possibleInteractions.AddRange(obj.GetPossibleInteractions(this));
 		if(possibleInteractions.Count == 0)
 		{
 			Debug.Log("NO Interactions, send message to UI");
 		}else if(possibleInteractions.Count == 1)
-		{
-            interactionDropdown.transform.position = this.transform.position + new Vector3(0.0f, 50.0f, 0.0f);
-            interactionDropdown.SetActive(true);
-
-            drop = interactionDropdown.GetComponent<Dropdown>();
-            drop.ClearOptions();
-            possibleInteractions.Insert(0, "None");
-            drop.AddOptions(possibleInteractions);
-
-            //obj.Interact(possibleInteractions[0], this);
+		{            
+            obj.Interact(possibleInteractions[0], this);
             //Debug.Log(possibleInteractions[0]);
             return true;
 		}
 
         // Author: John Vance
+        // Purpose: Used for multiple interactions between objects
 		else
 		{
             // Display dropdown menu and sets it to the second selected object's position
             interactionDropdown.transform.position = this.transform.position + new Vector3(0.0f, 50.0f, 0.0f);
             interactionDropdown.SetActive(true);
 
-            drop = interactionDropdown.GetComponent<Dropdown>();
+            // Clears out all of the options so that the interactions for the new item are used
             drop.ClearOptions();
-            possibleInteractions.Insert(0, "None");
+
+            // Populates the dropdown with the current interactions
+            drop.options.Add(new Dropdown.OptionData() { text = "Exit " + this.name });
             drop.AddOptions(possibleInteractions);
 
+            // Sets up the "title"
+            drop.options.Insert(0, new Dropdown.OptionData(title));
+            drop.value = 0;            
+            drop.captionText.text = title;
+
+            // When something is selected in the dropdown menu it runs the below code
+            drop.onValueChanged.AddListener(delegate
+            {
+                if (drop.value == 0 || drop.value == 1)
+                {
+                    interactionDropdown.SetActive(false);
+
+                }
+                else
+                {
+                    obj.Interact(possibleInteractions[drop.value - 2], this);
+                    interactionDropdown.SetActive(false);
+
+                }
+
+                // Allows for other objects to use the listener
+                drop.onValueChanged.RemoveAllListeners();
+
+            });
+
             return true;
-
-            //for (int i = 0; i < possibleInteractions.Count; i++)
-            //{
-            //    Debug.Log("Interaction list, Send Message to UI \nInteraction " + i + ": " + possibleInteractions[i]);
-            //    //Debug.Log(possibleInteractions[i]);
-
-            //}
         }
 		return false;
 	}
@@ -211,19 +224,4 @@ public class InteractableBase : MonoBehaviour
 			response(this);
 		}
 	}
-
-    // Author: John Vance
-    /// <summary>
-    /// Allows for the dropdown menu to run interactions
-    /// </summary>
-    /// <param name="value"></param>
-    public void MultipleInteractions(int value)
-    {
-        if (interacting != null)
-        {
-            interacting.Interact(drop.options[value].text, this);
-        }
-
-    }
-
 }
