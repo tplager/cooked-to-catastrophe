@@ -108,7 +108,7 @@ public class Guest : MonoBehaviour
         }
     }
 
-    // Author: Nick Engell
+    // Author: Nick Engell, Kyle Weekley
     /// <summary>
     /// Updates the guest info based on the current guest clicked on
     /// </summary>

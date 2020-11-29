@@ -30,14 +30,18 @@ public class CafeteriaManager : MonoBehaviour
     [SerializeField] private Sprite cookedSpaghettiMeatballSprite;
     // The guest info canvas panel
     [SerializeField] private GameObject guestInfo;
+    // The button to close the guest info canvas panel
+    [SerializeField] private Button guestInfoCloseButton;
     // Specials list UI object
     [SerializeField] private GameObject specialsUIItemText;
 
+    // Author: Kyle Weekley, Ben Stern
     /// <summary>
 	/// the singleton instance
 	/// </summary>
 	private static CafeteriaManager _instance;
 
+    // Author: Kyle Weekley, Ben Stern
     /// <summary>
     /// the instance of the cart manager
     /// </summary>
@@ -81,7 +85,10 @@ public class CafeteriaManager : MonoBehaviour
         get { return guestInfo; }
     }
 
-    //Im using Awake here because it is called before start
+    // Author: Kyle Weekley, Ben Stern
+    /// <summary>
+    /// Called before Start to handle singleton setup
+    /// </summary>
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -203,7 +210,7 @@ public class CafeteriaManager : MonoBehaviour
         guests.Remove(removedGuest);
     }
 
-    // Author: Ben Stern, John Vance
+    // Author: Kyle Weekley, Ben Stern
     /// <summary>
     /// Is  called when a new scene is loaded
     /// </summary>
@@ -226,12 +233,19 @@ public class CafeteriaManager : MonoBehaviour
             guestInfo = GameObject.Find("UICanvas");
             guestInfo = guestInfo.transform.Find("Guest Info").gameObject;
             specialsUIItemText = GameObject.Find("/Canvas/SpecialsUI/ItemText");
+            guestInfoCloseButton = guestInfo.GetComponentInChildren<Button>();
+            // Set the close button's onClick behavior to close the menu
+            // This is done here as well as in-editor because the button will lose its reference to the CafeteriaManager singleton after scene switches
+            guestInfoCloseButton.onClick.AddListener(CloseInfoScreen);
         }
     }
 
+    // Author: Kyle Weekley, Ben Stern
+    /// <summary>
+    /// Remove from scene manager when the program is closed
+    /// </summary>
     private void OnDisable()
     {
-        //remove from scene manager when the program is closed
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

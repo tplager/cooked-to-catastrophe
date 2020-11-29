@@ -768,7 +768,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &188038172
 RectTransform:
@@ -4850,6 +4850,7 @@ MonoBehaviour:
   cookedRiceSprite: {fileID: 21300000, guid: 938ef128cf4f8fe48a59d02acf10bbe6, type: 3}
   cookedSpaghettiMeatballSprite: {fileID: 21300000, guid: 938ef128cf4f8fe48a59d02acf10bbe6, type: 3}
   guestInfo: {fileID: 1412079308}
+  guestInfoCloseButton: {fileID: 0}
   specialsUIItemText: {fileID: 7939800}
 --- !u!4 &1971601092
 Transform:
