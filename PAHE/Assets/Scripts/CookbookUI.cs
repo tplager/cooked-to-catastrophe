@@ -47,23 +47,50 @@ public class CookbookUI : MonoBehaviour
     [SerializeField]
     private List<string> specials = new List<string>();
 
+    // A dictionary that contains all of the orders for the day and their quantities
+    [SerializeField]
+    private Dictionary<string, int> orders = new Dictionary<string, int>();
+
     // A reference to the text object that displays how many of a recipe has been ordered
     [SerializeField]
     private Text orderQuantity;
+
+    // A reference to the CafeteriaManager gameObject
+    [SerializeField]
+    private CafeteriaManager cafeteriaManager;
     #endregion
 
     #region Methods
-    // Author: Trenton Plager
+    // Author: Trenton Plager, Kyle Weekley
     /// <summary>
     /// Purpose: Updates the cookbook display to the current recipe index (which should be 0) 
-    /// Restrcitions: None
+    /// Obtains reference to CafeteriaManager to inform the specials and orders lists
+    /// Restrictions: None
     /// </summary>
     void Start()
     {
-        // This shouldn't need to be here forever
-        // It's just here for testing purposes 
-        specials.Add(cookbook.recipes[Random.Range(0, cookbook.recipes.Length)].name);
+        // The cookbook needs to find the CafeteriaManager, which may not exist based on scenes entered
+        GameObject CafeteriaManagerObject = GameObject.Find("CafeteriaManager");
 
+        // If the CafeteriaManager does exist, grab the script from it
+        // Then set up the specials and orders info
+        if (CafeteriaManagerObject)
+        {
+            cafeteriaManager = CafeteriaManagerObject.GetComponent<CafeteriaManager>();
+            specials = new List<string>(cafeteriaManager.Specials.Keys);
+            orders = cafeteriaManager.Orders;
+        }
+
+        UpdateCookbookDisplay();
+    }
+
+    // Author: Kyle Weekley
+    /// <summary>
+    /// Purpose: Updates current page when opening cookbook to reflect current order quantity
+    /// Restrictions: None
+    /// </summary>
+    private void OnEnable()
+    {
         UpdateCookbookDisplay();
     }
 
@@ -103,7 +130,7 @@ public class CookbookUI : MonoBehaviour
         }
     }
 
-    // Author: Trenton Plager
+    // Author: Trenton Plager, Kyle Weekley
     /// <summary>
     /// Purpose: Updates the cookbook display by changing the recipe title and updating the ingredients and instructions lists
     /// Restrictions: None
@@ -117,8 +144,17 @@ public class CookbookUI : MonoBehaviour
         isSpecialIndicator.SetActive(specials.Contains(cookbook.recipes[currentRecipeIndex].name));
 
         // Sets the order quantity
-        // Currently this is random, but it shouldn't always be random
-        orderQuantity.text = $"x{Random.Range(0, 5)}"; 
+        // Check if orders list contains this recipe
+        if (orders.ContainsKey(cookbook.recipes[currentRecipeIndex].name))
+        {
+            orderQuantity.text = "x" + orders[cookbook.recipes[currentRecipeIndex].name].ToString();
+        }
+        //If not, set quantity to zero
+        else
+        {
+            orderQuantity.text = "x0";
+        }
+        
 
         // Loops through all the ingredients in the recipe
         for (int i = 0; i < cookbook.recipes[currentRecipeIndex].ingredients.Length; i++)
