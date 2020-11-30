@@ -66,7 +66,7 @@ public class InteractableBase : MonoBehaviour
 		actionResponses = new Dictionary<string, InteractDelegate>();
 
         interactionDropdown = GameObject.Find("InteractionsDropdown");
-        drop = interactionDropdown.GetComponent<Dropdown>();
+        //drop = interactionDropdown.GetComponent<Dropdown>();
 
         title = "\"Select One\"";
         //interactionsTrigers = new List<string>();
