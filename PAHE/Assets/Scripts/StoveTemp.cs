@@ -132,11 +132,6 @@ public class StoveTemp : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// Author: John Vance
     /// Purpose: Allows for the Burner's status to be displayed in the UI
@@ -163,6 +158,27 @@ public class StoveTemp : MonoBehaviour
 
     }
 
-
+    // Author: Trenton Plager
+    /// <summary>
+    /// Returns the temp of the passed-in burner
+    /// </summary>
+    /// <param name="burner">The burner to return the temp of</param>
+    /// <returns></returns>
+    public int GetBurnerTemp(StoveLocation burner)
+    {
+        switch(burner)
+        {
+            case StoveLocation.BottomLeftBurner:
+                return burnerBL;
+            case StoveLocation.BottomRightBurner:
+                return burnerBR;
+            case StoveLocation.TopLeftBurner:
+                return burnerTL;
+            case StoveLocation.TopRightBurner:
+                return burnerTR;
+            default:
+                return 0;
+        }
+    }
 }
 

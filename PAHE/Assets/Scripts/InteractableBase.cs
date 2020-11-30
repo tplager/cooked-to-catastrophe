@@ -16,7 +16,7 @@ public class InteractableBase : MonoBehaviour
 	/// <summary>
 	/// A dictionary of interactions, and their responses, that this object has
 	/// </summary>
-	private Dictionary<string, InteractDelegate> actionResponses;
+	public Dictionary<string, InteractDelegate> actionResponses;
 	private bool interactionsDirty;
 
 	private List<string> interactions;
@@ -62,6 +62,8 @@ public class InteractableBase : MonoBehaviour
 		if (actionResponses.ContainsKey(actionName))
 		{
 			Debug.Log("an action of the same name already exists in the list");
+            interactionsDirty = true;
+            return;
 		}
 		actionResponses.Add(actionName, interactResponse);
 		interactionsDirty = true;
