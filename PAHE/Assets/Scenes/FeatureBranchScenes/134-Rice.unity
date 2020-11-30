@@ -1885,6 +1885,7 @@ GameObject:
   - component: {fileID: 171903276}
   - component: {fileID: 171903275}
   - component: {fileID: 171903274}
+  - component: {fileID: 171903277}
   m_Layer: 5
   m_Name: Pot 2
   m_TagString: Untagged
@@ -1963,6 +1964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionsTrigers:
   - Place On Burner
+  - Fill With Water
 --- !u!114 &171903275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,6 +1992,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOnStove: 0
   currentBurner: 0
+--- !u!114 &171903277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171903270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0926f8c1329a9458a9937403f7f5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlacePositionRelative: {x: 0, y: -20, z: 0}
 --- !u!1 &175181185
 GameObject:
   m_ObjectHideFlags: 0
@@ -8303,6 +8318,7 @@ GameObject:
   - component: {fileID: 1408965802}
   - component: {fileID: 1408965805}
   - component: {fileID: 1408965804}
+  - component: {fileID: 1408965806}
   m_Layer: 5
   m_Name: Sink
   m_TagString: Untagged
@@ -8393,6 +8409,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
+--- !u!114 &1408965806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408965800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285a3fba240f29d4c8002a7ed33c7df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filled: {fileID: 21300000, guid: 6801c6a7750c51241b36a33cbd65eff9, type: 3}
+  boiling: {fileID: 21300000, guid: 102495a2a7bb4274999270b445c22a58, type: 3}
 --- !u!1 &1444915271
 GameObject:
   m_ObjectHideFlags: 0
