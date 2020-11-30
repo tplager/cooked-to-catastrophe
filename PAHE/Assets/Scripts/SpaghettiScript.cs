@@ -65,6 +65,7 @@ public class SpaghettiScript : MonoBehaviour
         imageComponent = GetComponent<Image>();
 
         cookableObject = GetComponent<CookableObject>();
+		cookableObject.OnCookOveride = OnCookOveride;
 
         ChangeSpaghettiState(SpaghettiState.Boxed);
     }
@@ -125,4 +126,17 @@ public class SpaghettiScript : MonoBehaviour
                 break;
         }
     }
+
+	public bool OnCookOveride()
+	{
+		ContainerComponent container = transform.parent.GetComponent<ContainerComponent>();
+		//check if we are in water
+		if (container == null || !container.HoldingWater)
+		{
+			cookableObject.IsCooked = true;
+			cookableObject.IsBurnt = true;
+			return true;
+		}
+		return false;
+	}
 }
