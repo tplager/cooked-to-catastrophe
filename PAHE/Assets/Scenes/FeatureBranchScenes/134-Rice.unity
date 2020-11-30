@@ -1753,6 +1753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacePositionRelative: {x: 0, y: -20, z: 0}
+  HoldingWater: 0
 --- !u!114 &163428531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1965,7 +1966,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionsTrigers:
   - Place On Burner
-  - Fill With Water
 --- !u!114 &171903275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,6 +2006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacePositionRelative: {x: 0, y: 0, z: 0}
+  HoldingWater: 0
 --- !u!1 &175181185
 GameObject:
   m_ObjectHideFlags: 0
@@ -7396,6 +7397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacePositionRelative: {x: 0, y: 0, z: 0}
+  HoldingWater: 0
 --- !u!114 &1089639479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8540,7 +8542,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac28e660a49d8d4586402e5b36adb3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionsTrigers: []
+  interactionsTrigers:
+  - Fill water
+  - Empty water
 --- !u!114 &1408965805
 MonoBehaviour:
   m_ObjectHideFlags: 0

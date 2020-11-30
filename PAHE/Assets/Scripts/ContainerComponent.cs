@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //Author: Ben Stern
 
 /// <summary>
@@ -23,15 +24,18 @@ public class ContainerComponent : MonoBehaviour
 	/// <summary>
 	/// A refrence to the item that this container is holding
 	/// </summary>
-	private InteractableBase itemHolding;
+	private List<InteractableBase> itemsHolding = new List<InteractableBase>();
+
+	public bool HoldingWater;
 
 	private void Start()
 	{
 		//initialize all of the interactions and triggers
 		interactableComponent = GetComponent<InteractableBase>();
 		interactableComponent.AddInteractionToList("Place Item", HoldItem);
-        //interactableComponent.AddInteractionToList("Take Egg", SpatulaGrab);
-        interactableComponent.AddInteractionTrigger("Empty into");
+		//interactableComponent.AddInteractionToList("Take Egg", SpatulaGrab);
+		interactableComponent.AddInteractionTrigger("Empty into");
+		interactableComponent.AddInteractionToList("Fill water", FillWater);
 	}
 
 
@@ -39,17 +43,17 @@ public class ContainerComponent : MonoBehaviour
 	/// <summary>
 	/// Place an item into this container
 	/// </summary>
-	/// <param name="ItemToHold">The item to place into the container</param>
-	public void HoldItem(InteractableBase ItemToHold)
+	/// <param name="itemToHold">The item to place into the container</param>
+	public void HoldItem(InteractableBase itemToHold)
 	{
-		itemHolding = ItemToHold;
+		itemsHolding.Add(itemToHold);
 		//move the item into the container
-		itemHolding.transform.position = transform.position + PlacePositionRelative;
-		itemHolding.transform.SetParent(transform);
+		itemToHold.transform.position = transform.position + PlacePositionRelative;
+		itemToHold.transform.SetParent(transform);
 		//call any interaction that happen when this item is placed in a container
-		itemHolding.Interact("On Place In Container", interactableComponent);
-        //objects in containers should not be selectable until taken out of the container
-        itemHolding.GetComponent<SelectableObject>().enabled = false;
+		itemToHold.Interact("On Place In Container", interactableComponent);
+		//objects in containers should not be selectable until taken out of the container
+		itemToHold.GetComponent<SelectableObject>().enabled = false;
 		//add the empty into to interaction to the list
 		interactableComponent.AddInteractionToList("Empty into", EmptyInto);
 	}
@@ -61,19 +65,53 @@ public class ContainerComponent : MonoBehaviour
 	/// <param name="itemToEmptyInto">an interactable Item containing</param>
 	public void EmptyInto(InteractableBase itemToEmptyInto)
 	{
-		itemToEmptyInto.Interact("Place Item", itemHolding);
-        
-        // Allows for the spatula to move onto the frying pan and plate
-        itemToEmptyInto.Interact("Take Egg", interactableComponent);
-
-        //double check that the item is no longer in this container befor editing properties.
-        if (itemHolding.transform.parent != transform)
+		bool completed = false;
+		for (int i = 0; i < itemsHolding.Count; i++)
 		{
-			itemHolding = null;
+			itemToEmptyInto.Interact("Place Item", itemsHolding[i]);
+
+			// Allows for the spatula to move onto the frying pan and plate
+			itemToEmptyInto.Interact("Take Egg", interactableComponent);
+
+			itemToEmptyInto.Interact("Place On Plate", itemsHolding[i]);
+
+			//double check that the item is no longer in this container befor editing properties.
+			if (itemsHolding[i].transform.parent != transform)
+			{
+				itemsHolding.RemoveAt(i);
+				i--;
+				completed = true;
+				continue;
+			}
+			completed = false;
+		}
+
+		if (completed)
+		{
 			//remove the empty into interaction from the list
 			interactableComponent.RemoveInteractionFromList("Empty into");
 		}
+
+		itemToEmptyInto.Interact("Fill water", interactableComponent);
+
+		EmptyWater();
 	}
 
-    
+	public void EmptyWater(InteractableBase item = null)
+	{
+		HoldingWater = false;
+		GetComponent<Image>().color = Color.white;
+		interactableComponent.RemoveInteractionFromList("Empty water");
+		interactableComponent.AddInteractionToList("Fill water", FillWater);
+	}
+
+	public void FillWater(InteractableBase item)
+	{
+		HoldingWater = true;
+		GetComponent<Image>().color = Color.blue;
+		interactableComponent.RemoveInteractionFromList("Fill water");
+		interactableComponent.AddInteractionToList("Empty water", EmptyWater);
+	}
+
+
 }

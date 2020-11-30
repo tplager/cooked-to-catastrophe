@@ -63,10 +63,25 @@ public class Rice : MonoBehaviour
 	/// </summary>
 	private void Update()
 	{
-		if(transform.root.GetComponent<CookableObject>().TimeToCook <= 0)
-        {
-			Destroy(transform.root.Find("WaterInPot(Clone)"));
-        }
+		//if(transform.root.GetComponent<CookableObject>().TimeToCook <= 0)
+		//{
+		//	Destroy(transform.root.Find("WaterInPot(Clone)"));
+		//}
+
+		// If the rice is in a container (aka not in the bag)
+		if (riceState != RiceStates.Bagged)
+		{
+			// If there is not water in the container
+			if (transform.parent.gameObject.GetComponent<ContainerComponent>().HoldingWater == false)
+			{
+				// If the rice is trying to be cooked with no water in it
+				if (GetComponent<CookableObject>().CurrentlyBeingCooked == true)
+				{
+					// Set the rice to burnt
+					GetComponent<CookableObject>().IsBurnt = true;
+				}
+			}
+		}
 
 		// If the rice is fully cooked
 		if (GetComponent<CookableObject>().IsCooked)
