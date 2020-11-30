@@ -27,6 +27,9 @@ public class CookableObject : MonoBehaviour
 	// A delegate that optionally overides on cook when set;
 	public Func<bool> OnCookOveride;
 
+    // Determines if the food is currently being cooked
+    private bool currentlyBeingCooked;
+
     // Author: Nick Engell
     /// <summary>
     /// Property for how much space the object will take up in the cart
@@ -65,7 +68,8 @@ public class CookableObject : MonoBehaviour
         get { return timeToCook; }
         set 
         { 
-            timeToCook = value; 
+            timeToCook = value;
+            currentlyBeingCooked = true;
             if(timeToCook <= 0)
             {
                 isCooked = true;
@@ -82,7 +86,8 @@ public class CookableObject : MonoBehaviour
         get { return timeToBurn; }
         set 
         { 
-            timeToBurn = value; 
+            timeToBurn = value;
+            currentlyBeingCooked = true;
             if(timeToBurn <= 0)
             {
                 isBurnt = true;
@@ -117,6 +122,15 @@ public class CookableObject : MonoBehaviour
         get { return highHeatMultiplier; }
     }
 
+    // Author: Nick Engell
+    /// <summary>
+    /// Property for whether the food has started / is currently being cooked
+    /// </summary>
+    public bool CurrentlyBeingCooked
+    {
+        get { return currentlyBeingCooked; }
+    }    
+
     /// <summary>
     /// Updates the time and updates the cooked and burnt fields
     /// </summary>
@@ -137,5 +151,5 @@ public class CookableObject : MonoBehaviour
 				isCooked = true;
 			}
 		}
-    }
+    
 }
