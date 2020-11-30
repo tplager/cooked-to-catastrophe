@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/129 Cafeteria.unity
-    guid: 801d04b84b937044bbd3b06646893a58
+    path: Assets/Scenes/Kitchen.unity
+    guid: 0b0a5bf085ceeeb42906455da3bf8b4f
+  - enabled: 1
+    path: Assets/Scenes/Cafeteria.unity
+    guid: ba43f2096be0a614cb3381840345815e
   - enabled: 1
     path: Assets/Scenes/Pantry.unity
     guid: 9c4a2637b78f2a442a003f4400aab1c1
-  - enabled: 1
-    path: Assets/Scenes/129 Kitchen.unity
-    guid: da6c865227d724c4db7c773f68638e41
   m_configObjects: {}
