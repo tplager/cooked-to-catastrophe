@@ -236,27 +236,30 @@ public class CafeteriaManager : MonoBehaviour
         {
             if(plate.transform.childCount > 0)
             {
-                if(plate == plate1)
+                // Checks the first plate
+                if (plate == plate1)
                 {
                     if(plate.transform.GetChild(0).name == "Egg")
                     {
-                        guests[0].GetComponent<Guest>().CompareDishAndOrder("Over-Medium Fried Egg");
+                        guests[0].GetComponent<Guest>().CompareDishAndOrder("Over-Medium Fried Egg", plate.transform.GetChild(0).gameObject);
+                        Destroy(plate.transform.GetChild(0).gameObject);
 
                     }
 
-                    Destroy(plate.transform.GetChild(0).gameObject);
 
                 }
 
+                // Checks the second plate
                 if (plate == plate2)
                 {
-                    guests[1].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name);
+                    guests[1].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
 
                 }
 
+                // Checks the third plate
                 if (plate == plate3)
                 {
-                    guests[2].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name);
+                    guests[2].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
 
                 }
 

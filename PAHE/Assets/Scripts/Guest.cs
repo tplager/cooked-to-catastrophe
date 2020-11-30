@@ -93,17 +93,34 @@ public class Guest : MonoBehaviour
     /// Checks to see if the dish passed in is the one the guest ordered
     /// </summary>
     /// <param name="orderToCompare"></param>
-    public void CompareDishAndOrder(string orderToCompare)
+    public void CompareDishAndOrder(string orderToCompare, GameObject food)
     {
         // If the incoming order is what the guest initally ordered
         if(orderToCompare == orderKeyRequested)
         {
+            if(food.GetComponent<CookableObject>() != null)
+            {
+                if(food.GetComponent<CookableObject>().IsCooked == true)
+                {
+                    orderServed = 1;
+
+
+                }
+                else
+                {
+                    orderServed = 3;
+
+
+                }
+                UpdateGuestInfo();
+
+
+            }
             //cafeteriaManager.GuestInfo.SetActive(true);
             // Not entirely sure how inefficient this is. I could find it by manually getting the indexes but it'd be messy to read
             // Sets the guest picture in the info screen to happy
             //cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = happyFace;
-            orderServed = 1;
-            UpdateGuestInfo();
+
         }
         else
         {
@@ -156,6 +173,15 @@ public class Guest : MonoBehaviour
                 // Sad face: If the dish is NOT what they ordered
                 case 2:
                     cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = sadFace;
+
+                    cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("This isn't {0}!", orderKeyRequested);
+
+                    break;
+                // Sad Face: If the food they ordered is correct but on cooked properly
+                case 3:
+                    cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = sadFace;
+
+                    cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("{0} is what I ordered, but it's not cooked properly.", orderKeyRequested);
 
                     break;
 
