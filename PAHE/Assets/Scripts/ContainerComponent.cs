@@ -23,13 +23,15 @@ public class ContainerComponent : MonoBehaviour
 	/// <summary>
 	/// A refrence to the item that this container is holding
 	/// </summary>
-	private InteractableBase itemHolding;
+	private List<InteractableBase> itemsHolding = new List<InteractableBase>();
 
 	private void Start()
 	{
 		//initialize all of the interactions and triggers
 		interactableComponent = GetComponent<InteractableBase>();
 		interactableComponent.AddInteractionToList("Place Item", HoldItem);
+        interactableComponent.AddInteractionToList("Test", Testing);
+
         //interactableComponent.AddInteractionToList("Take Egg", SpatulaGrab);
         interactableComponent.AddInteractionTrigger("Empty into");
 	}
@@ -39,17 +41,17 @@ public class ContainerComponent : MonoBehaviour
 	/// <summary>
 	/// Place an item into this container
 	/// </summary>
-	/// <param name="ItemToHold">The item to place into the container</param>
-	public void HoldItem(InteractableBase ItemToHold)
+	/// <param name="itemToHold">The item to place into the container</param>
+	public void HoldItem(InteractableBase itemToHold)
 	{
-		itemHolding = ItemToHold;
-		//move the item into the container
-		itemHolding.transform.position = transform.position + PlacePositionRelative;
-		itemHolding.transform.SetParent(transform);
-		//call any interaction that happen when this item is placed in a container
-		itemHolding.Interact("On Place In Container", interactableComponent);
+	    itemsHolding.Add(itemToHold);
+        //move the item into the container
+        itemToHold.transform.position = transform.position + PlacePositionRelative;
+        itemToHold.transform.SetParent(transform);
+        //call any interaction that happen when this item is placed in a container
+        itemToHold.Interact("On Place In Container", interactableComponent);
         //objects in containers should not be selectable until taken out of the container
-        itemHolding.GetComponent<SelectableObject>().enabled = false;
+        itemToHold.GetComponent<SelectableObject>().enabled = false;
 		//add the empty into to interaction to the list
 		interactableComponent.AddInteractionToList("Empty into", EmptyInto);
 	}
@@ -61,19 +63,43 @@ public class ContainerComponent : MonoBehaviour
 	/// <param name="itemToEmptyInto">an interactable Item containing</param>
 	public void EmptyInto(InteractableBase itemToEmptyInto)
 	{
-		itemToEmptyInto.Interact("Place Item", itemHolding);
-        
-        // Allows for the spatula to move onto the frying pan and plate
-        itemToEmptyInto.Interact("Take Egg", interactableComponent);
+        bool completed = false; 
+        for (int i = 0; i < itemsHolding.Count; i++)
+        {
+            itemToEmptyInto.Interact("Place Item", itemsHolding[i]);
 
-        //double check that the item is no longer in this container befor editing properties.
-        if (itemHolding.transform.parent != transform)
-		{
-			itemHolding = null;
-			//remove the empty into interaction from the list
-			interactableComponent.RemoveInteractionFromList("Empty into");
-		}
-	}
+            // Allows for the spatula to move onto the frying pan and plate
+            itemToEmptyInto.Interact("Take Egg", interactableComponent);
 
-    
+            itemToEmptyInto.Interact("Place On Plate", itemsHolding[i]);
+
+            //double check that the item is no longer in this container befor editing properties.
+            if (itemsHolding[i].transform.parent != transform)
+            {
+                itemsHolding.RemoveAt(i);
+                i--;
+                completed = true;
+                continue;
+            }
+            completed = false;
+        }
+
+        if (completed)
+        {
+            //remove the empty into interaction from the list
+            interactableComponent.RemoveInteractionFromList("Empty into");
+        }
+    }
+
+    /// <summary>
+    /// Author: John Vancce
+    /// Purpose: Just for showing multiple interactions work
+    /// </summary>
+    /// <param name="ItemToHold">Only kept from the above functions</param>
+    public void Testing(InteractableBase ItemToHold)
+    {
+        Debug.Log("Test for Multiple Interactions");
+    }
+
+
 }

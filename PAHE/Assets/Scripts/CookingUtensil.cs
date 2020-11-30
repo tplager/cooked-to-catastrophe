@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StoveLocation
+{
+    TopLeftBurner,
+    TopRightBurner,
+    BottomLeftBurner,
+    BottomRightBurner
+}
+
 public class CookingUtensil : MonoBehaviour
 {
-
-    public enum StoveLocation
-    {
-        TopLeftBurner,
-        TopRightBurner,
-        BottomLeftBurner,
-        BottomRightBurner
-    }
-
     [SerializeField] private bool isOnStove;
     private GameObject foodInside;
 
@@ -33,13 +32,13 @@ public class CookingUtensil : MonoBehaviour
     /// <summary>
     /// Property for foodInside variable, checks to see if the object has any children. If so, then return it
     /// </summary>
-    public GameObject FoodInside
+    public CookableObject[] FoodsInside
     {
         get
         {
-            if(gameObject.transform.childCount == 1)
+            if(gameObject.transform.childCount >= 1)
             {
-                return gameObject.transform.GetChild(0).gameObject;
+                return gameObject.transform.GetComponentsInChildren<CookableObject>();
             }
             else
             {
