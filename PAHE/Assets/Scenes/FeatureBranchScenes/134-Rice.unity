@@ -2701,6 +2701,9 @@ MonoBehaviour:
   hoursInputField: {fileID: 91487590}
   listOfUtensils:
   - {fileID: 163428526}
+  - {fileID: 420475758}
+  - {fileID: 584254744}
+  - {fileID: 171903270}
 --- !u!4 &275460522
 Transform:
   m_ObjectHideFlags: 0
@@ -8460,6 +8463,7 @@ GameObject:
   - component: {fileID: 1408965805}
   - component: {fileID: 1408965804}
   - component: {fileID: 1408965806}
+  - component: {fileID: 1408965807}
   m_Layer: 5
   m_Name: Sink
   m_TagString: Untagged
@@ -8565,6 +8569,24 @@ MonoBehaviour:
   waterInPotPrefab: {fileID: 7516543804886667737, guid: 0069d09fa6073154c9fd5a40f542efb5, type: 3}
   filled: {fileID: 21300000, guid: 6801c6a7750c51241b36a33cbd65eff9, type: 3}
   boiling: {fileID: 21300000, guid: 102495a2a7bb4274999270b445c22a58, type: 3}
+--- !u!114 &1408965807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408965800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6514ef342f32d2e4abf80055f7e89afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToCook: 600
+  timeToBurn: 0
+  lowHeatMultiplier: 1
+  mediumHeatMultiplier: 1
+  highHeatMultiplier: 1
+  size: 0
 --- !u!1 &1444915271
 GameObject:
   m_ObjectHideFlags: 0

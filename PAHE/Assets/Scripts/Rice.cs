@@ -63,6 +63,11 @@ public class Rice : MonoBehaviour
 	/// </summary>
 	private void Update()
 	{
+		if(transform.root.GetComponent<CookableObject>().TimeToCook <= 0)
+        {
+			Destroy(transform.root.Find("WaterInPot(Clone)"));
+        }
+
 		// If the rice is fully cooked
 		if (GetComponent<CookableObject>().IsCooked)
 		{
