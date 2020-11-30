@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Author: Trenton Plager
 public enum SauceStates
 {
     Jar, 
@@ -11,6 +12,9 @@ public enum SauceStates
     Plated
 }
 
+/// <summary>
+/// A script to manage how the marinara sauce works
+/// </summary>
 [RequireComponent(typeof(InteractableBase))]
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(CookableObject))]
@@ -43,7 +47,7 @@ public class SauceScript : MonoBehaviour
     [SerializeField]
     private Sprite scorchedImage;
 
-        /// <summary>
+    /// <summary>
     /// the image representing the the sauce when it is on the plate
     /// </summary>
     [SerializeField]
@@ -62,9 +66,9 @@ public class SauceScript : MonoBehaviour
         ChangeSauceState(SauceStates.Jar);
     }
 
-    // Author: Nick Engell
+    // Author: Trenton Plager
     /// <summary>
-    /// Updates the egg state and image based on the food cook state
+    /// Updates the sauce sprite if the sauce is burnt
     /// </summary>
     private void Update()
     {
@@ -75,9 +79,9 @@ public class SauceScript : MonoBehaviour
         }
     }
 
-    //takes an interactable base so it can be a delegate
+    // takes an interactable base so it can be a delegate
     /// <summary>
-    /// A function to call when the egg is placed in to a container
+    /// A function to call when the sauce is placed in to a container
     /// </summary>
     /// <param name="container">the container the egg is being placed in</param>
     public void OnPlaceInContainer(InteractableBase container)
@@ -102,7 +106,11 @@ public class SauceScript : MonoBehaviour
             ChangeSauceState(SauceStates.Plated);
         }
     }
-
+    
+    /// <summary>
+    /// A helper method to change the sauce state and sprite depending on the new state
+    /// </summary>
+    /// <param name="newState"></param>
     public void ChangeSauceState(SauceStates newState)
     {
         sauceState = newState;
@@ -114,6 +122,8 @@ public class SauceScript : MonoBehaviour
                 break;
             case SauceStates.Loose:
                 imageComponent.sprite = looseImage;
+
+                // Changes the size of the image so that it fits better into the pot
                 GetComponent<RectTransform>().sizeDelta = new Vector2(170, 170); 
                 break;
             case SauceStates.Scorched:

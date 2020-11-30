@@ -113,6 +113,10 @@ public class CookableObject : MonoBehaviour
         get { return highHeatMultiplier; }
     }
 
+    /// <summary>
+    /// Updates the time and updates the cooked and burnt fields
+    /// </summary>
+    /// <param name="time"></param>
     public void Cook(float time)
     {
         timeElapsed += time; 

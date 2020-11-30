@@ -269,7 +269,7 @@ public class EggTimerManager : MonoBehaviour
         return false;
     }
 
-    // Author: Nick Engell
+    // Author: Nick Engell, Trenton Plager
     /// <summary>
     /// Goes through the utensils and attemps to cook the food in them
     /// </summary>
@@ -297,6 +297,12 @@ public class EggTimerManager : MonoBehaviour
         }
     }
 
+    // Author: Trenton Plager
+    /// <summary>
+    /// A helper method that cooks food depending on the current burner it is on
+    /// </summary>
+    /// <param name="currentFood">The food that needs to be cooked</param>
+    /// <param name="burner">The burner that the food is on</param>
     public void CookFoodHelper(CookableObject currentFood, StoveLocation burner)
     {
         int burnerTemp = stoveTemps.GetBurnerTemp(burner);

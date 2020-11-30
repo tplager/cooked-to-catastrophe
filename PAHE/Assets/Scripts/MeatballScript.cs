@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Author: Trenton Plager
 public enum MeatballStates
 {
     Bagged, 
@@ -11,6 +12,9 @@ public enum MeatballStates
     LooseBurned
 }
 
+/// <summary>
+/// A script to manage the state and script updating of the meatballs
+/// </summary>
 [RequireComponent(typeof(InteractableBase))]
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(CookableObject))]
@@ -61,9 +65,9 @@ public class MeatballScript : MonoBehaviour
         ChangeMeatballState(MeatballStates.Bagged);
     }
 
-    // Author: Nick Engell
+    // Author: Trenton Plager
     /// <summary>
-    /// Updates the egg state and image based on the food cook state
+    /// Updates the meatball state and image based on the food cook state
     /// </summary>
     private void Update()
     {
@@ -85,18 +89,21 @@ public class MeatballScript : MonoBehaviour
 
     //takes an interactable base so it can be a delegate
     /// <summary>
-    /// A function to call when the egg is placed in to a container
+    /// A function to call when the meatball is placed in to a container
     /// </summary>
     /// <param name="container">the container the egg is being placed in</param>
     public void OnPlaceInContainer(InteractableBase container)
     {
-        //if the egg is currently shelled, unshell it
         if (meatballState == MeatballStates.Bagged)
         {
             ChangeMeatballState(MeatballStates.LooseFrozen);
         }
     }
 
+    /// <summary>
+    /// A helper method to change the meatball state and sprite depending on the new state
+    /// </summary>
+    /// <param name="newState"></param>
     public void ChangeMeatballState(MeatballStates newState)
     {
         meatballState = newState;
