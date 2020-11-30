@@ -94,11 +94,17 @@ public class FoodSingleton : MonoBehaviour
     public void SetToPlate(GameObject obj)
     {
         // Gets the plate in the scene and sets the singleton to it
-        Instance.transform.position = obj.transform.position;
-        Instance.transform.SetParent(obj.transform);
-        Instance.gameObject.GetComponent<SelectableObject>().enabled = true;
+        if (_instance != null)
+        {
+            if (_instance.gameObject.GetComponent<SelectableObject>() != null)
+            {
+                _instance.transform.position = obj.transform.position;
+                _instance.transform.SetParent(obj.transform);
+                _instance.gameObject.GetComponent<SelectableObject>().enabled = true;
 
-        Destroy(Instance);
+                Destroy(_instance);
+            }
+        }
 
     }
 

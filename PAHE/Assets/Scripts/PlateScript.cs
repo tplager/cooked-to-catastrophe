@@ -13,6 +13,7 @@ public class PlateScript : MonoBehaviour
 {
     private GameObject customFood;
     private Transform foodTransform;
+    private GameObject foodTransferScript;
     
     /// <summary>
     /// Author: John Vance
@@ -20,6 +21,7 @@ public class PlateScript : MonoBehaviour
     /// </summary>
     public void Transfer()
     {
+        
         // Gets the food on the plate
         customFood = transform.GetChild(0).gameObject;
 
@@ -27,8 +29,11 @@ public class PlateScript : MonoBehaviour
         foodTransform = transform.GetChild(0);
         foodTransform.SetParent(null);
 
-        // Applies the singleton
+        //customFood.AddComponent<FoodSingleton>();
+
+        // Applies the singleton               
         customFood.AddComponent<FoodSingleton>();
+        
 
     }
 }

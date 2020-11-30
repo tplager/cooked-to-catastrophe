@@ -123,9 +123,9 @@ public class CafeteriaManager : MonoBehaviour
         orders = new Dictionary<string, int>();
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
         plates = new List<GameObject>();
-        plates.Add(plate1);
-        plates.Add(plate2);
-        plates.Add(plate3);
+        //plates.Add(plate1);
+        //plates.Add(plate2);
+        //plates.Add(plate3);
 
     }
 
@@ -232,7 +232,17 @@ public class CafeteriaManager : MonoBehaviour
     /// </summary>
     public void CheckOrder()
     {
-        foreach(GameObject plate in plates)
+        plates.Clear();
+
+        plate1 = GameObject.Find("Meal1");
+        plate2 = GameObject.Find("Meal2");
+        plate3 = GameObject.Find("Meal3");
+
+        plates.Add(plate1);
+        plates.Add(plate2);
+        plates.Add(plate3);
+
+        foreach (GameObject plate in plates)
         {
             if(plate.transform.childCount > 0)
             {
@@ -318,6 +328,8 @@ public class CafeteriaManager : MonoBehaviour
     {
         if (currentSelection == null)
         {
+            selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
+
             selectedObject.selected = true;
             currentSelection = selectedObject;
             selectionIcon.color = selectedObject.GetComponent<Image>().color;
@@ -353,6 +365,7 @@ public class CafeteriaManager : MonoBehaviour
     /// </summary>
     public void ClearSelection()
     {
+        selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
 
         if (currentSelection != null)
         {
