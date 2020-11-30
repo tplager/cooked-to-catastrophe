@@ -33,6 +33,8 @@ public class ContainerComponent : MonoBehaviour
 		//initialize all of the interactions and triggers
 		interactableComponent = GetComponent<InteractableBase>();
 		interactableComponent.AddInteractionToList("Place Item", HoldItem);
+        interactableComponent.AddInteractionToList("Test", Testing);
+
         //interactableComponent.AddInteractionToList("Take Egg", SpatulaGrab);
         interactableComponent.AddInteractionTrigger("Empty into");
 		interactableComponent.AddInteractionToList("Fill water", FillWater);
@@ -114,4 +116,19 @@ public class ContainerComponent : MonoBehaviour
 	}
 
     
+
+
+    /// <summary>
+    /// Author: John Vancce
+    /// Purpose: Just for showing multiple interactions work
+    /// </summary>
+    /// <param name="ItemToHold">Only kept from the above functions</param>
+    public void Testing(InteractableBase ItemToHold)
+    {
+        Debug.Log("Test for Multiple Interactions");
+    }
+
+
+
+
 }

@@ -35,6 +35,17 @@ public class CafeteriaManager : MonoBehaviour
     // Specials list UI object
     [SerializeField] private GameObject specialsUIItemText;
 
+    // Holds all of the info for the plates in the Cafeteria scene
+    [SerializeField] private GameObject plate1;
+    [SerializeField] private GameObject plate2;
+    [SerializeField] private GameObject plate3;
+    private List<GameObject> plates;
+
+
+    public SelectableObject currentSelection;
+    private Image selectionIcon;
+
+
     // Author: Kyle Weekley, Ben Stern
     /// <summary>
 	/// the singleton instance
@@ -110,8 +121,13 @@ public class CafeteriaManager : MonoBehaviour
         SetupDayOneSpecials();
         SetupDayOneGuests();
         orders = new Dictionary<string, int>();
-    }
+        selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
+        plates = new List<GameObject>();
+        //plates.Add(plate1);
+        //plates.Add(plate2);
+        //plates.Add(plate3);
 
+    }
 
     // Author: Nick Engell, Kyle Weekley
     /// <summary>
@@ -210,6 +226,59 @@ public class CafeteriaManager : MonoBehaviour
         guests.Remove(removedGuest);
     }
 
+    /// <summary>
+    /// Author: John Vance
+    /// Purpose: Checks to see if the order on the plate is the same as the one the guest ordered
+    /// </summary>
+    public void CheckOrder()
+    {
+        plates.Clear();
+
+        plate1 = GameObject.Find("Meal1");
+        plate2 = GameObject.Find("Meal2");
+        plate3 = GameObject.Find("Meal3");
+
+        plates.Add(plate1);
+        plates.Add(plate2);
+        plates.Add(plate3);
+
+        foreach (GameObject plate in plates)
+        {
+            if(plate.transform.childCount > 0)
+            {
+                // Checks the first plate
+                if (plate == plate1)
+                {
+                    if(plate.transform.GetChild(0).name == "Egg")
+                    {
+                        guests[0].GetComponent<Guest>().CompareDishAndOrder("Over-Medium Fried Egg", plate.transform.GetChild(0).gameObject);
+                        Destroy(plate.transform.GetChild(0).gameObject);
+
+                    }
+
+
+                }
+
+                // Checks the second plate
+                if (plate == plate2)
+                {
+                    guests[1].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
+
+                }
+
+                // Checks the third plate
+                if (plate == plate3)
+                {
+                    guests[2].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
+
+                }
+
+
+            }
+        }
+
+    }
+
     // Author: Kyle Weekley, Ben Stern
     /// <summary>
     /// Is  called when a new scene is loaded
@@ -222,11 +291,11 @@ public class CafeteriaManager : MonoBehaviour
         {
             guestCanvas.enabled = false;
         }
-        else if (scene.name == "Kitchen" || scene.name == "129 Kitchen")
+        else if (scene.name == "Kitchen" || scene.name == "129 Kitchen" || scene.name == "130_Kitchen")
         {
             guestCanvas.enabled = false;
         }
-        else if (scene.name == "Cafeteria" || scene.name == "129 Cafeteria")
+        else if (scene.name == "Cafeteria" || scene.name == "129 Cafeteria" || scene.name == "130_Cafeteria")
         {
             guestCanvas.enabled = true;
             // You can't find an inactive gameObject, so this needs some extra steps
@@ -247,5 +316,70 @@ public class CafeteriaManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /// Author: Kyle Weekley, John Vance
+	/// <summary>
+	/// Attempt to select an object or interact with it in some way
+    /// Added so that the objects in the cafeteria scene can be selected in interacted with
+	/// </summary>
+	/// <param name="selectedObject">The is attempting to be selected</param>
+	public void ObjectSelected(SelectableObject selectedObject)
+    {
+        if (currentSelection == null)
+        {
+            selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
+
+            selectedObject.selected = true;
+            currentSelection = selectedObject;
+            selectionIcon.color = selectedObject.GetComponent<Image>().color;
+            selectionIcon.sprite = selectedObject.GetComponent<Image>().sprite;
+        }
+        else
+        {
+            //TODO: call interactable object methods
+            InteractableBase currentInteractable = currentSelection.GetComponent<InteractableBase>();
+            InteractableBase selectedInteractable = selectedObject.GetComponent<InteractableBase>();
+            if (currentInteractable != null && selectedInteractable != null)
+            {
+                if ((currentSelection.name == "Spatula" && selectedObject.name == "Frying Pan") ||
+                    (currentSelection.name == "Spatula" && selectedObject.name == "Plate"))
+                {
+                    selectedInteractable.AttemptInteraction(currentInteractable);
+
+                }
+
+                else if (selectedInteractable.AttemptInteraction(currentInteractable))
+                {
+                    CheckOrder();
+                    ClearSelection();
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Author: Kyle Weekley, John Vance
+    /// Purpose: Clears the currently selected object
+    /// Restrictions: None
+    /// </summary>
+    public void ClearSelection()
+    {
+        selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
+
+        if (currentSelection != null)
+        {
+            currentSelection.selected = false;
+        }
+        currentSelection = null;
+
+        
+
+        //Reset selection sprite
+        selectionIcon.sprite = null;
+        selectionIcon.color = Color.white;
+
+        //Currently using sprite color for testing
+        //selectionIcon.color = Color.white;
     }
 }
