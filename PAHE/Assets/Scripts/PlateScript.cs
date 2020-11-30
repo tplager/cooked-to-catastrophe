@@ -29,8 +29,6 @@ public class PlateScript : MonoBehaviour
         foodTransform = transform.GetChild(0);
         foodTransform.SetParent(null);
 
-        //customFood.AddComponent<FoodSingleton>();
-
         // Applies the singleton               
         customFood.AddComponent<FoodSingleton>();
         
