@@ -9,6 +9,8 @@ public class Guest : MonoBehaviour
     // Author: Nick Engell, Kyle Weekley
     // Whether or not the guest has a key for the player
     private bool hasKey;
+    // Whether or not the guest's order has been taken
+    private bool orderTaken;
     // A list of possible dialogue lines
     private List<string> dialogueLines;
     // Sprite for guest's neutral face
@@ -26,6 +28,16 @@ public class Guest : MonoBehaviour
     // The unique greeting line for this specific guest
     private string uniqueGreetingLine;
 
+    // Author: Kyle Weekley
+    /// <summary>
+    /// Used to set DontDestroyOnLoad
+    /// Guests should be remembered despite moving to other scenes
+    /// </summary>
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +49,7 @@ public class Guest : MonoBehaviour
         dialogueLines.Add("Can't really find much good food out there.");
 
         // Get reference to GameManager (Kyle: Added single .find here since guests are now being instantiated at runtime)
-        gameManager = GameObject.Find("GameManager");
+        gameManager = GameObject.Find("CafeteriaManager");
 
         // Quick reference to the cafeteria manager script
         cafeteriaManager = gameManager.GetComponent<CafeteriaManager>();
@@ -96,7 +108,7 @@ public class Guest : MonoBehaviour
         }
     }
 
-    // Author: Nick Engell
+    // Author: Nick Engell, Kyle Weekley
     /// <summary>
     /// Updates the guest info based on the current guest clicked on
     /// </summary>
@@ -121,9 +133,30 @@ public class Guest : MonoBehaviour
             // Update the guest face with their neutral face
             cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = neutralFace;
 
-            cafeteriaManager.RemoveGuestFromList(this.gameObject);
+            // Check if this guest's order has already been taken
+            if (orderTaken == false)
+            {
+                // Check if the guest's order is already present in the orders list
+                if (cafeteriaManager.Orders.ContainsKey(orderKeyRequested))
+                {
+                    // If it is, increment the count of that order by 1
+                    cafeteriaManager.Orders[orderKeyRequested]++;
+                }
+                else
+                {
+                    // If not, add the guest's order to the orders dictionary with a quantity of 1
+                    cafeteriaManager.Orders.Add(orderKeyRequested, 1);
+                }
+
+                // Set the guest's order as taken
+                orderTaken = true;
+            }
+
+            foreach (KeyValuePair<string, int> kvp in cafeteriaManager.Orders)
+            {
+                //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+            }
         }
-
-
     }
 }

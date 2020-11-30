@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CafeteriaManager : MonoBehaviour
@@ -11,10 +12,12 @@ public class CafeteriaManager : MonoBehaviour
     private Dictionary<string, Sprite> specials;
     // List that holds guest gameObjects
     private List<GameObject> guests;
+    // Dictionary of accepted guest orders and quantities
+    private Dictionary<string, int> orders;
     // Guest prefab
     [SerializeField] private GameObject guest;
     //Canvas reference for guest instantiation
-    [SerializeField] private Canvas canvas;
+    [SerializeField] private Canvas guestCanvas;
     //Locations to spawn guests
     [SerializeField] private Vector3 guestPositionLeft;
     [SerializeField] private Vector3 guestPositionCenter;
@@ -27,8 +30,33 @@ public class CafeteriaManager : MonoBehaviour
     [SerializeField] private Sprite cookedSpaghettiMeatballSprite;
     // The guest info canvas panel
     [SerializeField] private GameObject guestInfo;
-    // Specials list object
+    // The button to close the guest info canvas panel
+    [SerializeField] private Button guestInfoCloseButton;
+    // Specials list UI object
     [SerializeField] private GameObject specialsUIItemText;
+
+    // Author: Kyle Weekley, Ben Stern
+    /// <summary>
+	/// the singleton instance
+	/// </summary>
+	private static CafeteriaManager _instance;
+
+    // Author: Kyle Weekley, Ben Stern
+    /// <summary>
+    /// the instance of the cart manager
+    /// </summary>
+    public static CafeteriaManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject obj = new GameObject("CafeteriaManager");
+                _instance = obj.AddComponent<CafeteriaManager>();
+            }
+            return _instance;
+        }
+    }
 
     // Author: Nick Engell
     /// <summary>
@@ -37,7 +65,16 @@ public class CafeteriaManager : MonoBehaviour
     public Dictionary<string, Sprite> Specials
     {
         get { return specials; }
-    }    
+    }
+
+    // Author: Kyle Weekley
+    /// <summary>
+    /// Get property for the orders dictionary
+    /// </summary>
+    public Dictionary<string, int> Orders
+    {
+        get { return orders; }
+    }
 
     // Author: Nick Engell
     /// <summary>
@@ -48,15 +85,35 @@ public class CafeteriaManager : MonoBehaviour
         get { return guestInfo; }
     }
 
+    // Author: Kyle Weekley, Ben Stern
+    /// <summary>
+    /// Called before Start to handle singleton setup
+    /// </summary>
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+        //because cafeteria manager is not destroyed when new scenes are loaded we need to reget certain elements when entering a new scene
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
     // Set up everything needed for Day 1
     void Start()
     {
         SetupDayOneSpecials();
         SetupDayOneGuests();
+        orders = new Dictionary<string, int>();
     }
 
 
-    // Author: Nick Engell
+    // Author: Nick Engell, Kyle Weekley
     /// <summary>
     /// Setup the specials for day 1
     /// </summary>
@@ -66,8 +123,9 @@ public class CafeteriaManager : MonoBehaviour
         specials = new Dictionary<string, Sprite>();
         
         // Add the specials available for day 1
-        specials.Add("Fried Egg", cookedEggSprite);
-        specials.Add("Rice", cookedRiceSprite);
+        // These names should definitely be grabbed from the cookbook json file but I don't feel like changing it right now sorry
+        specials.Add("Over-Medium Fried Egg", cookedEggSprite);
+        specials.Add("Long Grain White Rice", cookedRiceSprite);
         specials.Add("Spaghetti & Meatballs", cookedSpaghettiMeatballSprite);
 
         //Populate specials UI
@@ -128,7 +186,7 @@ public class CafeteriaManager : MonoBehaviour
         GameObject newGuest = Instantiate(guest, position, Quaternion.identity);
 
         //Set guest as a child of canvas
-        newGuest.transform.SetParent(canvas.transform, false);
+        newGuest.transform.SetParent(guestCanvas.transform, false);
 
         //Set guest's order if specified
         //Otherwise guest will make a random order on its own
@@ -150,5 +208,44 @@ public class CafeteriaManager : MonoBehaviour
     public void RemoveGuestFromList(GameObject removedGuest)
     {
         guests.Remove(removedGuest);
+    }
+
+    // Author: Kyle Weekley, Ben Stern
+    /// <summary>
+    /// Is  called when a new scene is loaded
+    /// </summary>
+    /// <param name="scene">the scene being loaded</param>
+    /// <param name="mode">the way the scene is being loaded</param>
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Pantry" || scene.name == "133-Pantry")
+        {
+            guestCanvas.enabled = false;
+        }
+        else if (scene.name == "Kitchen" || scene.name == "129 Kitchen")
+        {
+            guestCanvas.enabled = false;
+        }
+        else if (scene.name == "Cafeteria" || scene.name == "129 Cafeteria")
+        {
+            guestCanvas.enabled = true;
+            // You can't find an inactive gameObject, so this needs some extra steps
+            guestInfo = GameObject.Find("UICanvas");
+            guestInfo = guestInfo.transform.Find("Guest Info").gameObject;
+            specialsUIItemText = GameObject.Find("/Canvas/SpecialsUI/ItemText");
+            guestInfoCloseButton = guestInfo.GetComponentInChildren<Button>();
+            // Set the close button's onClick behavior to close the menu
+            // This is done here as well as in-editor because the button will lose its reference to the CafeteriaManager singleton after scene switches
+            guestInfoCloseButton.onClick.AddListener(CloseInfoScreen);
+        }
+    }
+
+    // Author: Kyle Weekley, Ben Stern
+    /// <summary>
+    /// Remove from scene manager when the program is closed
+    /// </summary>
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

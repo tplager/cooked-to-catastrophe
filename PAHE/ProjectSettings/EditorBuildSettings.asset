@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/FeatureBranchScenes/133-KitchenScene.unity
-    guid: 5acb9b6993c7caa42a479bd74733e615
+    path: Assets/Scenes/129 Cafeteria.unity
+    guid: 801d04b84b937044bbd3b06646893a58
   - enabled: 1
-    path: Assets/Scenes/FeatureBranchScenes/133-Pantry.unity
-    guid: 5b6d87b26d31ae14f836696d825f6309
+    path: Assets/Scenes/Pantry.unity
+    guid: 9c4a2637b78f2a442a003f4400aab1c1
+  - enabled: 1
+    path: Assets/Scenes/129 Kitchen.unity
+    guid: da6c865227d724c4db7c773f68638e41
   m_configObjects: {}
