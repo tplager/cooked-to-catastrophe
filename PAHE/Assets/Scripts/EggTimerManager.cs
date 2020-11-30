@@ -281,88 +281,37 @@ public class EggTimerManager : MonoBehaviour
             // Store a reference to the current utensil
             CookingUtensil currentUtensil = listOfUtensils[i].GetComponent<CookingUtensil>();
             // If the current one is on the stove and there is a food in it
-            if(currentUtensil.IsOnStove && currentUtensil.FoodInside != null)
+            if(currentUtensil.IsOnStove && currentUtensil.FoodsInside != null)
             {
                 // Store a reference to the current food in the utensil
-                CookableObject currentFood = currentUtensil.FoodInside.GetComponent<CookableObject>();
-                // Check which burner it's on
-                switch (currentUtensil.CurrentBurner)
-                {
-                    case CookingUtensil.StoveLocation.TopLeftBurner:
-                        // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
-                        switch(stoveTemps.BurnerTL)
-                        {
-                            case 1:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
-                                break;
-                            case 2:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                break;
-                            case 3:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
-                                break;
-                        }
+                CookableObject[] currentFoods = currentUtensil.FoodsInside;
 
-                        break;
-                    case CookingUtensil.StoveLocation.TopRightBurner:
-                        // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
-                        switch (stoveTemps.BurnerTR)
-                        {
-                            case 1:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
-                                break;
-                            case 2:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                break;
-                            case 3:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
-                                break;
-                        }
-                        break;
-                    case CookingUtensil.StoveLocation.BottomLeftBurner:
-                        // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
-                        switch (stoveTemps.BurnerBL)
-                        {
-                            case 1:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
-                                break;
-                            case 2:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                break;
-                            case 3:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
-                                break;
-                        }
-                        break;
-                    case CookingUtensil.StoveLocation.BottomRightBurner:
-                        // Check the temperature of the burner and change the time cooked/burnt by what heat it is set to
-                        switch (stoveTemps.BurnerBR)
-                        {
-                            case 1:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.LowHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.LowHeatMultiplier;
-                                break;
-                            case 2:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.MediumHeatMultiplier;
-                                break;
-                            case 3:
-                                currentFood.TimeToCook -= timeToSkip * currentFood.HighHeatMultiplier;
-                                currentFood.TimeToBurn -= timeToSkip * currentFood.HighHeatMultiplier;
-                                break;
-                        }
-                        break;
+                for (int j = 0; j < currentFoods.Length; j++)
+                {
+                    CookableObject currentFood = currentFoods[j];
+                    // Check which burner it's on
+
+                    CookFoodHelper(currentFood, currentUtensil.CurrentBurner);
                 }
             }
+        }
+    }
+
+    public void CookFoodHelper(CookableObject currentFood, StoveLocation burner)
+    {
+        int burnerTemp = stoveTemps.GetBurnerTemp(burner);
+
+        switch (burnerTemp)
+        {
+            case 1:
+                currentFood.Cook(timeToSkip * currentFood.LowHeatMultiplier); 
+                break;
+            case 2:
+                currentFood.Cook(timeToSkip * currentFood.MediumHeatMultiplier);
+                break;
+            case 3:
+                currentFood.Cook(timeToSkip * currentFood.HighHeatMultiplier);
+                break;
         }
     }
 }

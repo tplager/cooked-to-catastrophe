@@ -8,6 +8,8 @@ public class CookableObject : MonoBehaviour
     private bool isCooked;
     private bool isBurnt;
 
+    public float timeElapsed;
+
     // In seconds, how long till it will be done, will be counted down
     [SerializeField] private float timeToCook;
     // In seconds, how long till it will be burnt, will be counter down
@@ -111,5 +113,18 @@ public class CookableObject : MonoBehaviour
         get { return highHeatMultiplier; }
     }
 
+    public void Cook(float time)
+    {
+        timeElapsed += time; 
 
+        if (timeElapsed >= timeToBurn)
+        {
+            isBurnt = true;
+            isCooked = true;
+        }
+        else if (timeElapsed >= timeToCook)
+        {
+            isCooked = true; 
+        }
+    }
 }

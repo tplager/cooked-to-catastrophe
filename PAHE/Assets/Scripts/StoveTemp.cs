@@ -163,6 +163,21 @@ public class StoveTemp : MonoBehaviour
 
     }
 
-
+    public int GetBurnerTemp(StoveLocation burner)
+    {
+        switch(burner)
+        {
+            case StoveLocation.BottomLeftBurner:
+                return burnerBL;
+            case StoveLocation.BottomRightBurner:
+                return burnerBR;
+            case StoveLocation.TopLeftBurner:
+                return burnerTL;
+            case StoveLocation.TopRightBurner:
+                return burnerTR;
+            default:
+                return 0;
+        }
+    }
 }
 
