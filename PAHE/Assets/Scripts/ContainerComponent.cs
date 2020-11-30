@@ -33,8 +33,10 @@ public class ContainerComponent : MonoBehaviour
 		//initialize all of the interactions and triggers
 		interactableComponent = GetComponent<InteractableBase>();
 		interactableComponent.AddInteractionToList("Place Item", HoldItem);
+
 		//interactableComponent.AddInteractionToList("Take Egg", SpatulaGrab);
 		interactableComponent.AddInteractionTrigger("Empty into");
+
 		interactableComponent.AddInteractionToList("Fill water", FillWater);
 	}
 
@@ -46,6 +48,7 @@ public class ContainerComponent : MonoBehaviour
 	/// <param name="itemToHold">The item to place into the container</param>
 	public void HoldItem(InteractableBase itemToHold)
 	{
+
 		itemsHolding.Add(itemToHold);
 		//move the item into the container
 		itemToHold.transform.position = transform.position + PlacePositionRelative;
@@ -54,6 +57,7 @@ public class ContainerComponent : MonoBehaviour
 		itemToHold.Interact("On Place In Container", interactableComponent);
 		//objects in containers should not be selectable until taken out of the container
 		itemToHold.GetComponent<SelectableObject>().enabled = false;
+
 		//add the empty into to interaction to the list
 		interactableComponent.AddInteractionToList("Empty into", EmptyInto);
 	}
@@ -91,6 +95,7 @@ public class ContainerComponent : MonoBehaviour
 			//remove the empty into interaction from the list
 			interactableComponent.RemoveInteractionFromList("Empty into");
 		}
+
 
 		itemToEmptyInto.Interact("Fill water", interactableComponent);
 

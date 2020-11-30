@@ -11,15 +11,25 @@ using UnityEngine.SceneManagement;
 // Since you cant call static methods in the inspector this object cant be a singleton
 public class SceneLoader : MonoBehaviour
 {
-
-	/// <summary>
-	/// A simple function to load a scene
-	/// </summary>
-	/// <param name="s">the name of the scene</param>
-	public void LoadScene(string s)
+    private GameObject foodTransferScript;
+    /// <summary>
+    /// A simple function to load a scene
+    /// </summary>
+    /// <param name="s">the name of the scene</param>
+    public void LoadScene(string s)
 	{
 		SceneManager.LoadScene(s);
-	}
+        
+        if(s == "130_Kitchen")
+        {
+            foodTransferScript = GameObject.Find("FoodSingleton");
+            if (foodTransferScript != null)
+            {
+                Destroy(foodTransferScript.GetComponent<FoodSingleton>());
+                Destroy(foodTransferScript);
+            }
+        }
+    }
 
 	/// <summary>
 	/// A simple function to load a scene
