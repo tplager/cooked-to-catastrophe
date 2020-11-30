@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //Author: Ben Stern
 
 /// <summary>
@@ -25,6 +26,8 @@ public class ContainerComponent : MonoBehaviour
 	/// </summary>
 	private List<InteractableBase> itemsHolding = new List<InteractableBase>();
 
+	public bool HoldingWater;
+
 	private void Start()
 	{
 		//initialize all of the interactions and triggers
@@ -34,6 +37,7 @@ public class ContainerComponent : MonoBehaviour
 
         //interactableComponent.AddInteractionToList("Take Egg", SpatulaGrab);
         interactableComponent.AddInteractionTrigger("Empty into");
+		interactableComponent.AddInteractionToList("Fill water", FillWater);
 	}
 
 
@@ -89,7 +93,30 @@ public class ContainerComponent : MonoBehaviour
             //remove the empty into interaction from the list
             interactableComponent.RemoveInteractionFromList("Empty into");
         }
+
+		itemToEmptyInto.Interact("Fill water", interactableComponent);
+
+		EmptyWater();
     }
+
+	public void EmptyWater(InteractableBase item = null)
+	{
+		HoldingWater = false;
+		GetComponent<Image>().color = Color.white;
+		interactableComponent.RemoveInteractionFromList("Empty water");
+		interactableComponent.AddInteractionToList("Fill water", FillWater);
+	}
+
+	public void FillWater(InteractableBase item)
+	{
+		HoldingWater = false;
+		GetComponent<Image>().color = Color.blue;
+		interactableComponent.RemoveInteractionFromList("Fill water");
+		interactableComponent.AddInteractionToList("Empty water", EmptyWater);
+	}
+
+    
+
 
     /// <summary>
     /// Author: John Vancce
@@ -100,6 +127,8 @@ public class ContainerComponent : MonoBehaviour
     {
         Debug.Log("Test for Multiple Interactions");
     }
+
+
 
 
 }
