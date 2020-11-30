@@ -57,7 +57,7 @@ public class SinkScript : MonoBehaviour
 	private void Update()
 	{
 		// If the water should be boiling
-		if(waterContainer.GetComponent<CookableObject>().IsCooked)
+		if(waterContainer != null && waterContainer.GetComponent<CookableObject>().IsCooked)
         {
 			// Update state and image
 			waterState = WaterStates.Boiling;
