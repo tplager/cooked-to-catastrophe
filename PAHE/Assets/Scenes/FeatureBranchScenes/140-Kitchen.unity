@@ -1696,7 +1696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &149737007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3013,6 +3013,7 @@ MonoBehaviour:
   hoursInputField: {fileID: 91487590}
   listOfUtensils:
   - {fileID: 163428526}
+  - {fileID: 952450937}
 --- !u!4 &275460522
 Transform:
   m_ObjectHideFlags: 0
@@ -7745,7 +7746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 527.99994, y: 254.00006}
+  m_AnchoredPosition: {x: -976, y: -145}
   m_SizeDelta: {x: 300, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &952450939
@@ -7786,7 +7787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9e126a7cdac464fb4cdec3f75c296c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnStove: 0
+  isOnStove: 1
   currentBurner: 0
 --- !u!114 &952450942
 MonoBehaviour:
