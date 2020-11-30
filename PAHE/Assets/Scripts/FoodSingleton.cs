@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+/// <summary>
+/// Author: John Vance
+/// Purpose: Allows for any food to be transfered from the Kitchen Scene to the Cafeteria Scene
+/// Restrictions: None
+/// </summary>
 public class FoodSingleton : MonoBehaviour
 {
+    // Checks to see if the singleton has been transfered or not
+    private bool transfered;
+
+    // The instance of the singleton
     private static FoodSingleton _instance;
 
+    // Property to get the singleton outside of the script
     public static FoodSingleton Instance
     {
         get
@@ -21,6 +30,7 @@ public class FoodSingleton : MonoBehaviour
         }
     }
 
+    // Sets up everything for the singletons
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -30,7 +40,7 @@ public class FoodSingleton : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
-
+        transfered = true;
         SceneManager.sceneLoaded += OnSceneLoaded;
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
@@ -44,39 +54,50 @@ public class FoodSingleton : MonoBehaviour
     /// </summary>
     /// <param name="scene">The scene being loaded</param>
     /// <param name="mode">What mode the scene loads in</param>
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         //food = null;
         if (scene.name == "Kitchen" || scene.name == "130_Kitchen")
         {
             GameObject obj = GameObject.Find("/Canvas/Plate");
 
-            if (obj != null && (obj.transform.childCount > 0))
+            if (obj != null && (transfered == false))
             {
                 SetToPlate(obj);
+                transfered = true;
 
             }
+            transfered = false;
 
         }
         if (scene.name == "Cafeteria" || scene.name == "130_Cafeteria")
         {
             GameObject obj = GameObject.Find("/Canvas/Serving Plate");
 
-            if (obj != null)
+            if (obj != null && (transfered == false))
             {
                 SetToPlate(obj);
+                transfered = true;
 
 
             }
+            transfered = false;
 
         }
     }
 
-
+    /// <summary>
+    /// Author: John Vance
+    /// Purpose: Allows for the food to be placed on the plate in the Kitchen and Cafeteria scenes
+    /// </summary>
+    /// <param name="obj"></param>
     public void SetToPlate(GameObject obj)
     {
-        this.transform.position = obj.transform.position;
-        this.transform.SetParent(obj.transform);
+        // Gets the plate in the scene and sets the singleton to it
+        Instance.transform.position = obj.transform.position;
+        Instance.transform.SetParent(obj.transform);
+        Instance.gameObject.GetComponent<SelectableObject>().enabled = true;
+
         Destroy(Instance);
 
     }

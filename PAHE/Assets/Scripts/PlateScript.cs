@@ -12,13 +12,22 @@ using UnityEngine.UI;
 public class PlateScript : MonoBehaviour
 {
     private GameObject customFood;
-
+    private Transform foodTransform;
     
+    /// <summary>
+    /// Author: John Vance
+    /// Purpose: Gets the food and sets it to a singleton that can be transfered
+    /// </summary>
     public void Transfer()
     {
+        // Gets the food on the plate
         customFood = transform.GetChild(0).gameObject;
-        transform.GetChild(0).SetParent(null);
 
+        // Sets the food to have no parents so that a singleton can be applied to it
+        foodTransform = transform.GetChild(0);
+        foodTransform.SetParent(null);
+
+        // Applies the singleton
         customFood.AddComponent<FoodSingleton>();
 
     }

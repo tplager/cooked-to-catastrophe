@@ -19,7 +19,8 @@ public class SceneLoader : MonoBehaviour
 	public void LoadScene(string s)
 	{
 		SceneManager.LoadScene(s);
-	}
+        
+    }
 
 	/// <summary>
 	/// A simple function to load a scene
