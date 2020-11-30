@@ -28,6 +28,10 @@ public class Guest : MonoBehaviour
     // The unique greeting line for this specific guest
     private string uniqueGreetingLine;
 
+    // Checks to see if the order has been given to the guest
+    private int orderServed;
+
+
     // Author: Kyle Weekley
     /// <summary>
     /// Used to set DontDestroyOnLoad
@@ -89,26 +93,48 @@ public class Guest : MonoBehaviour
     /// Checks to see if the dish passed in is the one the guest ordered
     /// </summary>
     /// <param name="orderToCompare"></param>
-    public void CompareDishAndOrder(string orderToCompare)
+    public void CompareDishAndOrder(string orderToCompare, GameObject food)
     {
         // If the incoming order is what the guest initally ordered
         if(orderToCompare == orderKeyRequested)
         {
-            cafeteriaManager.GuestInfo.SetActive(true);
+            if(food.GetComponent<CookableObject>() != null)
+            {
+                if(food.GetComponent<CookableObject>().IsCooked == true)
+                {
+                    orderServed = 1;
+
+
+                }
+                else
+                {
+                    orderServed = 3;
+
+
+                }
+                UpdateGuestInfo();
+
+
+            }
+            //cafeteriaManager.GuestInfo.SetActive(true);
             // Not entirely sure how inefficient this is. I could find it by manually getting the indexes but it'd be messy to read
             // Sets the guest picture in the info screen to happy
-            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = happyFace;
+            //cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = happyFace;
+
         }
         else
         {
-            cafeteriaManager.GuestInfo.SetActive(true);
+            //cafeteriaManager.GuestInfo.SetActive(true);
             // Not entirely sure how inefficient this is. I could find it by manually getting the indexes but it'd be messy to read
             // Sets the guest picture in the info screen to sad
-            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = sadFace;
+            //cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = sadFace;
+            orderServed = 2;
+            UpdateGuestInfo();
+
         }
     }
 
-    // Author: Nick Engell, Kyle Weekley
+    // Author: Nick Engell, Kyle Weekley, John Vance
     /// <summary>
     /// Updates the guest info based on the current guest clicked on
     /// </summary>
@@ -122,16 +148,50 @@ public class Guest : MonoBehaviour
             // Open it
             cafeteriaManager.GuestInfo.SetActive(true);
 
-            // Update the greeting text with their unique dialogue line with a "- " at the beginning
-            cafeteriaManager.GuestInfo.transform.Find("Greeting Background/Greeting Text").gameObject.GetComponent<Text>().text = "- " + uniqueGreetingLine;
+            // Checks if the order was already served to the guest depending on 
+            // if it was what the guest ordered or not their mood changes
+            switch(orderServed)
+            {
+                // Neutral face: The default value
+                case 0:
+                    // Update the guest face with their neutral face
+                    cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = neutralFace;
 
-            // Update the meal text with the dish name
-            cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("{0}, please!", orderKeyRequested);
+                    // Update the meal text with the dish name
+                    cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("{0}, please!", orderKeyRequested);
+
+                    break;
+
+                // Happy face: If the dish is what they ordered
+                case 1:
+                    cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = happyFace;
+
+                    cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("Thanks for the {0}!", orderKeyRequested);
+
+                    break;
+
+                // Sad face: If the dish is NOT what they ordered
+                case 2:
+                    cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = sadFace;
+
+                    cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("This isn't {0}!", orderKeyRequested);
+
+                    break;
+                // Sad Face: If the food they ordered is correct but on cooked properly
+                case 3:
+                    cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = sadFace;
+
+                    cafeteriaManager.GuestInfo.transform.Find("Meal Background/Request Text").gameObject.GetComponent<Text>().text = string.Format("{0} is what I ordered, but it's not cooked properly.", orderKeyRequested);
+
+                    break;
+
+            }
+
             // Update the dish icon with the correct dish
             cafeteriaManager.GuestInfo.transform.Find("Meal Background/Plate Background/Dish Requested").gameObject.GetComponent<Image>().sprite = cafeteriaManager.Specials[orderKeyRequested];
-
-            // Update the guest face with their neutral face
-            cafeteriaManager.GuestInfo.transform.Find("Border/Guest Picture").gameObject.GetComponent<Image>().sprite = neutralFace;
+            
+            // Update the greeting text with their unique dialogue line with a "- " at the beginning
+            cafeteriaManager.GuestInfo.transform.Find("Greeting Background/Greeting Text").gameObject.GetComponent<Text>().text = "- " + uniqueGreetingLine;
 
             // Check if this guest's order has already been taken
             if (orderTaken == false)
