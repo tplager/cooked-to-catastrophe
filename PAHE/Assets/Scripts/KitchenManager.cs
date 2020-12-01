@@ -12,14 +12,25 @@ public class KitchenManager : MonoBehaviour
 {
     public SelectableObject currentSelection;
     private Image selectionIcon;
-    private GameObject stoveTopRightUI;
-    private GameObject stoveTopLeftUI;
-    private GameObject stoveBottomRightUI;
-    private GameObject stoveBottomLeftUI;
+
+    [SerializeField]
+    private GameObject stoveTopRightUI;     // Gets the reference to the Top Right Burner
+    [SerializeField]
+    private GameObject stoveTopLeftUI;      // Gets the reference to the Top Left Burner
+    [SerializeField]
+    private GameObject stoveBottomRightUI;  // Gets the reference to the Bottom Right Burner
+    [SerializeField]
+    private GameObject stoveBottomLeftUI;   // Gets the reference to the Bottom Left Burner
 
     private GameObject[] stoveDialArray;
 
+    [SerializeField]
+    private GameObject utensilCup;              // Variable for the Utensil Cup
+
     private GameObject stove;
+
+    private GameObject interactionsDropdown;
+    private Dropdown drop;
 
     // Author: Nick Engell
     /// <summary>
@@ -37,15 +48,14 @@ public class KitchenManager : MonoBehaviour
     void Start()
     {
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
-
-        stoveTopRightUI = GameObject.Find("TopRightBurnerUI").gameObject;           // Gets the reference to the Top Right Burner
-        stoveTopLeftUI = GameObject.Find("TopLeftBurnerUI").gameObject;             // Gets the reference to the Top Left Burner
-        stoveBottomRightUI = GameObject.Find("BottomRightBurnerUI").gameObject;     // Gets the reference to the Bottom Right Burner
-        stoveBottomLeftUI = GameObject.Find("BottomLeftBurnerUI").gameObject;       // Gets the reference to the Bottom Left Burner
+        
 
         // Find and store a reference to the stove object
         stove = GameObject.Find("Stove");
 
+        //drop = interactionsDropdown.GetComponent<Dropdown>();
+        interactionsDropdown = GameObject.Find("InteractionsDropdown");
+        interactionsDropdown.SetActive(false);
         // Puts the UI elements into the array
         stoveDialArray = new GameObject[] { stoveTopRightUI, stoveTopLeftUI, stoveBottomRightUI, stoveBottomLeftUI };
 
@@ -89,13 +99,30 @@ public class KitchenManager : MonoBehaviour
 			//TODO: call interactable object methods
 			InteractableBase currentInteractable = currentSelection.GetComponent<InteractableBase>();
 			InteractableBase selectedInteractable = selectedObject.GetComponent<InteractableBase>();
+
 			if(currentInteractable != null && selectedInteractable != null)
 			{
-				if (selectedInteractable.AttemptInteraction(currentInteractable))
+                if(selectedObject.name == "Plate" && 
+                    selectedObject.transform.childCount >= 1 && 
+                    (currentSelection.gameObject.GetComponent<SpaghettiScript>() != true && currentSelection.gameObject.GetComponent<MeatballScript>() != true && currentSelection.gameObject.GetComponent<SauceScript>() != true))
+                {
+                    ClearSelection();
+
+                }
+
+                else if ((currentSelection.name == "Spatula" && selectedObject.name == "Frying Pan") ||
+                    (currentSelection.name == "Spatula" && selectedObject.name == "Plate"))
+                {
+                    selectedInteractable.AttemptInteraction(currentInteractable);
+
+                }
+
+                else if (selectedInteractable.AttemptInteraction(currentInteractable))
 				{
 					ClearSelection();
-				}
-			}
+                    
+                }
+            }
 		}
 	}
 
@@ -113,12 +140,7 @@ public class KitchenManager : MonoBehaviour
 		}
 		currentSelection = null;
         
-        // Clears the Stove UI when the Clear Selection button is pressed
-        foreach (GameObject element in stoveDialArray)
-        {
-            element.SetActive(false);
-
-        }
+        
 
         //Reset selection sprite
         selectionIcon.sprite = null;
@@ -151,6 +173,18 @@ public class KitchenManager : MonoBehaviour
             }
         }
         
+
+    }
+
+    /// <summary>
+    /// Author: John Vance
+    /// Purpose: Allows for the player to leave a Burner Menu
+    /// </summary>
+    /// <param name="burner">The Burner the player is affecting</param>
+    public void Leave(GameObject burner)
+    {
+        burner.SetActive(false);
+        ClearSelection();
 
     }
 }

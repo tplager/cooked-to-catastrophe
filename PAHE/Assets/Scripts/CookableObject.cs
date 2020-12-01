@@ -1,25 +1,34 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CookableObject : MonoBehaviour
 {
 
-    private bool isCooked;
-    private bool isBurnt;
+	private bool isCooked;
+	private bool isBurnt;
 
-    // In seconds, how long till it will be done, will be counted down
-    [SerializeField] private float timeToCook;
-    // In seconds, how long till it will be burnt, will be counter down
-    [SerializeField] private float timeToBurn;
+	public float timeElapsed;
 
-    // How much elapsed time will count. So if 10 seconds have passed and the multiplier is 1.5, it will count as 15 seconds
-    [SerializeField] private float lowHeatMultiplier;
-    [SerializeField] private float mediumHeatMultiplier;
-    [SerializeField] private float highHeatMultiplier;
+	// In seconds, how long till it will be done, will be counted down
+	[SerializeField] private float timeToCook;
+	// In seconds, how long till it will be burnt, will be counter down
+	[SerializeField] private float timeToBurn;
 
-    // How much space the object will take up in the cart
-    [SerializeField] private float size;
+	// How much elapsed time will count. So if 10 seconds have passed and the multiplier is 1.5, it will count as 15 seconds
+	[SerializeField] private float lowHeatMultiplier;
+	[SerializeField] private float mediumHeatMultiplier;
+	[SerializeField] private float highHeatMultiplier;
+
+	// How much space the object will take up in the cart
+	[SerializeField] private float size;
+
+	// A delegate that optionally overides on cook when set;
+	public Func<bool> OnCookOveride;
+
+    // Determines if the food is currently being cooked
+    private bool currentlyBeingCooked;
 
     // Author: Nick Engell
     /// <summary>
@@ -59,7 +68,8 @@ public class CookableObject : MonoBehaviour
         get { return timeToCook; }
         set 
         { 
-            timeToCook = value; 
+            timeToCook = value;
+            currentlyBeingCooked = true;
             if(timeToCook <= 0)
             {
                 isCooked = true;
@@ -76,7 +86,8 @@ public class CookableObject : MonoBehaviour
         get { return timeToBurn; }
         set 
         { 
-            timeToBurn = value; 
+            timeToBurn = value;
+            currentlyBeingCooked = true;
             if(timeToBurn <= 0)
             {
                 isBurnt = true;
@@ -111,5 +122,34 @@ public class CookableObject : MonoBehaviour
         get { return highHeatMultiplier; }
     }
 
+    // Author: Nick Engell
+    /// <summary>
+    /// Property for whether the food has started / is currently being cooked
+    /// </summary>
+    public bool CurrentlyBeingCooked
+    {
+        get { return currentlyBeingCooked; }
+    }
 
+    /// <summary>
+    /// Updates the time and updates the cooked and burnt fields
+    /// </summary>
+    /// <param name="time"></param>
+    public void Cook(float time)
+    {
+        timeElapsed += time;
+        //Check if anything overides the on cook
+        if (OnCookOveride == null || !OnCookOveride())
+        {
+            if (timeElapsed >= timeToBurn)
+            {
+                isBurnt = true;
+                isCooked = true;
+            }
+            else if (timeElapsed >= timeToCook)
+            {
+                isCooked = true;
+            }
+        }
+    }
 }
