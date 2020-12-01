@@ -39,6 +39,13 @@ public class PlateScript : MonoBehaviour
 
     private bool cooked;
 
+    [SerializeField]
+    private GameObject spaghettiPrefab;
+    [SerializeField]
+    private GameObject meatballPrefab;
+    [SerializeField]
+    private GameObject saucePreab;
+
     void Start()
     {
         names = new List<string>();
@@ -47,13 +54,15 @@ public class PlateScript : MonoBehaviour
 
     void Update()
     {
-        if(this.gameObject.transform.childCount > 2)
+        if (this.gameObject.transform.childCount > 2)
         {
-            for(int i = 0; i < transform.childCount; i++)
+            objects.Clear();
+            names.Clear();
+            for (int i = 0; i < transform.childCount; i++)
             {
                 names.Add(transform.GetChild(i).GetComponent<Image>().sprite.name);
                 objects.Add(transform.GetChild(i).gameObject);
-                if (transform.GetChild(i).name == "Spaghetti")
+                if (transform.GetChild(i).gameObject.GetComponent<SpaghettiScript>() == true)
                 {
                     newFood = transform.GetChild(i).gameObject;
                 }
@@ -61,10 +70,10 @@ public class PlateScript : MonoBehaviour
 
             for (int i = 0; i < objects.Count; i++)
             {
-                if(objects[i].GetComponent<CookableObject>() != null)
+                if (objects[i].GetComponent<CookableObject>() != null)
                 {
                     cooked = objects[i].GetComponent<CookableObject>().IsCooked;
-                    if(cooked == false)
+                    if (cooked == false)
                     {
                         i = objects.Count;
                     }
@@ -73,55 +82,55 @@ public class PlateScript : MonoBehaviour
 
             }
 
-            if (names.Contains("SpaghettiUncooked") && names.Contains("MeatballsFrozen"))
+            if (names.Contains("SpaghettiUncooked") && names.Contains("MeatballsFrozen") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(USPFM, objects, newFood);
                 
             }
 
-            else if (names.Contains("SpaghettiUncooked") && names.Contains("MeatballsBurned"))
+            else if (names.Contains("SpaghettiUncooked") && names.Contains("MeatballsBurned") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(USPBM, objects, newFood);
 
             }
 
-            else if (names.Contains("SpaghettiUncooked") && names.Contains("Meatballs"))
+            else if (names.Contains("SpaghettiUncooked") && names.Contains("Meatballs") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(USPCM, objects, newFood);
 
             }
 
-            else if (names.Contains("SpaghettiPrepped") && names.Contains("MeatballsFrozen"))
+            else if (names.Contains("SpaghettiPrepped") && names.Contains("MeatballsFrozen") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(CSPFM, objects, newFood);
 
             }
 
-            else if (names.Contains("SpaghettiPrepped") && names.Contains("MeatballsBurned"))
+            else if (names.Contains("SpaghettiPrepped") && names.Contains("MeatballsBurned") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(CSPBM, objects, newFood);
 
             }
 
-            else if (names.Contains("SpaghettiPrepped") && names.Contains("Meatballs"))
+            else if (names.Contains("SpaghettiPrepped") && names.Contains("Meatballs") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(CSPCM, objects, newFood);
 
             }
 
-            else if (names.Contains("SpaghettiBurned") && names.Contains("MeatballsFrozen"))
+            else if (names.Contains("SpaghettiBurned") && names.Contains("MeatballsFrozen") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(BSPFM, objects, newFood);
 
             }
 
-            else if (names.Contains("SpaghettiBurned") && names.Contains("MeatballsBurned"))
+            else if (names.Contains("SpaghettiBurned") && names.Contains("MeatballsBurned") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(BSPBM, objects, newFood);
 
             }
 
-            else if (names.Contains("SpaghettiBurned") && names.Contains("Meatballs"))
+            else if (names.Contains("SpaghettiBurned") && names.Contains("Meatballs") && (names.Contains("SauceInPan") || names.Contains("SauceForSpaghetti")))
             {
                 SetImgDelete(BSPCM, objects, newFood);
 
@@ -138,17 +147,17 @@ public class PlateScript : MonoBehaviour
     {
         food.GetComponent<Image>().sprite = img;
         food.GetComponent<CookableObject>().IsCooked = cooked;
-        int x = list.Count - 1;
-        while(x != 0)
+        for(int x = list.Count - 1; x >= 0; x--)
         {
-            if(list[x].name != "Spaghetti")
+            //if(list[x].GetComponent<SpaghettiScript>() != true)
+            if (list[x] != food)
             {
                 GameObject tempObj = list[x];
                 list.RemoveAt(x);
                 Destroy(tempObj);
-                x--;
+                //x++;   
             }
-
+            
             if(!list.Contains(food))
             {
                 x = 0;

@@ -104,7 +104,7 @@ public class KitchenManager : MonoBehaviour
 			{
                 if(selectedObject.name == "Plate" && 
                     selectedObject.transform.childCount >= 1 && 
-                    (currentSelection.gameObject.name != "Spaghetti" && currentSelection.gameObject.name != "Meatballs" && currentSelection.gameObject.name != "Marinara Sauce"))
+                    (currentSelection.gameObject.GetComponent<SpaghettiScript>() != true && currentSelection.gameObject.GetComponent<MeatballScript>() != true && currentSelection.gameObject.GetComponent<SauceScript>() != true))
                 {
                     ClearSelection();
 

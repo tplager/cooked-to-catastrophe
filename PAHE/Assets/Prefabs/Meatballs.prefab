@@ -11,8 +11,12 @@ GameObject:
   - component: {fileID: 843659211984098846}
   - component: {fileID: 136456046975046097}
   - component: {fileID: 2219905485959162150}
+  - component: {fileID: 5826927054706314995}
+  - component: {fileID: -1471684560430599273}
+  - component: {fileID: -3916791653194491037}
+  - component: {fileID: 6732501953729534508}
   m_Layer: 5
-  m_Name: Carton Of Eggs - Copy
+  m_Name: Meatballs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +31,7 @@ RectTransform:
   m_GameObject: {fileID: 3174632898146246471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33333, y: 0.33333, z: 0.33333}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -35,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 586.20166, y: 85.630005}
-  m_SizeDelta: {x: 291.01022, y: 291.01022}
+  m_SizeDelta: {x: 201.0375, y: 140.5328}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &136456046975046097
 CanvasRenderer:
@@ -75,3 +79,66 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5826927054706314995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3174632898146246471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6514ef342f32d2e4abf80055f7e89afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeElapsed: 0
+  timeToCook: 1500
+  timeToBurn: 2100
+  lowHeatMultiplier: 0.5
+  mediumHeatMultiplier: 1
+  highHeatMultiplier: 1.5
+  size: 0
+--- !u!114 &-1471684560430599273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3174632898146246471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac28e660a49d8d4586402e5b36adb3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionsTrigers:
+  - Place Item
+  interactionDropdown: {fileID: 0}
+--- !u!114 &-3916791653194491037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3174632898146246471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60a8094299ef1c409702cd5ae1dd351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: 0
+--- !u!114 &6732501953729534508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3174632898146246471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c778cd7b39cf11f479b15f80a7ea359a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baggedImage: {fileID: 21300000, guid: 98dad1d704db7d045bb57207f3c334ad, type: 3}
+  frozenImage: {fileID: 21300000, guid: 8901b878d45b0854f94d7e390a7abe34, type: 3}
+  cookedImage: {fileID: 21300000, guid: af8ee17ad915b6c45a515aef9201f6be, type: 3}
+  burnedImage: {fileID: 21300000, guid: 3c89957ce43933c4593f1342cec7cab6, type: 3}

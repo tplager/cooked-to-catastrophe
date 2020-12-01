@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 843659211984098846}
   - component: {fileID: 136456046975046097}
   - component: {fileID: 2219905485959162150}
-  - component: {fileID: 9079778359681978696}
-  - component: {fileID: -452556284228455132}
-  - component: {fileID: -1038284583708503581}
-  - component: {fileID: -2361213942945416045}
+  - component: {fileID: -7663824908880812995}
+  - component: {fileID: 7700557649048224051}
+  - component: {fileID: -5467025081238296386}
+  - component: {fileID: -5450778835306903176}
   m_Layer: 5
-  m_Name: Rice
+  m_Name: Egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 586.20166, y: 85.630005}
-  m_SizeDelta: {x: 259.5242, y: 259.5242}
+  m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &136456046975046097
 CanvasRenderer:
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f6fbc9e1c7b0c4847a5dac6714d53b03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 550e804a9a236494b8270c18f2d0ef9a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -79,7 +79,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9079778359681978696
+--- !u!114 &-7663824908880812995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3174632898146246471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60a8094299ef1c409702cd5ae1dd351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: 0
+--- !u!114 &7700557649048224051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +107,7 @@ MonoBehaviour:
   interactionsTrigers:
   - Place Item
   interactionDropdown: {fileID: 0}
---- !u!114 &-452556284228455132
+--- !u!114 &-5467025081238296386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,11 +116,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3174632898146246471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60a8094299ef1c409702cd5ae1dd351, type: 3}
+  m_Script: {fileID: 11500000, guid: b804114a9579eb6479256fc9b0244fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected: 0
---- !u!114 &-1038284583708503581
+  shelledImage: {fileID: 21300000, guid: 550e804a9a236494b8270c18f2d0ef9a, type: 3}
+  rawImage: {fileID: 21300000, guid: 85f89446ed14ad34d88647f9cc69585e, type: 3}
+  fried: {fileID: 21300000, guid: 50decd1f25d7d4b40824a5810e6a3a8b, type: 3}
+  burnt: {fileID: 21300000, guid: 3f1ff23a9040f9b46b4a4320fb46b030, type: 3}
+--- !u!114 &-5450778835306903176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,25 +136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeElapsed: 0
-  timeToCook: 1200
-  timeToBurn: 2400
-  lowHeatMultiplier: 1
+  timeToCook: 60
+  timeToBurn: 180
+  lowHeatMultiplier: 0.5
   mediumHeatMultiplier: 1
-  highHeatMultiplier: 1
+  highHeatMultiplier: 1.5
   size: 0
---- !u!114 &-2361213942945416045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3174632898146246471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11a2e6eafe60bc48a6de7eda5bdea17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baggedImage: {fileID: 21300000, guid: f6fbc9e1c7b0c4847a5dac6714d53b03, type: 3}
-  rawImage: {fileID: 21300000, guid: c4bab57781f86b54fbbcd4770399e53b, type: 3}
-  cooked: {fileID: 21300000, guid: cdb29af6115e10e44a4c44c05ec44659, type: 3}
-  burnt: {fileID: 21300000, guid: 2dacff242a02cf3419fc7c2ca45b873f, type: 3}
