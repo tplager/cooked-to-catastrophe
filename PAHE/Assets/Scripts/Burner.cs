@@ -12,7 +12,7 @@ public class Burner : MonoBehaviour
 	//various components of that the script keeps track of
 	private InteractableBase interactableComponent;
 
-	[SerializeField] CookingUtensil.StoveLocation burner;
+	[SerializeField] StoveLocation burner;
 
 	void Start()
 	{

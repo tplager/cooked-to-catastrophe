@@ -48,13 +48,14 @@ public class KitchenManager : MonoBehaviour
     void Start()
     {
         selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
-        interactionsDropdown = GameObject.Find("InteractionsDropdown");
-        drop = interactionsDropdown.GetComponent<Dropdown>();
-        interactionsDropdown.SetActive(false);
+        
 
         // Find and store a reference to the stove object
         stove = GameObject.Find("Stove");
 
+        //drop = interactionsDropdown.GetComponent<Dropdown>();
+        interactionsDropdown = GameObject.Find("InteractionsDropdown");
+        interactionsDropdown.SetActive(false);
         // Puts the UI elements into the array
         stoveDialArray = new GameObject[] { stoveTopRightUI, stoveTopLeftUI, stoveBottomRightUI, stoveBottomLeftUI };
 

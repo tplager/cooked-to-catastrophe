@@ -129,7 +129,7 @@ public class CookableObject : MonoBehaviour
     public bool CurrentlyBeingCooked
     {
         get { return currentlyBeingCooked; }
-    }    
+    }
 
     /// <summary>
     /// Updates the time and updates the cooked and burnt fields
@@ -138,18 +138,18 @@ public class CookableObject : MonoBehaviour
     public void Cook(float time)
     {
         timeElapsed += time;
-		//Check if anything overides the on cook
-		if (OnCookOveride == null || !OnCookOveride())
-		{
-			if (timeElapsed >= timeToBurn)
-			{
-				isBurnt = true;
-				isCooked = true;
-			}
-			else if (timeElapsed >= timeToCook)
-			{
-				isCooked = true;
-			}
-		}
-    
+        //Check if anything overides the on cook
+        if (OnCookOveride == null || !OnCookOveride())
+        {
+            if (timeElapsed >= timeToBurn)
+            {
+                isBurnt = true;
+                isCooked = true;
+            }
+            else if (timeElapsed >= timeToCook)
+            {
+                isCooked = true;
+            }
+        }
+    }
 }

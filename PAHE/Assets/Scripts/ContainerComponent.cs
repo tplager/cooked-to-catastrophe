@@ -96,10 +96,14 @@ public class ContainerComponent : MonoBehaviour
 			interactableComponent.RemoveInteractionFromList("Empty into");
 		}
 
+        if(HoldingWater)
+        {
+            itemToEmptyInto.Interact("Fill water", interactableComponent);
 
-		itemToEmptyInto.Interact("Fill water", interactableComponent);
+            EmptyWater();
+        }
 
-		EmptyWater();
+		
 	}
 
 	public void EmptyWater(InteractableBase item = null)
