@@ -102,14 +102,22 @@ public class KitchenManager : MonoBehaviour
 
 			if(currentInteractable != null && selectedInteractable != null)
 			{
-                if((currentSelection.name == "Spatula" && selectedObject.name == "Frying Pan") || 
+                if(selectedObject.name == "Plate" && 
+                    selectedObject.transform.childCount >= 1 && 
+                    (currentSelection.gameObject.name != "Spaghetti" && currentSelection.gameObject.name != "Meatballs" && currentSelection.gameObject.name != "Marinara Sauce"))
+                {
+                    ClearSelection();
+
+                }
+
+                else if ((currentSelection.name == "Spatula" && selectedObject.name == "Frying Pan") ||
                     (currentSelection.name == "Spatula" && selectedObject.name == "Plate"))
                 {
                     selectedInteractable.AttemptInteraction(currentInteractable);
 
                 }
 
-				else if (selectedInteractable.AttemptInteraction(currentInteractable))
+                else if (selectedInteractable.AttemptInteraction(currentInteractable))
 				{
 					ClearSelection();
                     

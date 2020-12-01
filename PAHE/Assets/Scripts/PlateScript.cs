@@ -37,6 +37,7 @@ public class PlateScript : MonoBehaviour
     [SerializeField]
     private Sprite CSPBM;    // Cooked Spaghetti and Burned Meatballs
 
+    private bool cooked;
 
     void Start()
     {
@@ -58,7 +59,21 @@ public class PlateScript : MonoBehaviour
                 }
             }
 
-            if(names.Contains("SpaghettiUncooked") && names.Contains("MeatballsFrozen"))
+            for (int i = 0; i < objects.Count; i++)
+            {
+                if(objects[i].GetComponent<CookableObject>() != null)
+                {
+                    cooked = objects[i].GetComponent<CookableObject>().IsCooked;
+                    if(cooked == false)
+                    {
+                        i = objects.Count;
+                    }
+
+                }
+
+            }
+
+            if (names.Contains("SpaghettiUncooked") && names.Contains("MeatballsFrozen"))
             {
                 SetImgDelete(USPFM, objects, newFood);
                 
@@ -122,6 +137,7 @@ public class PlateScript : MonoBehaviour
     public void SetImgDelete(Sprite img, List<GameObject> list, GameObject food)
     {
         food.GetComponent<Image>().sprite = img;
+        food.GetComponent<CookableObject>().IsCooked = cooked;
         int x = list.Count - 1;
         while(x != 0)
         {
