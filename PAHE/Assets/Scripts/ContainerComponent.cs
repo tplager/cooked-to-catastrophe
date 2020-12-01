@@ -98,10 +98,20 @@ public class ContainerComponent : MonoBehaviour
 
         if(HoldingWater)
         {
-            itemToEmptyInto.Interact("Fill water", interactableComponent);
+            if(itemToEmptyInto.gameObject.name == "Strainer")
+            {
+                itemToEmptyInto.Interact("Empty water", interactableComponent);
 
-            EmptyWater();
+            }
+
+            else
+            {
+                itemToEmptyInto.Interact("Fill water", interactableComponent);
+
+                EmptyWater();
+            }
         }
+           
 
 		
 	}
