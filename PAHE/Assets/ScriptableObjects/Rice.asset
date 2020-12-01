@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rice
   m_EditorClassIdentifier: 
   Size: 10
-  CartImage: {fileID: 21300000, guid: 938ef128cf4f8fe48a59d02acf10bbe6, type: 3}
+  CartImage: {fileID: 21300000, guid: f6fbc9e1c7b0c4847a5dac6714d53b03, type: 3}
   ItemName: Bag of Rice
-  prefab: {fileID: 0}
+  prefab: {fileID: 3174632898146246471, guid: 47d57b8788d5e734ab1f50f0d9fd5cf1, type: 3}

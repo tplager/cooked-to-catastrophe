@@ -69,7 +69,7 @@ public class Rice : MonoBehaviour
 		//}
 
 		// If the rice is in a container (aka not in the bag)
-		if (riceState != RiceStates.Bagged)
+		if (riceState != RiceStates.Bagged && transform.parent != null)
 		{
 			// If there is not water in the container
 			if (transform.parent.gameObject.GetComponent<ContainerComponent>().HoldingWater == false)

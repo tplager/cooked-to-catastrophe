@@ -20,15 +20,7 @@ public class SceneLoader : MonoBehaviour
 	{
 		SceneManager.LoadScene(s);
         
-        if(s == "130_Kitchen")
-        {
-            foodTransferScript = GameObject.Find("FoodSingleton");
-            if (foodTransferScript != null)
-            {
-                Destroy(foodTransferScript.GetComponent<FoodSingleton>());
-                Destroy(foodTransferScript);
-            }
-        }
+        
     }
 
 	/// <summary>

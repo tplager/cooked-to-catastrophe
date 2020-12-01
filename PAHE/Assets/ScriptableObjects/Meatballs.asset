@@ -15,4 +15,4 @@ MonoBehaviour:
   Size: 10
   CartImage: {fileID: 21300000, guid: 98dad1d704db7d045bb57207f3c334ad, type: 3}
   ItemName: Bag of Meatballs
-  prefab: {fileID: 0}
+  prefab: {fileID: 3174632898146246471, guid: 5a6f7b5dea9e05c45bda18a5b6f73ed9, type: 3}

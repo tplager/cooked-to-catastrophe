@@ -16,6 +16,7 @@ public class FoodSingleton : MonoBehaviour
     // The instance of the singleton
     private static FoodSingleton _instance;
 
+
     // Property to get the singleton outside of the script
     public static FoodSingleton Instance
     {

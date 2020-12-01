@@ -103,7 +103,9 @@ public class SelectableObject : MonoBehaviour, IPointerDownHandler
 
 
         }
-        selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
-
+        if (GameObject.Find("Selection Sprite"))
+        {
+            selectionIcon = GameObject.Find("Selection Sprite").GetComponent<Image>();
+        }
     }
 }

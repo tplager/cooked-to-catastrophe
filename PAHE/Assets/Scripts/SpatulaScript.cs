@@ -31,7 +31,8 @@ public class SpatulaScript : MonoBehaviour
     {
         if (transform.childCount <= 0)
         {
-            transform.position = utensilCup.transform.position + new Vector3(0.0f, 70.0f, 0.0f);
+            transform.position = utensilCup.transform.position + new Vector3(-10.0f, 50.0f, 0.0f);
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, 4.022f);
 
         }
 
@@ -48,6 +49,12 @@ public class SpatulaScript : MonoBehaviour
     {
         // Moves the Spatula slightly lower
         transform.position = container.transform.position - new Vector3(0.0f, 20.0f, 0.0f);// + PlacePositionRelative;
+        if(transform.rotation != Quaternion.identity)
+        {
+            transform.rotation = Quaternion.identity;
+        }
+        
+
         InteractableBase child = transform.GetChild(0).gameObject.GetComponent<InteractableBase>();
 
         // Sets the Egg to be a child of the Plate

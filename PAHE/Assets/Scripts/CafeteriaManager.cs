@@ -256,21 +256,47 @@ public class CafeteriaManager : MonoBehaviour
 
                     }
 
+                    else
+                    {
+                        guests[0].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
+
+                    }
+
 
                 }
 
                 // Checks the second plate
                 if (plate == plate2)
                 {
-                    guests[1].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
+                    if (plate.transform.GetChild(0).name == "Bag of Rice")
+                    {
+                        guests[1].GetComponent<Guest>().CompareDishAndOrder("Long Grain White Rice", plate.transform.GetChild(0).gameObject);
+                        Destroy(plate.transform.GetChild(0).gameObject);
 
+                    }
+
+                    else
+                    {
+                        guests[1].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
+
+                    }
                 }
 
                 // Checks the third plate
                 if (plate == plate3)
                 {
-                    guests[2].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
+                    if (plate.transform.GetChild(0).name == "Spaghetti")
+                    {
+                        guests[2].GetComponent<Guest>().CompareDishAndOrder("Spaghetti & Meatballs", plate.transform.GetChild(0).gameObject);
+                        Destroy(plate.transform.GetChild(0).gameObject);
 
+                    }
+
+                    else
+                    {
+                        guests[2].GetComponent<Guest>().CompareDishAndOrder(plate.transform.GetChild(0).name, plate.transform.GetChild(0).gameObject);
+
+                    }
                 }
 
 
@@ -346,6 +372,12 @@ public class CafeteriaManager : MonoBehaviour
                     (currentSelection.name == "Spatula" && selectedObject.name == "Plate"))
                 {
                     selectedInteractable.AttemptInteraction(currentInteractable);
+
+                }
+
+                else if(selectedInteractable == currentInteractable)
+                {
+                    ClearSelection();
 
                 }
 
