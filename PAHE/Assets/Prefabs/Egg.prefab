@@ -136,8 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeElapsed: 0
-  timeToCook: 60
-  timeToBurn: 180
+  timeToCook: 300
+  timeToBurn: 420
   lowHeatMultiplier: 0.5
   mediumHeatMultiplier: 1
   highHeatMultiplier: 1.5
